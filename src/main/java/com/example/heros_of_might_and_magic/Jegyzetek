@@ -1,0 +1,169 @@
+
+
+        Image icon = new Image("C:\\Users\\biroa\\IdeaProjects\\Heros_of_Might_and_Magic\\src\\icon.jpg");
+        stage.getIcons().add(icon);
+        stage.setTitle("Heros of Might and Magic");
+
+        stage.setHeight(650);
+        stage.setWidth(640);
+        stage.setResizable(false);
+
+        stage.setScene(new Scene(root));
+
+        //Scene csatater = new Scene(root);
+        //stage.setScene(csatater);
+
+
+        //Stage stage = new Stage();    ->ez csak egy megjegyzés
+
+        // Ez actually jól működöik!!!!
+        Group root = new Group();
+        Scene scene = new Scene(root, 650, 650, Color.BLACK);
+
+        Image icon = new Image("C:\\Users\\biroa\\IdeaProjects\\Heros_of_Might_and_Magic\\src\\icon.jpg");
+        stage.getIcons().add(icon);
+        stage.setTitle("Heros of Might and Magic");
+
+        stage.setHeight(650);
+        stage.setWidth(640);
+        stage.setResizable(false);
+
+        Image csatater = new Image("C:\\Users\\biroa\\IdeaProjects\\Heros_of_Might_and_Magic\\src\\csatater_fekete.png");
+        ImageView imageView = new ImageView(csatater);
+        imageView.setX(20);
+        imageView.setY(20);
+
+
+        //Ez csak gyakorlás
+        Text text = new Text();
+        text.setText("Whoaaaa!!");
+        text.setX(50);
+        text.setY(50);
+        text.setFont(Font.font("Verdana",50));
+        text.setFill(Color.LIMEGREEN);
+
+        Line line = new Line();
+        line.setStartX(200);
+        line.setStartY(200);
+        line.setEndX(500);
+        line.setEndY(200);
+        line.setStrokeWidth(5);
+        line.setStroke(Color.RED);
+        line.setOpacity(0.5);
+
+
+        //ezek kellenek, hogy működjenek a fent leírtak
+        root.getChildren().add(text);
+        root.getChildren().add(line);
+        root.getChildren().add(imageView);
+        stage.setScene(scene);
+        stage.show();
+
+
+        /*
+                ImageView myImageView;
+                myImageView.setImage("csatater_fekete.png");
+               // myImageView.setX(20);
+               // myImageView.setY(20);
+                //root.getChildren().add(myImageView);
+                 */
+
+        //scene = new Scene(root, Color.BLACK);
+
+
+        @FXML
+            private Text MoralSzam;
+
+            @FXML
+            void plusMoral(ActionEvent event) {
+                MoralSzam.setText("6");
+            }
+
+
+      /*
+      package com.example.heros_of_might_and_magic;
+      import javafx.event.ActionEvent;
+      import javafx.fxml.FXML;
+      import javafx.scene.text.Text;
+
+      public class HeroController {
+
+          @FXML
+          private Text tamadas;
+
+          @FXML
+          private Text vedekezes;
+
+          @FXML
+          private Text varazsero;
+
+          @FXML
+          private Text tudas;
+
+          @FXML
+          private Text szerencse;
+
+          @FXML
+          private Text moral;
+
+          @FXML
+          void plusMoral(ActionEvent event) {
+              moral.setText("6");
+          }
+
+          @FXML
+          void plusSzerencse(ActionEvent event) {
+
+          }
+
+          @FXML
+          void plusTamadas(ActionEvent event) {
+
+          }
+
+          @FXML
+          void plusTudas(ActionEvent event) {
+
+          }
+
+          @FXML
+          void plusVarazsero(ActionEvent event) {
+
+          }
+
+          @FXML
+          void plusVedekezes(ActionEvent event) {
+
+          }
+
+      }
+
+      */
+
+        if(SceneController.nehezseg =="konnyu"){
+                    this.arany = 1300;
+                }
+                else{
+                    if(SceneController.nehezseg =="kozepes"){
+                        this.arany = 1000;
+                    }
+                    else{
+                        if(SceneController.nehezseg =="nehez"){
+                            this.arany = 700;
+                        }
+                    }
+                }
+
+
+
+       /*
+              if(SceneController.nehezseg == "konnyu"){
+                  Sarkanyharcos.setArany(1300);
+              }
+              if(SceneController.nehezseg == "kozepes"){
+                  Sarkanyharcos.setArany(1000);
+              }
+              if(SceneController.nehezseg == "nehez"){
+                  Sarkanyharcos.setArany(700);
+              }
+              */

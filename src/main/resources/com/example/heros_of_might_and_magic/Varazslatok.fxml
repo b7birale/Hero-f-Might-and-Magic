@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="650.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.heros_of_might_and_magic.Varazslat">
+   <children>
+      <Text layoutX="26.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Villámcsapás" wrappingWidth="139.1773681640625">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font></Text>
+      <Text layoutX="26.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tűzlabda" wrappingWidth="139.1773681640625">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="26.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feltámasztás" wrappingWidth="139.1773681640625">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="221.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ár:" wrappingWidth="40.54376220703125">
+         <font>
+            <Font name="Candara Bold Italic" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="196.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="60 arany" wrappingWidth="110.14373779296875">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="196.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="120 arany" wrappingWidth="110.14373779296875">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="196.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="120 arany" wrappingWidth="110.14373779296875">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="447.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arany:" wrappingWidth="73.34375">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="327.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manna:" wrappingWidth="84.54376220703125">
+         <font>
+            <Font name="Candara Bold Italic" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="355.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5 " wrappingWidth="28.54376220703125">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="355.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9" wrappingWidth="28.54376220703125">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="355.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" wrappingWidth="28.54376220703125">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Button layoutX="457.0" layoutY="149.0" mnemonicParsing="false" onAction="#buyVillamcsapas" text="Buy">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="457.0" layoutY="206.0" mnemonicParsing="false" onAction="#buyTuzlabda" text="Buy">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="457.0" layoutY="263.0" mnemonicParsing="false" onAction="#buyFeltamasztas" text="Buy">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Button>
+      <Text fx:id="villamcsapas_megvette" layoutX="520.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   " wrappingWidth="84.54376220703125">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="tuzlabda_megvette" layoutX="520.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   " wrappingWidth="84.54376220703125">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="feltamasztas_megvette" layoutX="520.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   " wrappingWidth="84.54376220703125">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="arany" layoutX="522.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1000" wrappingWidth="94.94378662109375">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="26.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Varázslat:" wrappingWidth="126.9437255859375">
+         <font>
+            <Font name="Candara Bold Italic" size="24.0" />
+         </font>
+      </Text>
+      <Button layoutX="252.0" layoutY="521.0" mnemonicParsing="false" onAction="#tovabb" text="Tovább">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Button>
+      <Text layoutX="26.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teleport" wrappingWidth="110.14373779296875">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="197.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100 arany" wrappingWidth="110.14373779296875">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="355.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" wrappingWidth="28.54376220703125">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="26.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mágikus nyílvessző" wrappingWidth="126.9437255859375">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="197.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="50 arany" wrappingWidth="110.14373779296875">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="355.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" wrappingWidth="28.54376220703125">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Button layoutX="457.0" layoutY="325.0" mnemonicParsing="false" onAction="#buyTeleport" text="Buy">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="457.0" layoutY="395.0" mnemonicParsing="false" onAction="#buyMagikusNyilvesszo" text="Buy">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Button>
+      <Text fx:id="teleport_megvette" layoutX="520.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   " wrappingWidth="84.54376220703125">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="magikusnyilvesszo_megvette" layoutX="520.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   " wrappingWidth="84.54376220703125">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
