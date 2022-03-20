@@ -143,10 +143,15 @@
             <Font name="Candara" size="24.0" />
          </font>
       </Text>
-      <Button layoutX="266.0" layoutY="499.0" mnemonicParsing="false" text="Tovább">
+      <Button layoutX="266.0" layoutY="499.0" mnemonicParsing="false" onAction="#tovabb" text="Tovább">
          <font>
             <Font name="Candara" size="24.0" />
          </font>
       </Button>
+      <Text fx:id="nincsElegArany" fill="RED" layoutX="208.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   " textAlignment="CENTER" wrappingWidth="222.29412841796875">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -2,8 +2,13 @@ package com.example.heros_of_might_and_magic;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
@@ -38,6 +43,8 @@ public class Eloholt extends Egyseg{
 
 
     @FXML
+    private Text nincsElegArany;
+    @FXML
     private Text mennyisegDemon;
     @FXML
     private Text mennyisegZombi;
@@ -50,38 +57,80 @@ public class Eloholt extends Egyseg{
 
 
     public void megveszemDemon(ActionEvent event) throws IOException {
-        demonSzam += Integer.parseInt(TF_demon.getText());
-        SceneController.arany = SceneController.arany - Integer.parseInt(TF_demon.getText())*6; // 6 = démon ára
-        arany.setText(String.valueOf(SceneController.arany));
-        mennyisegDemon.setText(String.valueOf(demonSzam));
+        if (SceneController.arany - Integer.parseInt(TF_demon.getText())*6 < 0){
+            nincsElegArany.setText("Nincs elég aranyad!");
+        }
+        else{
+            demonSzam += Integer.parseInt(TF_demon.getText());
+            SceneController.arany = SceneController.arany - Integer.parseInt(TF_demon.getText())*6; // 6 = démon ára
+            arany.setText(String.valueOf(SceneController.arany));
+            mennyisegDemon.setText(String.valueOf(demonSzam));
+        }
     }
 
     public void megveszemZombi(ActionEvent event) throws IOException {
-        zombiSzam += Integer.parseInt(TF_zombi.getText());
-        SceneController.arany = SceneController.arany - Integer.parseInt(TF_zombi.getText())*12; // 12 = zombi ára
-        arany.setText(String.valueOf(SceneController.arany));
-        mennyisegZombi.setText(String.valueOf(zombiSzam));
+        if (SceneController.arany - Integer.parseInt(TF_zombi.getText())*12 < 0){
+            nincsElegArany.setText("Nincs elég aranyad!");
+        }
+        else{
+            zombiSzam += Integer.parseInt(TF_zombi.getText());
+            SceneController.arany = SceneController.arany - Integer.parseInt(TF_zombi.getText())*12;
+            arany.setText(String.valueOf(SceneController.arany));
+            mennyisegZombi.setText(String.valueOf(zombiSzam));
+        }
     }
 
     public void megveszemVampir(ActionEvent event) throws IOException {
-        vampirSzam += Integer.parseInt(TF_vampir.getText());
-        SceneController.arany = SceneController.arany - Integer.parseInt(TF_vampir.getText())*7;
-        arany.setText(String.valueOf(SceneController.arany));
-        mennyisegVampir.setText(String.valueOf(vampirSzam));
+        if (SceneController.arany - Integer.parseInt(TF_vampir.getText())*7 < 0){
+            nincsElegArany.setText("Nincs elég aranyad!");
+        }
+        else{
+            vampirSzam += Integer.parseInt(TF_vampir.getText());
+            SceneController.arany = SceneController.arany - Integer.parseInt(TF_vampir.getText())*7;
+            arany.setText(String.valueOf(SceneController.arany));
+            mennyisegVampir.setText(String.valueOf(vampirSzam));
+        }
     }
 
     public void megveszemSzellem(ActionEvent event) throws IOException {
-        szellemSzam += Integer.parseInt(TF_szellem.getText());
-        SceneController.arany = SceneController.arany - Integer.parseInt(TF_szellem.getText())*8;
-        arany.setText(String.valueOf(SceneController.arany));
-        mennyisegSzellem.setText(String.valueOf(szellemSzam));
+        if (SceneController.arany - Integer.parseInt(TF_szellem.getText())*8 < 0){
+            nincsElegArany.setText("Nincs elég aranyad!");
+        }
+        else{
+            szellemSzam += Integer.parseInt(TF_szellem.getText());
+            SceneController.arany = SceneController.arany - Integer.parseInt(TF_szellem.getText())*8;
+            arany.setText(String.valueOf(SceneController.arany));
+            mennyisegSzellem.setText(String.valueOf(szellemSzam));
+        }
     }
 
     public void megveszemVerfarkas(ActionEvent event) throws IOException {
-        verfarkasSzam += Integer.parseInt(TF_verfarkas.getText());
-        SceneController.arany = SceneController.arany - Integer.parseInt(TF_verfarkas.getText())*15;
-        arany.setText(String.valueOf(SceneController.arany));
-        mennyisegVerfarkas.setText(String.valueOf(verfarkasSzam));
+        if (SceneController.arany - Integer.parseInt(TF_verfarkas.getText())*15 < 0){
+            nincsElegArany.setText("Nincs elég aranyad!");
+        }
+        else{
+            verfarkasSzam += Integer.parseInt(TF_verfarkas.getText());
+            SceneController.arany = SceneController.arany - Integer.parseInt(TF_verfarkas.getText())*15;
+            arany.setText(String.valueOf(SceneController.arany));
+            mennyisegVerfarkas.setText(String.valueOf(verfarkasSzam));
+        }
+    }
+
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    public void tovabb(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("csatater.fxml"));
+        root = loader.load();
+
+        // Csatater macska = loader.getController();
+        //macska.writeGold(SceneController.arany);
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 

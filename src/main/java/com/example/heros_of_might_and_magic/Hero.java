@@ -67,6 +67,7 @@ public class Hero {
     private Text arany;
     public void plusTamadas() {
         ar = arSzamitas(5);
+        System.out.println("arszamitas utan ar: " + ar);
         if(this.tamadas + 1 <= 10 && ar <= SceneController.arany){
             this.tamadas += 1;
             vasarlasokSzama++;
@@ -244,6 +245,7 @@ public class Hero {
         System.out.println("Arszamitasbol ar: " + ar);
         System.out.println("Vasarlasok szama: " + vasarlasokSzama);
         System.out.println("r: " + r);
+        System.out.println("int r: " + (int)r);
         return (int)r;
     }
 
