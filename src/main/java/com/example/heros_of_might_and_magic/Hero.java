@@ -19,8 +19,6 @@ import static java.lang.Math.round;
 
 public class Hero {
 
-
-
     public int tamadas;
     public int tudas;
     public int vedekezes;

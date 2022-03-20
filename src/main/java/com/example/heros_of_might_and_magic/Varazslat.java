@@ -13,6 +13,11 @@ import java.io.IOException;
 
 public class Varazslat {
 
+    int ar;
+    int manna;
+    String nev;
+    String leiras;
+
     public int getAr() {
         return ar;
     }
@@ -132,11 +137,6 @@ public class Varazslat {
             magikusnyilvesszo_megvette.setText("Már megvetted!");
         }
     }
-
-    int ar;
-    int manna;
-    String nev;
-    String leiras;
 
 
     private Stage stage;

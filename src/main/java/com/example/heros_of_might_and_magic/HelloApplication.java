@@ -37,7 +37,7 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         launch(args);
 
-        Hero Sarkanyharcos = new Hero();
+        //Hero Sarkanyharcos = new Hero();
         //Sarkanyharcos.setArany(1300);
         System.out.println("Arany: " + SceneController.arany);
         System.out.println("Nehezseg: " + SceneController.nehezseg);

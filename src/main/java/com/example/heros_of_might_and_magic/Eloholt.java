@@ -15,14 +15,10 @@ public class Eloholt extends Egyseg{
         arany.setText(String.valueOf(mennyiseg));
     }
 
-
-
-
+    /*
 
     @FXML
     private TextField TF_demon;
-
-    /*
     @FXML
     private TextField TF_zombi;
     @FXML
@@ -32,7 +28,6 @@ public class Eloholt extends Egyseg{
     @FXML
     private TextField TF_verfarkas;
 
-    */
 
     public int demonSzam;
     //public int zombiSzam;
@@ -51,6 +46,8 @@ public class Eloholt extends Egyseg{
         arany.setText(String.valueOf(SceneController.arany));
         mennyisegDemon.setText(String.valueOf(demonSzam));
     }
+
+    */
 
 
 

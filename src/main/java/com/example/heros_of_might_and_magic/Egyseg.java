@@ -5,6 +5,16 @@ import javafx.scene.text.Text;
 
 public class Egyseg {
 
+    String nev;
+    int ar;
+    int minSebzes;
+    int maxSebzes;
+    int eletero;
+    int sebesseg;
+    int kezdemenyezes;
+    String specialisKepesseg;
+
+
     public Egyseg() {
         this.nev = "egyseg";
         this.ar = 0;
@@ -71,17 +81,5 @@ public class Egyseg {
     public void setSpecialisKepesseg(String specialisKepesseg) {
         this.specialisKepesseg = specialisKepesseg;
     }
-
-
-
-
-    String nev;
-    int ar;
-    int minSebzes;
-    int maxSebzes;
-    int eletero;
-    int sebesseg;
-    int kezdemenyezes;
-    String specialisKepesseg;
 
 }
