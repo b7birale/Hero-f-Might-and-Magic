@@ -66,7 +66,7 @@ public class Hero {
     @FXML
     private Text arany;
     public void plusTamadas() {
-        ar = arSzamitas(5);
+        ar = arSzamitas();
         System.out.println("arszamitas utan ar: " + ar);
         if(this.tamadas + 1 <= 10 && ar <= SceneController.arany){
             this.tamadas += 1;
@@ -75,7 +75,7 @@ public class Hero {
 
             tamadasSzam.setText(String.valueOf(tamadas));
             arany.setText(String.valueOf(SceneController.arany));
-            Ar.setText(String.valueOf(arSzamitas(5) + " arany"));
+            Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
             //println(nem vehetsz tobb tamadast)
@@ -96,7 +96,7 @@ public class Hero {
     private Button plusVedekezes;
     @FXML
     public void plusVedekezes() {
-        arSzamitas(5);
+        ar = arSzamitas();
         if(this.vedekezes + 1 <= 10 && ar <= SceneController.arany){
             this.vedekezes += 1;
             vasarlasokSzama++;
@@ -104,7 +104,7 @@ public class Hero {
 
             vedekezesSzam.setText(String.valueOf(vedekezes));
             arany.setText(String.valueOf(SceneController.arany));
-            Ar.setText(String.valueOf(arSzamitas(5) + " arany"));
+            Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
             //println(nem vehetsz tobb vedekezest)
@@ -122,7 +122,7 @@ public class Hero {
     private Button plusMoral;
     @FXML
     public void plusMoral() {
-        arSzamitas(5);
+        ar = arSzamitas();
         if(this.moral + 1 <= 10 && ar <= SceneController.arany){
             this.moral += 1;
             vasarlasokSzama++;
@@ -130,7 +130,7 @@ public class Hero {
 
             moralSzam.setText(String.valueOf(moral));
             arany.setText(String.valueOf(SceneController.arany));
-            Ar.setText(String.valueOf(arSzamitas(5) + " arany"));
+            Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
             //println(nem vehetsz tobb moralt)
@@ -148,7 +148,7 @@ public class Hero {
     private Button plusSzerencse;
     @FXML
     public void plusSzerencse() {
-        arSzamitas(5);
+        ar = arSzamitas();
         if(this.szerencse + 1 <= 10 && ar <= SceneController.arany){
             this.szerencse += 1;
             vasarlasokSzama++;
@@ -156,7 +156,7 @@ public class Hero {
 
             szerencseSzam.setText(String.valueOf(szerencse));
             arany.setText(String.valueOf(SceneController.arany));
-            Ar.setText(String.valueOf(arSzamitas(5) + " arany"));
+            Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
             //println(nem vehetsz tobb szerencset)
@@ -174,7 +174,7 @@ public class Hero {
     private Button plusVarazsero;
     @FXML
     public void plusVarazsero() {
-        arSzamitas(5);
+        ar = arSzamitas();
         if(this.varazsero + 1 <= 10 && ar <= SceneController.arany){
             this.varazsero += 1;
             vasarlasokSzama++;
@@ -182,7 +182,7 @@ public class Hero {
 
             varazseroSzam.setText(String.valueOf(varazsero));
             arany.setText(String.valueOf(SceneController.arany));
-            Ar.setText(String.valueOf(arSzamitas(5) + " arany"));
+            Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
             //println(nem vehetsz tobb varazserot)
@@ -200,7 +200,7 @@ public class Hero {
     private Button plusTudas;
     @FXML
     public void plusTudas() {
-        arSzamitas(5);
+        ar = arSzamitas();
         if(this.tudas + 1 <= 10 && ar <= SceneController.arany){
             this.tudas += 1;
             vasarlasokSzama++;
@@ -208,7 +208,7 @@ public class Hero {
 
             tudasSzam.setText(String.valueOf(tudas));
             arany.setText(String.valueOf(SceneController.arany));
-            Ar.setText(String.valueOf(arSzamitas(5) + " arany"));
+            Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
             //println(nem vehetsz tobb tudast)
@@ -234,17 +234,17 @@ public class Hero {
         this.manna = manna;
     }
 
-    public int arSzamitas(int ar){
-        double r = (double)ar;
+    public int arSzamitas(){
+        double r = 5.00;
         for(int i = 0; i < vasarlasokSzama; i++){
             r += r * 0.1;
             System.out.println("r: " + r);
             r = ceil(r);
             System.out.println("r: " + r);
         }
-        System.out.println("Arszamitasbol ar: " + ar);
-        System.out.println("Vasarlasok szama: " + vasarlasokSzama);
-        System.out.println("r: " + r);
+        //System.out.println("Arszamitasbol ar: " + ar);
+        //System.out.println("Vasarlasok szama: " + vasarlasokSzama);
+        //System.out.println("r: " + r);
         System.out.println("int r: " + (int)r);
         return (int)r;
     }
