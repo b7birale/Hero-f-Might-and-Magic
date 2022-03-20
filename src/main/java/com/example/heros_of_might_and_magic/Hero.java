@@ -58,6 +58,9 @@ public class Hero {
     }
 
     @FXML
+    private Text nincsElegArany;
+
+    @FXML
     private Text Ar;
     @FXML
     private Text tamadasSzam;
@@ -65,6 +68,7 @@ public class Hero {
     private Button plusTamadas;
     @FXML
     private Text arany;
+
     public void plusTamadas() {
         ar = arSzamitas();
         System.out.println("arszamitas utan ar: " + ar);
@@ -78,7 +82,12 @@ public class Hero {
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
-            //println(nem vehetsz tobb tamadast)
+            if(ar > SceneController.arany){
+                nincsElegArany.setText("Nincs elég aranyad!");
+            }
+            if(this.tamadas + 1 > 10){
+                nincsElegArany.setText("Nem tudsz több támadást venni!");
+            }
         }
         System.out.println("Tamadas: " + tamadas);
         System.out.println("Ar: " + ar);
@@ -107,7 +116,12 @@ public class Hero {
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
-            //println(nem vehetsz tobb vedekezest)
+            if(ar > SceneController.arany){
+                nincsElegArany.setText("Nincs elég aranyad!");
+            }
+            if(this.vedekezes + 1 > 10){
+                nincsElegArany.setText("Nem tudsz több védekezést venni!");
+            }
         }
     }
 
@@ -133,7 +147,12 @@ public class Hero {
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
-            //println(nem vehetsz tobb moralt)
+            if(ar > SceneController.arany){
+                nincsElegArany.setText("Nincs elég aranyad!");
+            }
+            if(this.moral + 1 > 10){
+                nincsElegArany.setText("Nem tudsz több morált venni!");
+            }
         }
     }
 
@@ -159,7 +178,12 @@ public class Hero {
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
-            //println(nem vehetsz tobb szerencset)
+            if(ar > SceneController.arany){
+                nincsElegArany.setText("Nincs elég aranyad!");
+            }
+            if(this.szerencse + 1 > 10){
+                nincsElegArany.setText("Nem tudsz több szerencsét venni!");
+            }
         }
     }
 
@@ -185,7 +209,12 @@ public class Hero {
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
-            //println(nem vehetsz tobb varazserot)
+            if(ar > SceneController.arany){
+                nincsElegArany.setText("Nincs elég aranyad!");
+            }
+            if(this.varazsero + 1 > 10){
+                nincsElegArany.setText("Nem tudsz több varázserőt venni!");
+            }
         }
     }
 
@@ -211,7 +240,12 @@ public class Hero {
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
         }
         else{
-            //println(nem vehetsz tobb tudast)
+            if(ar > SceneController.arany){
+                nincsElegArany.setText("Nincs elég aranyad!");
+            }
+            if(this.tudas + 1 > 10){
+                nincsElegArany.setText("Nem tudsz több tudást venni!");
+            }
         }
     }
 

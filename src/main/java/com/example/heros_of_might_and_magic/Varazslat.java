@@ -55,6 +55,9 @@ public class Varazslat {
     }
 
     @FXML
+    private Text nincsElegArany;
+
+    @FXML
     private Text arany;
     public void writeGold(int mennyiseg) {
         arany.setText(String.valueOf(mennyiseg));
@@ -65,14 +68,19 @@ public class Varazslat {
     boolean villamcsapas = false;
 
     public void buyVillamcsapas(){
-        if(!villamcsapas){
+        if(!villamcsapas && SceneController.arany - 60 >= 0){
             villamcsapas = true;
             villamcsapas_megvette.setText("Megvetted!");
             SceneController.arany = SceneController.arany - 60;
             arany.setText(String.valueOf(SceneController.arany));
         }
         else{
-            villamcsapas_megvette.setText("Már megvetted!");
+            if(villamcsapas){
+                villamcsapas_megvette.setText("Már megvetted!");
+            }
+            else{
+                nincsElegArany.setText("Nincs elég aranyad!");
+            }
         }
 
     }
@@ -81,14 +89,19 @@ public class Varazslat {
     private Text tuzlabda_megvette;
     boolean tuzlabda = false;
     public void buyTuzlabda(){
-        if(!tuzlabda) {
+        if(!tuzlabda && SceneController.arany - 120 >= 0) {
             tuzlabda = true;
             tuzlabda_megvette.setText("Megvetted!");
             SceneController.arany = SceneController.arany - 120;
             arany.setText(String.valueOf(SceneController.arany));
         }
         else{
-            tuzlabda_megvette.setText("Már megvetted!");
+            if(tuzlabda){
+                tuzlabda_megvette.setText("Már megvetted!");
+            }
+            else{
+                nincsElegArany.setText("Nincs elég aranyad!");
+            }
         }
     }
 
@@ -96,14 +109,19 @@ public class Varazslat {
     private Text feltamasztas_megvette;
     boolean feltamasztas = false;
     public void buyFeltamasztas(){
-        if(!feltamasztas) {
+        if(!feltamasztas && SceneController.arany - 120 >= 0) {
             feltamasztas = true;
             feltamasztas_megvette.setText("Megvetted!");
             SceneController.arany = SceneController.arany - 120;
             arany.setText(String.valueOf(SceneController.arany));
         }
         else{
-            feltamasztas_megvette.setText("Már megvetted!");
+            if(feltamasztas){
+                feltamasztas_megvette.setText("Már megvetted!");
+            }
+            else{
+                nincsElegArany.setText("Nincs elég aranyad!");
+            }
         }
     }
 
@@ -112,14 +130,19 @@ public class Varazslat {
     private Text teleport_megvette;
     boolean teleport = false;
     public void buyTeleport(){
-        if(!teleport) {
+        if(!teleport && SceneController.arany - 100 >= 0) {
             teleport = true;
             teleport_megvette.setText("Megvetted!");
             SceneController.arany = SceneController.arany - 100;
             arany.setText(String.valueOf(SceneController.arany));
         }
         else{
-            teleport_megvette.setText("Már megvetted!");
+            if(teleport){
+                teleport_megvette.setText("Már megvetted!");
+            }
+            else{
+                nincsElegArany.setText("Nincs elég aranyad!");
+            }
         }
     }
 
@@ -127,14 +150,19 @@ public class Varazslat {
     private Text magikusnyilvesszo_megvette;
     boolean magikusNyilvesszo = false;
     public void buyMagikusNyilvesszo(){
-        if(!magikusNyilvesszo) {
+        if(!magikusNyilvesszo && SceneController.arany - 50 >= 0) {
             magikusNyilvesszo = true;
             magikusnyilvesszo_megvette.setText("Megvetted!");
             SceneController.arany = SceneController.arany - 50;
             arany.setText(String.valueOf(SceneController.arany));
         }
         else{
-            magikusnyilvesszo_megvette.setText("Már megvetted!");
+            if(magikusNyilvesszo){
+                magikusnyilvesszo_megvette.setText("Már megvetted!");
+            }
+            else{
+                nincsElegArany.setText("Nincs elég aranyad!");
+            }
         }
     }
 

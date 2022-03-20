@@ -44,6 +44,7 @@ public class Eloholt extends Egyseg{
 
     @FXML
     private Text nincsElegArany;
+
     @FXML
     private Text mennyisegDemon;
     @FXML
