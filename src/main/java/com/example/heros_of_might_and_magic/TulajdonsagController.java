@@ -19,45 +19,23 @@ import static java.lang.Math.round;
 
 public class TulajdonsagController {
 
-    //Hero hos = new Hero();
-
-    public int tamadas;
-    public int tudas;
-    public int vedekezes;
-    public int moral;
-    public int szerencse;
-    public int varazsero;
-    //public int arany;
-    public int manna;
-    public int vasarlasokSzama;
-    private int ar;
-
-    private List<Varazslat> varazslatok;
-    private List<Egyseg> egysegek;
-
-    public TulajdonsagController() {
-        this.tamadas = 1;
-        this.vedekezes = 1;
-        this.moral = 1;
-        this.szerencse = 1;
-        this.varazsero = 1;
-        this.tudas = 1;
-        this.manna = 0;
-        this.ar = 5;
-        this.vasarlasokSzama = 0;
-
-    }
-
+    Hos hos = new Hos();
 
     public void writeGold(int mennyiseg) {
         arany.setText(String.valueOf(mennyiseg));
     }
 
+    private int vasarlasokSzama;
+    private int ar;
+
+    private int tamadas;
+    private int tudas;
+    private int vedekezes;
+    private int moral;
+    private int szerencse;
+    private int varazsero;
 
 
-    public int getTamadas() {
-        return tamadas;
-    }
 
     @FXML
     private Text nincsElegArany;
@@ -96,9 +74,6 @@ public class TulajdonsagController {
         System.out.println("Arany: " + SceneController.arany);
     }
 
-    public int getVedekezes() {
-        return vedekezes;
-    }
 
 
     @FXML
@@ -125,10 +100,6 @@ public class TulajdonsagController {
                 nincsElegArany.setText("Nem tudsz több védekezést venni!");
             }
         }
-    }
-
-    public int getMoral() {
-        return moral;
     }
 
 
@@ -158,10 +129,6 @@ public class TulajdonsagController {
         }
     }
 
-    public int getSzerencse() {
-        return szerencse;
-    }
-
 
     @FXML
     private Text szerencseSzam;
@@ -189,9 +156,6 @@ public class TulajdonsagController {
         }
     }
 
-    public int getVarazsero() {
-        return varazsero;
-    }
 
 
     @FXML
@@ -220,9 +184,6 @@ public class TulajdonsagController {
         }
     }
 
-    public int getTudas() {
-        return tudas;
-    }
 
 
     @FXML
@@ -251,24 +212,6 @@ public class TulajdonsagController {
         }
     }
 
-    /*
-    public int getArany() {
-        return arany;
-    }
-
-    public void setArany(int arany) {
-        this.arany = arany;
-    }
-
-     */
-
-    public int getManna() {
-        return manna;
-    }
-
-    public void setManna(int manna) {
-        this.manna = manna;
-    }
 
     public int arSzamitas(){
         double r = 5.00;
@@ -287,7 +230,6 @@ public class TulajdonsagController {
 
 
 
-
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -298,17 +240,20 @@ public class TulajdonsagController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Varazslatok.fxml"));
         root = loader.load();
 
-
-
-        Varazslat macska = loader.getController();
+        VarazslatController macska = loader.getController();
         macska.writeGold(SceneController.arany);
+
+        hos.setTamadas(tamadas);
+        hos.setVedekezes(vedekezes);
+        hos.setMoral(moral);
+        hos.setTudas(tudas);
+        hos.setVarazsero(varazsero);
+        hos.setSzerencse(szerencse);
+        macska.setHos(hos);
+
         /*
         macska.zombikiir(EgysegController.zombidb);
-        .
-        .
-        .
-        hos.setTamadas(tamadas);
-        macska.setHos(hos);
+
         */
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
