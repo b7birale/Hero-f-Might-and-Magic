@@ -13,6 +13,16 @@ import java.io.IOException;
 
 public class Varazslat {
 
+    /*
+    Hero hos = new Hero();
+
+    public void setHos(Hero hos) {
+        this.hos = hos;
+    }
+
+
+     */
+
     int ar;
     int manna;
     String nev;

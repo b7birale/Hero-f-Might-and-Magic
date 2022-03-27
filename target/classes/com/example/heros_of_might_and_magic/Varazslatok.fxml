@@ -161,5 +161,10 @@
             <Font name="Candara" size="14.0" />
          </font>
       </Text>
+      <Text fx:id="nincsElegArany" fill="RED" layoutX="180.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   " textAlignment="CENTER" wrappingWidth="251.97735595703125">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

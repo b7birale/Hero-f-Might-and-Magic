@@ -17,7 +17,9 @@ import java.util.List;
 import static java.lang.Math.ceil;
 import static java.lang.Math.round;
 
-public class Hero {
+public class TulajdonsagController {
+
+    //Hero hos = new Hero();
 
     public int tamadas;
     public int tudas;
@@ -33,7 +35,7 @@ public class Hero {
     private List<Varazslat> varazslatok;
     private List<Egyseg> egysegek;
 
-    public Hero() {
+    public TulajdonsagController() {
         this.tamadas = 1;
         this.vedekezes = 1;
         this.moral = 1;
@@ -296,8 +298,18 @@ public class Hero {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Varazslatok.fxml"));
         root = loader.load();
 
+
+
         Varazslat macska = loader.getController();
         macska.writeGold(SceneController.arany);
+        /*
+        macska.zombikiir(EgysegController.zombidb);
+        .
+        .
+        .
+        hos.setTamadas(tamadas);
+        macska.setHos(hos);
+        */
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

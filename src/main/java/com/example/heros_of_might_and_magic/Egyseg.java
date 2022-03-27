@@ -6,7 +6,7 @@ import javafx.scene.text.Text;
 public class Egyseg {
 
     String nev;
-    int ar;
+    protected int ar;   //itt minden protected!
     int minSebzes;
     int maxSebzes;
     int eletero;

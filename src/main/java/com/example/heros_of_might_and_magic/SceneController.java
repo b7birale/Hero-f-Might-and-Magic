@@ -3,15 +3,10 @@
 package com.example.heros_of_might_and_magic;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -45,7 +40,7 @@ public class SceneController {
 
         arany = 1300;
 
-        Hero macska = loader.getController();
+        TulajdonsagController macska = loader.getController();
         macska.writeGold(arany);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -64,7 +59,7 @@ public class SceneController {
 
         arany = 1000;
 
-        Hero scene2Controller = loader.getController();
+        TulajdonsagController scene2Controller = loader.getController();
         scene2Controller.writeGold(arany);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -85,7 +80,7 @@ public class SceneController {
 
         arany = 700;
 
-        Hero scene2Controller = loader.getController();
+        TulajdonsagController scene2Controller = loader.getController();
         scene2Controller.writeGold(arany);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
