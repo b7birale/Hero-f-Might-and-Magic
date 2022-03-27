@@ -1,3 +1,4 @@
+/*
 package com.example.heros_of_might_and_magic;
 
 public class Feltamasztas extends Varazslat{
@@ -16,3 +17,5 @@ public class Feltamasztas extends Varazslat{
     }
 
 }
+
+ */

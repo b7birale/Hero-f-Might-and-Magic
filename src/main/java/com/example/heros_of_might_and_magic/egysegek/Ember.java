@@ -1,9 +1,10 @@
-package com.example.heros_of_might_and_magic;
+package com.example.heros_of_might_and_magic.egysegek;
 
+import com.example.heros_of_might_and_magic.Egyseg;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
-public class Ember extends Egyseg{
+public class Ember extends Egyseg {
 
     @FXML
     private Text arany;

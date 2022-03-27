@@ -1,6 +1,6 @@
-package com.example.heros_of_might_and_magic;
+package com.example.heros_of_might_and_magic.egysegek;
 
-public class Griff extends RepuloLeny{
+public class Griff extends RepuloLeny {
 
     public Griff() {
         this.nev = "Griff";

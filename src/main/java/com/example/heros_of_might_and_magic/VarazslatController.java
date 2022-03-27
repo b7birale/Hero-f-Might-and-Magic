@@ -142,8 +142,41 @@ public class VarazslatController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Frakciok.fxml"));
         root = loader.load();
 
-        Frakcio macska = loader.getController();
+        EloholtController macska = loader.getController();
         macska.writeGold(SceneController.arany);
+
+        if(villamcsapas){
+            Varazslat villamcsapas = new Varazslat();
+            villamcsapas.setAr(60);
+            villamcsapas.setManna(5);
+            hos.varazslatok.add(villamcsapas);
+        }
+        if(tuzlabda){
+            Varazslat tuzlabda = new Varazslat();
+            tuzlabda.setAr(120);
+            tuzlabda.setManna(9);
+            hos.varazslatok.add(tuzlabda);
+        }
+        if(feltamasztas){
+            Varazslat feltamasztas = new Varazslat();
+            feltamasztas.setAr(120);
+            feltamasztas.setManna(6);
+            hos.varazslatok.add(feltamasztas);
+        }
+        if(teleport){
+            Varazslat teleport = new Varazslat();
+            teleport.setAr(100);
+            teleport.setManna(4);
+            hos.varazslatok.add(teleport);
+        }
+        if(magikusNyilvesszo){
+            Varazslat magikusNyilvesszo = new Varazslat();
+            magikusNyilvesszo.setAr(50);
+            magikusNyilvesszo.setManna(15);
+            hos.varazslatok.add(magikusNyilvesszo);
+        }
+
+        macska.setHos(hos);
 
 
 

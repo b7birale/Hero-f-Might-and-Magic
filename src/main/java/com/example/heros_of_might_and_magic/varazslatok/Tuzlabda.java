@@ -1,3 +1,4 @@
+/*
 package com.example.heros_of_might_and_magic;
 
 public class Tuzlabda extends Varazslat{
@@ -14,3 +15,5 @@ public class Tuzlabda extends Varazslat{
         //sebzes = varazsero*20
     }
 }
+
+ */

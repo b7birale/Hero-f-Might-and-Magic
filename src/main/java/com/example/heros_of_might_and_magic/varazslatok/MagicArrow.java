@@ -1,3 +1,4 @@
+/*
 package com.example.heros_of_might_and_magic;
 
 public class MagicArrow extends Varazslat {
@@ -14,3 +15,5 @@ public class MagicArrow extends Varazslat {
         //sebzes = varazsero*10 + 10/20/30
     }
 }
+
+ */

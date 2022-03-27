@@ -1,6 +1,8 @@
-package com.example.heros_of_might_and_magic;
+package com.example.heros_of_might_and_magic.egysegek.eloholtak;
 
-public class Demon extends Eloholt{
+import com.example.heros_of_might_and_magic.Eloholt;
+
+public class Demon extends Eloholt {
 
     public Demon() {
 

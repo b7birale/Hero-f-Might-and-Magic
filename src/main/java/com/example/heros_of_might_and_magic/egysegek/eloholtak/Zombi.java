@@ -1,4 +1,6 @@
-package com.example.heros_of_might_and_magic;
+package com.example.heros_of_might_and_magic.egysegek.eloholtak;
+
+import com.example.heros_of_might_and_magic.Eloholt;
 
 public class Zombi extends Eloholt {
 

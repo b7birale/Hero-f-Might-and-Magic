@@ -1,6 +1,8 @@
-package com.example.heros_of_might_and_magic;
+package com.example.heros_of_might_and_magic.egysegek;
 
-public class Foldmuves extends Ember{
+import com.example.heros_of_might_and_magic.egysegek.Ember;
+
+public class Foldmuves extends Ember {
 
     public Foldmuves() {
         this.nev = "Foldmuves";

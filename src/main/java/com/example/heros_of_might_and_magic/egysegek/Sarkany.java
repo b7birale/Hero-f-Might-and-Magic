@@ -1,6 +1,8 @@
-package com.example.heros_of_might_and_magic;
+package com.example.heros_of_might_and_magic.egysegek;
 
-public class Sarkany extends RepuloLeny{
+import com.example.heros_of_might_and_magic.egysegek.RepuloLeny;
+
+public class Sarkany extends RepuloLeny {
 
     public Sarkany() {
         this.nev = "Sarkany";

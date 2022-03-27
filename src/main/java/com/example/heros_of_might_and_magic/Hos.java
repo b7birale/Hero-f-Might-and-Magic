@@ -14,8 +14,8 @@ public class Hos {
     public int varazsero;
     public int manna;
 
-    private List<Varazslat> varazslatok;
-    private List<Egyseg> egysegek;
+    public List<Varazslat> varazslatok;
+    public List<Egyseg> egysegek;
 
 
     public Hos() {

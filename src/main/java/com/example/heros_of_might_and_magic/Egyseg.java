@@ -5,14 +5,14 @@ import javafx.scene.text.Text;
 
 public class Egyseg {
 
-    String nev;
+    protected String nev;
     protected int ar;   //itt minden protected!
-    int minSebzes;
-    int maxSebzes;
-    int eletero;
-    int sebesseg;
-    int kezdemenyezes;
-    String specialisKepesseg;
+    protected int minSebzes;
+    protected int maxSebzes;
+    protected int eletero;
+    protected int sebesseg;
+    protected int kezdemenyezes;
+    protected String specialisKepesseg;
 
 
     public Egyseg() {

@@ -15,8 +15,8 @@ public class Varazslat {
 
     int ar;
     int manna;
-    String nev;
-    String leiras;
+    //String nev;
+    //String leiras;
 
     public int getAr() {
         return ar;
@@ -34,6 +34,7 @@ public class Varazslat {
         this.manna = manna;
     }
 
+    /*
     public String getNev() {
         return nev;
     }
@@ -49,6 +50,6 @@ public class Varazslat {
     public void setLeiras(String leiras) {
         this.leiras = leiras;
     }
-
+    */
 
 }
