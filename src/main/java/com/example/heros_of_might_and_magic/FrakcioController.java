@@ -11,8 +11,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Frakcio {
+public class FrakcioController {
 
+    Hos hos = new Hos();
+
+    public void setHos(Hos hos) {
+        this.hos = hos;
+    }
 
     @FXML
     private Text arany;
@@ -29,7 +34,7 @@ public class Frakcio {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Eloholtak.fxml"));
         root = loader.load();
 
-        Eloholt macska = loader.getController();
+        EloholtController macska = loader.getController();
         macska.writeGold(SceneController.arany);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

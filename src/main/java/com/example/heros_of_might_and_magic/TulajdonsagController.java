@@ -69,9 +69,6 @@ public class TulajdonsagController {
                 nincsElegArany.setText("Nem tudsz több támadást venni!");
             }
         }
-        System.out.println("Tamadas: " + tamadas);
-        System.out.println("Ar: " + ar);
-        System.out.println("Arany: " + SceneController.arany);
     }
 
 
@@ -217,14 +214,8 @@ public class TulajdonsagController {
         double r = 5.00;
         for(int i = 0; i < vasarlasokSzama; i++){
             r += r * 0.1;
-            System.out.println("r: " + r);
             r = ceil(r);
-            System.out.println("r: " + r);
         }
-        //System.out.println("Arszamitasbol ar: " + ar);
-        //System.out.println("Vasarlasok szama: " + vasarlasokSzama);
-        //System.out.println("r: " + r);
-        System.out.println("int r: " + (int)r);
         return (int)r;
     }
 

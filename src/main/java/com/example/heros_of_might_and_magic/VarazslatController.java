@@ -10,6 +10,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VarazslatController {
 
@@ -142,8 +144,10 @@ public class VarazslatController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Frakciok.fxml"));
         root = loader.load();
 
-        EloholtController macska = loader.getController();
+        FrakcioController macska = loader.getController();
         macska.writeGold(SceneController.arany);
+
+        //List<Varazslat> varazslatok = new ArrayList<Varazslat>();   //!!!!!!
 
         if(villamcsapas){
             Varazslat villamcsapas = new Varazslat();

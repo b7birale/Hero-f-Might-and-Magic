@@ -33,9 +33,9 @@ public class SceneController {
 
 
     public void konnyu(ActionEvent event) throws IOException {
-        //Parent root = FXMLLoader.load(getClass().getResource("Hero.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("Tulajdonsagok.fxml"));
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Hero.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Tulajdonsagok.fxml"));
         root = loader.load();
 
         arany = 1300;
@@ -52,9 +52,9 @@ public class SceneController {
     }
 
     public void kozepes(ActionEvent event) throws IOException {
-        //Parent root = FXMLLoader.load(getClass().getResource("Hero.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("Tulajdonsagok.fxml"));
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Hero.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Tulajdonsagok.fxml"));
         root = loader.load();
 
         arany = 1000;
@@ -73,9 +73,9 @@ public class SceneController {
     }
 
     public void nehez(ActionEvent event) throws IOException {
-        //Parent root = FXMLLoader.load(getClass().getResource("Hero.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("Tulajdonsagok.fxml"));
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Hero.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Tulajdonsagok.fxml"));
         root = loader.load();
 
         arany = 700;
