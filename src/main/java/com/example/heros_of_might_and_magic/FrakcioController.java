@@ -60,7 +60,7 @@ public class FrakcioController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RepuloLenyek.fxml"));
         root = loader.load();
 
-        EloholtController macska = loader.getController();
+        RepuloLenyController macska = loader.getController();
         macska.writeGold(SceneController.arany);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
