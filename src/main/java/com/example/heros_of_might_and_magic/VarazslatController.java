@@ -10,8 +10,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class VarazslatController {
 
@@ -147,8 +145,11 @@ public class VarazslatController {
         FrakcioController macska = loader.getController();
         macska.writeGold(SceneController.arany);
 
-        //List<Varazslat> varazslatok = new ArrayList<Varazslat>();   //!!!!!!
+        //ITT ÉN NEM TUDOM MI TÖRTÉNIK ÉS MI NEM ?!
 
+        //List<Varazslat> varazslatok = new ArrayList<Varazslat>();   //próbálkozás, ami nem nagyon jött be, de azért itthagyom egyelőre
+
+        /*
         if(villamcsapas){
             Varazslat villamcsapas = new Varazslat();
             villamcsapas.setAr(60);
@@ -180,7 +181,12 @@ public class VarazslatController {
             hos.varazslatok.add(magikusNyilvesszo);
         }
 
+         */
+
+
         macska.setHos(hos);
+
+
 
 
 

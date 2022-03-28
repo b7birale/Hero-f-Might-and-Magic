@@ -2,8 +2,6 @@ package com.example.heros_of_might_and_magic;
 
 import java.util.List;
 
-import static java.lang.Math.ceil;
-
 public class Hos {
 
     public int tamadas;

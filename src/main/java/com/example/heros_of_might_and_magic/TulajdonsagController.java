@@ -51,7 +51,6 @@ public class TulajdonsagController {
 
     public void plusTamadas() {
         ar = arSzamitas();
-        System.out.println("arszamitas utan ar: " + ar);
         if(this.tamadas + 1 <= 10 && ar <= SceneController.arany){
             this.tamadas += 1;
             vasarlasokSzama++;
