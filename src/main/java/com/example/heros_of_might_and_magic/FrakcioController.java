@@ -42,4 +42,30 @@ public class FrakcioController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void emberek(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Emberek.fxml"));
+        root = loader.load();
+
+        EmberController macska = loader.getController();
+        macska.writeGold(SceneController.arany);
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void repuloLenyek(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RepuloLenyek.fxml"));
+        root = loader.load();
+
+        EloholtController macska = loader.getController();
+        macska.writeGold(SceneController.arany);
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

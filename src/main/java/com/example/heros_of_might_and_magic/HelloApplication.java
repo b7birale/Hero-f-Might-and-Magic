@@ -37,7 +37,7 @@ public class HelloApplication extends Application {
 
     public void start(Stage stage) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("nehezsegi_szintek.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Nehezsegi_szintek.fxml"));
 
         Image icon = new Image("C:\\Users\\biroa\\IdeaProjects\\Heros_of_Might_and_Magic\\src\\icon.jpg");
         stage.getIcons().add(icon);

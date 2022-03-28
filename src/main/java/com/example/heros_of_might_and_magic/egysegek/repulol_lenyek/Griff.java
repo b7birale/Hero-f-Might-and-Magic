@@ -1,4 +1,6 @@
-package com.example.heros_of_might_and_magic.egysegek;
+package com.example.heros_of_might_and_magic.egysegek.repulol_lenyek;
+
+import com.example.heros_of_might_and_magic.RepuloLeny;
 
 public class Griff extends RepuloLeny {
 

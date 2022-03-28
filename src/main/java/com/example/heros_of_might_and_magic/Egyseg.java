@@ -25,6 +25,17 @@ public class Egyseg {
         this.kezdemenyezes = 0;
         this.specialisKepesseg = "nincs";
     }
+    //?
+    public Egyseg(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg) {
+        this.nev = nev;
+        this.ar = ar;
+        this.minSebzes = minSebzes;
+        this.maxSebzes = maxSebzes;
+        this.eletero = eletero;
+        this.sebesseg = sebesseg;
+        this.kezdemenyezes = kezdemenyezes;
+        this.specialisKepesseg = specialisKepesseg;
+    }
 
     public int getAr() {
         return ar;

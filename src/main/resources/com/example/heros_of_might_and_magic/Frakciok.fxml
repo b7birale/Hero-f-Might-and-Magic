@@ -12,12 +12,12 @@
             <Font name="Candara" size="24.0" />
          </font>
       </Button>
-      <Button layoutX="255.0" layoutY="217.0" mnemonicParsing="false" text="Emberek">
+      <Button layoutX="255.0" layoutY="217.0" mnemonicParsing="false" onAction="#emberek" text="Emberek">
          <font>
             <Font name="Candara" size="24.0" />
          </font>
       </Button>
-      <Button layoutX="229.0" layoutY="302.0" mnemonicParsing="false" text="Repülő lények">
+      <Button layoutX="229.0" layoutY="302.0" mnemonicParsing="false" onAction="#repuloLenyek" text="Repülő lények">
          <font>
             <Font name="Candara" size="24.0" />
          </font>

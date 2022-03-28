@@ -21,4 +21,15 @@ public class Eloholt extends Egyseg{
     public int szellemSzam;
     public int verfarkasSzam;
 
+    public Eloholt() {
+        this.nev = "egyseg";
+        this.ar = 0;
+        this.minSebzes = 0;
+        this.maxSebzes = 0;
+        this.eletero = 0;
+        this.sebesseg = 0;
+        this.kezdemenyezes = 0;
+        this.specialisKepesseg = "nincs";
+    }
+
 }

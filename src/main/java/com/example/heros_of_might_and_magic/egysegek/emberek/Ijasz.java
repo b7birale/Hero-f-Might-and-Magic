@@ -1,6 +1,6 @@
-package com.example.heros_of_might_and_magic.egysegek;
+package com.example.heros_of_might_and_magic.egysegek.emberek;
 
-import com.example.heros_of_might_and_magic.egysegek.Ember;
+import com.example.heros_of_might_and_magic.Ember;
 
 public class Ijasz extends Ember {
 

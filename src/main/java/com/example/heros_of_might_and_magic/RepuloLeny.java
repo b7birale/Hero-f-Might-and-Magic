@@ -1,4 +1,4 @@
-package com.example.heros_of_might_and_magic.egysegek;
+package com.example.heros_of_might_and_magic;
 
 import com.example.heros_of_might_and_magic.Egyseg;
 import javafx.fxml.FXML;
