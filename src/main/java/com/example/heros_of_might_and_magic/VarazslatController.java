@@ -150,7 +150,7 @@ public class VarazslatController {
         //List<Varazslat> varazslatok = new ArrayList<Varazslat>();   //próbálkozás, ami nem nagyon jött be, de azért itthagyom egyelőre
 
         //hos.addVarazslatok();
-        /*
+
         if(villamcsapas){
             Varazslat villamcsapas = new Varazslat();
             villamcsapas.setAr(60);
@@ -181,9 +181,6 @@ public class VarazslatController {
             magikusNyilvesszo.setManna(15);
             hos.addVarazslatok(magikusNyilvesszo);
         }
-
-
-         */
 
 
         macska.setHos(hos);

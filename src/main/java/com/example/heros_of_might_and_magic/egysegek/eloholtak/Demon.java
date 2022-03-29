@@ -6,8 +6,8 @@ public class Demon extends Eloholt {
 
     public Demon() {
 
-        //super("Demon",6,2,3,30,5,9,"nincs");
-
+        super("Demon",6,2,3,30,5,9,"nincs");
+    /*
         this.nev = "Demon";
         this.ar = 6;
         this.minSebzes = 2;
@@ -17,6 +17,8 @@ public class Demon extends Eloholt {
         this.kezdemenyezes = 9;
         this.specialisKepesseg = "nincs";
 
+
+     */
 
     }
 }

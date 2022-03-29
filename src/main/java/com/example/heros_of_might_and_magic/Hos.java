@@ -1,5 +1,6 @@
 package com.example.heros_of_might_and_magic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hos {
@@ -23,6 +24,8 @@ public class Hos {
         this.varazsero = 1;
         this.tudas = 1;
         this.manna = 0;
+        varazslatok = new ArrayList<>();
+        egysegek = new ArrayList<>();
     }
 
     /*

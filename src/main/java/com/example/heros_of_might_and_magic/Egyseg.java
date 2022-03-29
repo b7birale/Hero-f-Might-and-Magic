@@ -12,6 +12,7 @@ public class Egyseg {
     protected int eletero;
     protected int sebesseg;
     protected int kezdemenyezes;
+    protected int hanyDb;   //!
     protected String specialisKepesseg;
 
 

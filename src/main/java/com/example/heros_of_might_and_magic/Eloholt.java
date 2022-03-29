@@ -15,11 +15,14 @@ import java.io.IOException;
 
 public class Eloholt extends Egyseg{
 
+    /*
     public int demonSzam;
     public int zombiSzam;
     public int vampirSzam;
     public int szellemSzam;
     public int verfarkasSzam;
+
+     */
 
     public Eloholt() {
         this.nev = "egyseg";
@@ -32,4 +35,7 @@ public class Eloholt extends Egyseg{
         this.specialisKepesseg = "nincs";
     }
 
+    public Eloholt(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg) {
+        super(nev, ar, minSebzes, maxSebzes, eletero, sebesseg, kezdemenyezes, specialisKepesseg);
+    }
 }
