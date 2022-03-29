@@ -149,37 +149,39 @@ public class VarazslatController {
 
         //List<Varazslat> varazslatok = new ArrayList<Varazslat>();   //próbálkozás, ami nem nagyon jött be, de azért itthagyom egyelőre
 
+        //hos.addVarazslatok();
         /*
         if(villamcsapas){
             Varazslat villamcsapas = new Varazslat();
             villamcsapas.setAr(60);
             villamcsapas.setManna(5);
-            hos.varazslatok.add(villamcsapas);
+            hos.addVarazslatok(villamcsapas);
         }
         if(tuzlabda){
             Varazslat tuzlabda = new Varazslat();
             tuzlabda.setAr(120);
             tuzlabda.setManna(9);
-            hos.varazslatok.add(tuzlabda);
+            hos.addVarazslatok(tuzlabda);
         }
         if(feltamasztas){
             Varazslat feltamasztas = new Varazslat();
             feltamasztas.setAr(120);
             feltamasztas.setManna(6);
-            hos.varazslatok.add(feltamasztas);
+            hos.addVarazslatok(feltamasztas);
         }
         if(teleport){
             Varazslat teleport = new Varazslat();
             teleport.setAr(100);
             teleport.setManna(4);
-            hos.varazslatok.add(teleport);
+            hos.addVarazslatok(teleport);
         }
         if(magikusNyilvesszo){
             Varazslat magikusNyilvesszo = new Varazslat();
             magikusNyilvesszo.setAr(50);
             magikusNyilvesszo.setManna(15);
-            hos.varazslatok.add(magikusNyilvesszo);
+            hos.addVarazslatok(magikusNyilvesszo);
         }
+
 
          */
 

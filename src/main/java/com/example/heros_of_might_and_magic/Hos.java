@@ -15,7 +15,6 @@ public class Hos {
     public List<Varazslat> varazslatok;
     public List<Egyseg> egysegek;
 
-
     public Hos() {
         this.tamadas = 1;
         this.vedekezes = 1;
@@ -93,5 +92,9 @@ public class Hos {
 
     public void setVarazsero(int varazsero) {
         this.varazsero = varazsero;
+    }
+
+    public void addVarazslatok(Varazslat varazslat) {
+        varazslatok.add(varazslat);
     }
 }

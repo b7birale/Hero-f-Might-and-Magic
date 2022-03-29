@@ -35,7 +35,16 @@ public class TulajdonsagController {
     private int szerencse;
     private int varazsero;
 
-
+    public TulajdonsagController() {
+        this.vasarlasokSzama = 0;
+        this.ar = 0;
+        this.tamadas = 1;
+        this.tudas = 1;
+        this.vedekezes = 1;
+        this.moral = 1;
+        this.szerencse = 1;
+        this.varazsero = 1;
+    }
 
     @FXML
     private Text nincsElegArany;
