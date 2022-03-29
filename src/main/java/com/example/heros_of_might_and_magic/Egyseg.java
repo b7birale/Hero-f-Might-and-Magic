@@ -38,6 +38,21 @@ public class Egyseg {
         this.specialisKepesseg = specialisKepesseg;
     }
 
+
+
+
+    public void tamad(Egyseg tamadottEgyseg){
+        int sebzes = this.minSebzes*10*this.hanyDb;
+        csokkentEletero(sebzes);
+    }
+
+    private void csokkentEletero(int sebzes){
+        setEletero(eletero*hanyDb - sebzes);
+    }
+
+
+
+
     public int getAr() {
         return ar;
     }
