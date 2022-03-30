@@ -1,10 +1,16 @@
 package com.example.heros_of_might_and_magic;
 public class Varazslat {
 
-    int ar;
-    int manna;
-    //String nev;
-    //String leiras;
+    public int ar;
+    public int manna;
+
+    public Varazslat(int ar, int manna) {
+        this.ar = ar;
+        this.manna = manna;
+    }
+
+
+    //GETTEREK ÉS SETTEREK ---------------------------------------------------------------------------------------------
 
     public int getAr() {
         return ar;
@@ -22,22 +28,5 @@ public class Varazslat {
         this.manna = manna;
     }
 
-        /*
-        public String getNev() {
-            return nev;
-        }
-
-        public void setNev(String nev) {
-            this.nev = nev;
-        }
-
-        public String getLeiras() {
-            return leiras;
-        }
-
-        public void setLeiras(String leiras) {
-            this.leiras = leiras;
-        }
-        */
 
 }

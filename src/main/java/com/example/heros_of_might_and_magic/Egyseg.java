@@ -7,18 +7,19 @@ public class Egyseg {
 
     protected String nev;
     protected int ar;   //itt minden protected!
+    protected int hanyDb;
     protected int minSebzes;
     protected int maxSebzes;
     protected int eletero;
     protected int sebesseg;
     protected int kezdemenyezes;
-    protected int hanyDb;   //!
     protected String specialisKepesseg;
 
 
     public Egyseg() {
         this.nev = "egyseg";
         this.ar = 0;
+        this.hanyDb = 0;
         this.minSebzes = 0;
         this.maxSebzes = 0;
         this.eletero = 0;
@@ -51,7 +52,7 @@ public class Egyseg {
     }
 
 
-
+    //GETTEREK ÉS SETTEREK ---------------------------------------------------------------------------------------------
 
     public int getAr() {
         return ar;

@@ -5,13 +5,9 @@ import com.example.heros_of_might_and_magic.Ember;
 public class Ijasz extends Ember {
 
     public Ijasz() {
-        this.nev = "Ijasz";
-        this.ar = 6;
-        this.minSebzes = 2;
-        this.maxSebzes = 4;
-        this.eletero = 7;
-        this.sebesseg = 4;
-        this.kezdemenyezes = 9;
-        this.specialisKepesseg = "loves";
+
+        super("Ijasz",6,2,4,7,4,9,"loves");
+
+
     }
 }

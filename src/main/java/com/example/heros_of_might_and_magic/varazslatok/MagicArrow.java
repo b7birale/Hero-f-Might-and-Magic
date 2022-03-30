@@ -1,19 +1,24 @@
-/*
-package com.example.heros_of_might_and_magic;
+
+package com.example.heros_of_might_and_magic.varazslatok;
+
+import com.example.heros_of_might_and_magic.Varazslat;
 
 public class MagicArrow extends Varazslat {
 
+    //(10/20/30 + (varazsero x 10)) sebzést végez egy kiválasztott ellenséges egységen
+
     public MagicArrow() {
-        this.nev = "Magikus nyilvesszo";
-        this.ar = 50;
-        this.manna = 15;
-        this.leiras = "(10/20/30 + (varazsero x 10)) sebzést végez egy kiválasztott ellenséges egységen\n";
+
+        super(50, 15);
     }
 
-    //@Override
-    public void hasznal(int varazsero){     //parameterbe majd a Sarkanyharcos.varazsero jon
-        //sebzes = varazsero*10 + 10/20/30
+    /*
+    @Override
+    public void hasznal(int varazsero){     //parameterbe majd a hos.varazsero jon
+        sebzes = varazsero*10 + 10/20/30
     }
+
+     */
 }
 
- */
+

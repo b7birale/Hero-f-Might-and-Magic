@@ -1,5 +1,6 @@
 package com.example.heros_of_might_and_magic;
 
+import com.example.heros_of_might_and_magic.varazslatok.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -152,31 +153,31 @@ public class VarazslatController {
         //hos.addVarazslatok();
 
         if(villamcsapas){
-            Varazslat villamcsapas = new Varazslat();
+            Villamcsapas villamcsapas = new Villamcsapas();
             villamcsapas.setAr(60);
             villamcsapas.setManna(5);
             hos.addVarazslatok(villamcsapas);
         }
         if(tuzlabda){
-            Varazslat tuzlabda = new Varazslat();
+            Tuzlabda tuzlabda = new Tuzlabda();
             tuzlabda.setAr(120);
             tuzlabda.setManna(9);
             hos.addVarazslatok(tuzlabda);
         }
         if(feltamasztas){
-            Varazslat feltamasztas = new Varazslat();
+            Feltamasztas feltamasztas = new Feltamasztas();
             feltamasztas.setAr(120);
             feltamasztas.setManna(6);
             hos.addVarazslatok(feltamasztas);
         }
         if(teleport){
-            Varazslat teleport = new Varazslat();
+            Teleport teleport = new Teleport();
             teleport.setAr(100);
             teleport.setManna(4);
             hos.addVarazslatok(teleport);
         }
         if(magikusNyilvesszo){
-            Varazslat magikusNyilvesszo = new Varazslat();
+            MagicArrow magikusNyilvesszo = new MagicArrow();
             magikusNyilvesszo.setAr(50);
             magikusNyilvesszo.setManna(15);
             hos.addVarazslatok(magikusNyilvesszo);
