@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Hos {
 
-    public int tamadas;
+    public int tamadas;     //mind private!
     public int tudas;
     public int vedekezes;
     public int moral;
@@ -41,9 +41,26 @@ public class Hos {
 
      */
 
+
+
+    public void tamad(Egyseg tamadottEgyseg){
+        int sebzes = tamadas * 10 * tamadottEgyseg.hanyDb;
+        tamadottEgyseg.csokkentEletero(sebzes);
+    }
+
+    public void tamadEgyseggel(Egyseg tamadottEgyseg, Hos ellenfel){
+        int egysegIndex = 0;
+        egysegek.get(egysegIndex).tamad(tamadottEgyseg, tamadas, ellenfel);
+    }
+
+
+
+    //GETTEREK ÉS SETTEREK ------------------------------------------------------------------------------
+
     public int getTamadas() {
         return tamadas;
     }
+
     public int getManna() {
         return manna;
     }

@@ -3,6 +3,8 @@ package com.example.heros_of_might_and_magic;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
+import static java.lang.Math.ceil;
+
 public class Egyseg {
 
     protected String nev;
@@ -40,16 +42,28 @@ public class Egyseg {
     }
 
 
-
-
-    public void tamad(Egyseg tamadottEgyseg){
-        int sebzes = this.minSebzes*10*this.hanyDb;
-        csokkentEletero(sebzes);
-    }
-
-    private void csokkentEletero(int sebzes){
+    public void csokkentEletero(int sebzes){
         setEletero(eletero*hanyDb - sebzes);
     }
+
+    //mozgas
+
+    //random szám generátor
+    public int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+
+
+    public void tamad(Egyseg tamadottEgyseg, int tamadas, Hos ellenfel){
+        double alapsebzes = getRandomNumber(this.minSebzes, this.maxSebzes) * this.hanyDb;
+        double sebzes = alapsebzes * tamadas; //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
+        sebzes = sebzes * ellenfel.vedekezes;    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
+        int vegeredmeny = (int) ceil(sebzes);
+    }
+
+
+
+
 
 
     //GETTEREK ÉS SETTEREK ---------------------------------------------------------------------------------------------
