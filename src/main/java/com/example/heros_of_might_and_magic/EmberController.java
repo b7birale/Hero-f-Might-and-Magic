@@ -1,5 +1,7 @@
 package com.example.heros_of_might_and_magic;
 
+import com.example.heros_of_might_and_magic.egysegek.emberek.*;
+import com.example.heros_of_might_and_magic.egysegek.repulol_lenyek.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -134,6 +136,23 @@ public class EmberController {
         //HOGYAN TÁROLOM EL EGY EGYSZERŰ LISTÁBAN, HOGY AZ EGYES EGYSÉGEKBŐL MENNYI VAN??
 
         //macska.setHos(hos);
+
+        Foldmuves foldmuves = new Foldmuves(foldmuvesSzam);
+        hos.addEgysegek(foldmuves);
+
+        Grof grof = new Grof(grofSzam);
+        hos.addEgysegek(grof);
+
+        Ijasz ijasz = new Ijasz(ijaszSzam);
+        hos.addEgysegek(ijasz);
+
+        Lovag lovag = new Lovag(lovagSzam);
+        hos.addEgysegek(lovag);
+
+        Polgar polgar = new Polgar(polgarSzam);
+        hos.addEgysegek(polgar);
+
+
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

@@ -1,5 +1,7 @@
 package com.example.heros_of_might_and_magic;
 
+import com.example.heros_of_might_and_magic.egysegek.repulol_lenyek.*;
+import com.example.heros_of_might_and_magic.varazslatok.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -132,7 +134,27 @@ public class RepuloLenyController {
 
         //HOGYAN TÁROLOM EL EGY EGYSZERŰ LISTÁBAN, HOGY AZ EGYES EGYSÉGEKBŐL MENNYI VAN??
 
+        Griff griff = new Griff(griffSzam);
+        hos.addEgysegek(griff);
+
+        Fonix fonix = new Fonix(fonixSzam);
+        hos.addEgysegek(fonix);
+
+        Sarkany sarkany = new Sarkany(sarkanySzam);
+        hos.addEgysegek(sarkany);
+
+        Pteranodon pteranodon = new Pteranodon(pteranodonSzam);
+        hos.addEgysegek(pteranodon);
+
+        Pegazus pegazus = new Pegazus(pegazusSzam);
+        hos.addEgysegek(pegazus);
+
+
+
+
         //macska.setHos(hos);
+
+
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

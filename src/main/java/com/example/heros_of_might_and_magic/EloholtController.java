@@ -1,5 +1,7 @@
 package com.example.heros_of_might_and_magic;
 
+import com.example.heros_of_might_and_magic.egysegek.eloholtak.*;
+import com.example.heros_of_might_and_magic.egysegek.emberek.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -131,6 +133,21 @@ public class EloholtController {
         //macska.writeGold(SceneController.arany);
 
         //HOGYAN TÁROLOM EL EGY EGYSZERŰ LISTÁBAN, HOGY AZ EGYES EGYSÉGEKBŐL MENNYI VAN??
+
+        Demon demon = new Demon(demonSzam);
+        hos.addEgysegek(demon);
+
+        Szellem szellem = new Szellem(szellemSzam);
+        hos.addEgysegek(szellem);
+
+        Vampir vampir = new Vampir(vampirSzam);
+        hos.addEgysegek(vampir);
+
+        Verfarkas verfarkas = new Verfarkas(verfarkasSzam);
+        hos.addEgysegek(verfarkas);
+
+        Zombi zombi = new Zombi(zombiSzam);
+        hos.addEgysegek(zombi);
 
         //macska.setHos(hos);
 

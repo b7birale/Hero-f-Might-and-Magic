@@ -55,6 +55,14 @@ public class Hos {
 
 
 
+    public void addVarazslatok(Varazslat varazslat) {
+        varazslatok.add(varazslat);
+    }
+
+    public void addEgysegek(Egyseg egyseg) {
+        egysegek.add(egyseg);
+    }
+
     //GETTEREK ÉS SETTEREK ------------------------------------------------------------------------------
 
     public int getTamadas() {
@@ -114,7 +122,4 @@ public class Hos {
         this.varazsero = varazsero;
     }
 
-    public void addVarazslatok(Varazslat varazslat) {
-        varazslatok.add(varazslat);
-    }
 }

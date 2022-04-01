@@ -35,7 +35,9 @@ public class Eloholt extends Egyseg{
         this.specialisKepesseg = "nincs";
     }
 
-    public Eloholt(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg) {
-        super(nev, ar, minSebzes, maxSebzes, eletero, sebesseg, kezdemenyezes, specialisKepesseg);
+    public Eloholt(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int hanyDb) {
+        super(nev, ar, minSebzes, maxSebzes, eletero, sebesseg, kezdemenyezes, specialisKepesseg, hanyDb);
     }
+
+
 }

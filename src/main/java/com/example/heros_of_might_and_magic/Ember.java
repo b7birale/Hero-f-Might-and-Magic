@@ -18,7 +18,7 @@ public class Ember extends Egyseg {
         this.specialisKepesseg = "nincs";
     }
 
-    public Ember(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg) {
+    public Ember(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int hanyDb) {
         this.nev = nev;
         this.ar = ar;
         this.minSebzes = minSebzes;
@@ -27,5 +27,7 @@ public class Ember extends Egyseg {
         this.sebesseg = sebesseg;
         this.kezdemenyezes = kezdemenyezes;
         this.specialisKepesseg = specialisKepesseg;
+        this.hanyDb = hanyDb;
     }
+
 }

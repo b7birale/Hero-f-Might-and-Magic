@@ -15,7 +15,7 @@ public class RepuloLeny extends Egyseg {
         this.specialisKepesseg = "nincs";
     }
 
-    public RepuloLeny(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg) {
+    public RepuloLeny(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int hanyDb) {
         this.nev = nev;
         this.ar = ar;
         this.minSebzes = minSebzes;
@@ -24,6 +24,9 @@ public class RepuloLeny extends Egyseg {
         this.sebesseg = sebesseg;
         this.kezdemenyezes = kezdemenyezes;
         this.specialisKepesseg = specialisKepesseg;
+        this.hanyDb = hanyDb;
     }
+
+
 
 }

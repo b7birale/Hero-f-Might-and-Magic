@@ -4,9 +4,10 @@ import com.example.heros_of_might_and_magic.Ember;
 
 public class Polgar extends Ember {
 
-    public Polgar() {
+    public Polgar(int hanyDb) {
 
-        super("Polgar",6,7,9,6,9,3,"nincs");
+        super("Polgar",6,7,9,6,9,3,"nincs", hanyDb);
 
     }
+
 }

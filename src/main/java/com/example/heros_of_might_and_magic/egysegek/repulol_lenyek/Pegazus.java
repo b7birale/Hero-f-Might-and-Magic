@@ -4,9 +4,10 @@ import com.example.heros_of_might_and_magic.RepuloLeny;
 
 public class Pegazus extends RepuloLeny {
 
-    public Pegazus() {
+    public Pegazus(int hanyDb) {
 
-        super("Pegazus",7,2,2,30,7,8,"nincs");
+        super("Pegazus",7,2,2,30,7,8,"nincs", hanyDb);
 
     }
+
 }

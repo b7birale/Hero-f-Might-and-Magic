@@ -4,9 +4,9 @@ import com.example.heros_of_might_and_magic.Eloholt;
 
 public class Vampir extends Eloholt {
 
-    public Vampir() {
+    public Vampir(int hanyDb) {
 
-        super("Vampir",7,2,2,9,30,20,"verszivas");
+        super("Vampir",7,2,2,9,30,20,"verszivas", hanyDb);
 
     }
 }
