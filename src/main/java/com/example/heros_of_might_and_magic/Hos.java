@@ -42,9 +42,12 @@ public class Hos {
      */
 
 
+    public void fizet(int mennyit){
+        this.manna -= mennyit;
+    }
 
     public void tamad(Egyseg tamadottEgyseg){
-        int sebzes = tamadas * 10 * tamadottEgyseg.hanyDb;
+        int sebzes = tamadas * 10 * tamadottEgyseg.jelenlegiEletero;
         tamadottEgyseg.csokkentEletero(sebzes);
     }
 

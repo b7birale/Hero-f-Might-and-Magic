@@ -1,27 +1,26 @@
 package com.example.heros_of_might_and_magic;
 
-import javafx.fxml.FXML;
-import javafx.scene.text.Text;
-
 import static java.lang.Math.ceil;
 
 public class Egyseg {
 
     protected String nev;
     protected int ar;   //itt minden protected!
-    protected int hanyDb;
+    protected int jelenlegiEletero;
+    protected int eredetiEletero;
     protected int minSebzes;
     protected int maxSebzes;
     protected int eletero;
     protected int sebesseg;
     protected int kezdemenyezes;
     protected String specialisKepesseg;
+    protected Pozicio pozicio;
 
 
     public Egyseg() {
         this.nev = "egyseg";
         this.ar = 0;
-        this.hanyDb = 0;
+        this.jelenlegiEletero = 0;
         this.minSebzes = 0;
         this.maxSebzes = 0;
         this.eletero = 0;
@@ -30,7 +29,7 @@ public class Egyseg {
         this.specialisKepesseg = "nincs";
     }
     //?
-    public Egyseg(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int hanyDb) {
+    public Egyseg(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int osszEletero) {
         this.nev = nev;
         this.ar = ar;
         this.minSebzes = minSebzes;
@@ -39,16 +38,28 @@ public class Egyseg {
         this.sebesseg = sebesseg;
         this.kezdemenyezes = kezdemenyezes;
         this.specialisKepesseg = specialisKepesseg;
-        this.hanyDb = hanyDb;
+        this.jelenlegiEletero = osszEletero;
+        this.eredetiEletero = osszEletero;      //osszEletero fogy, eredetiEletero nem változik
     }
 
 
+    public void mozgas(){
+        this.pozicio.setSor(this.pozicio.getSor()-1);
+        this.pozicio.setOszlop(this.pozicio.getOszlop()+1);
+    }
+
+    public void sebez(int mennyivel){
+        this.jelenlegiEletero -= mennyivel;
+    }
+
+    public void gyogyit(int mennyivel){
+        this.jelenlegiEletero = Math.min(eredetiEletero, this.jelenlegiEletero + mennyivel);
+    }
 
     public void csokkentEletero(int sebzes){
-        setEletero(eletero*hanyDb - sebzes);
+        setEletero(eletero* jelenlegiEletero - sebzes);
     }
 
-    //mozgas
 
     //random szám generátor
     public int getRandomNumber(int min, int max) {
@@ -57,7 +68,7 @@ public class Egyseg {
 
 
     public void tamad(Egyseg tamadottEgyseg, int tamadas, Hos ellenfel){
-        double alapsebzes = getRandomNumber(this.minSebzes, this.maxSebzes) * this.hanyDb;
+        double alapsebzes = getRandomNumber(this.minSebzes, this.maxSebzes) * this.jelenlegiEletero;
         double sebzes = alapsebzes * tamadas; //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
         sebzes = sebzes * ellenfel.vedekezes;    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
         int vegeredmeny = (int) ceil(sebzes);

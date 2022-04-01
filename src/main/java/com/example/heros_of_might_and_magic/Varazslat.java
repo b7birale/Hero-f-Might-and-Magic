@@ -1,13 +1,35 @@
 package com.example.heros_of_might_and_magic;
-public class Varazslat {
 
-    public int ar;
-    public int manna;
+import java.util.List;
 
-    public Varazslat(int ar, int manna) {
+public abstract class Varazslat {
+
+    protected int ar;
+    protected int manna;
+    protected Hos hos;
+
+    public Varazslat(int ar, int manna, Hos hos) {
         this.ar = ar;
         this.manna = manna;
+        this.hos = hos;
     }
+
+    public void vegrehajt(List<Egyseg> egysegek){
+        if(vanElegManna()){
+            alkalmaz(egysegek);
+            hos.fizet(getMannaAr());
+        }
+    }
+
+    public boolean vanElegManna(){
+        return hos.manna >= getMannaAr();
+    }
+
+    public abstract int getMannaAr();
+
+    public abstract void alkalmaz(List<Egyseg> egysegek);
+
+
 
 
     //GETTEREK ÉS SETTEREK ---------------------------------------------------------------------------------------------

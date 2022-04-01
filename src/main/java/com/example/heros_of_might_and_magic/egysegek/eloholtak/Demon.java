@@ -6,7 +6,7 @@ public class Demon extends Eloholt {
 
     public Demon(int hanyDb) {
 
-        super("Demon",6,2,3,30,5,9,"nincs", hanyDb);
+        super("Demon",6,2,3,30,5,9,"nincs", hanyDb*30);
 
 
     }
