@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Hos {
 
-    public int tamadas;     //mind private!
+    public int tamadas;     //mind private! vagy mégsem
     public int tudas;
     public int vedekezes;
     public int moral;
@@ -56,8 +56,6 @@ public class Hos {
         egysegek.get(egysegIndex).tamad(tamadottEgyseg, tamadas, ellenfel);
     }
 
-
-
     public void addVarazslatok(Varazslat varazslat) {
         varazslatok.add(varazslat);
     }
@@ -65,6 +63,10 @@ public class Hos {
     public void addEgysegek(Egyseg egyseg) {
         egysegek.add(egyseg);
     }
+
+
+
+
 
     //GETTEREK ÉS SETTEREK ------------------------------------------------------------------------------
 

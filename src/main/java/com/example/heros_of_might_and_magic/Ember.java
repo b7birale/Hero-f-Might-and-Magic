@@ -2,9 +2,6 @@ package com.example.heros_of_might_and_magic;
 
 public class Ember extends Egyseg {
 
-    //?
-
-
     public Ember() {
         this.nev = "egyseg";
         this.ar = 0;
@@ -16,7 +13,7 @@ public class Ember extends Egyseg {
         this.specialisKepesseg = "nincs";
     }
 
-    public Ember(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int hanyDb) {
+    public Ember(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int jelenlegiEletero) {
         this.nev = nev;
         this.ar = ar;
         this.minSebzes = minSebzes;
@@ -25,7 +22,7 @@ public class Ember extends Egyseg {
         this.sebesseg = sebesseg;
         this.kezdemenyezes = kezdemenyezes;
         this.specialisKepesseg = specialisKepesseg;
-        this.jelenlegiEletero = hanyDb;
+        this.jelenlegiEletero = jelenlegiEletero;
     }
 
 }

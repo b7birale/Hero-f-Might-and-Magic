@@ -6,7 +6,7 @@ public class Ijasz extends Ember {
 
     public Ijasz(int hanyDb) {
 
-        super("Ijasz",6,2,4,7,4,9,"loves", hanyDb);
+        super("Ijasz",6,2,4,7,4,9,"loves", hanyDb*7);
 
 
     }

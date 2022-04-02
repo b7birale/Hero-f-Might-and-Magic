@@ -6,7 +6,7 @@ public class Griff extends RepuloLeny {
 
     public Griff(int hanyDb) {
 
-        super("Griff",15,5,10,30,7,15,"vegtelen visszatamadas", hanyDb);
+        super("Griff",15,5,10,30,7,15,"vegtelen visszatamadas", hanyDb*30);
 
     }
 

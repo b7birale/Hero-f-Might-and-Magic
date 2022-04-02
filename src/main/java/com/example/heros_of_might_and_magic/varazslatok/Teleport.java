@@ -26,15 +26,6 @@ public class Teleport extends Varazslat {
 
     }
 
-
-
-    /*
-    @Override
-    public void hasznal(egyseg?){
-        sebzes = varazsero*30;
-    }
-
-     */
 }
 
 

@@ -28,8 +28,8 @@ public class Egyseg {
         this.kezdemenyezes = 0;
         this.specialisKepesseg = "nincs";
     }
-    //?
-    public Egyseg(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int osszEletero) {
+
+    public Egyseg(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int jelenlegiEletero) {
         this.nev = nev;
         this.ar = ar;
         this.minSebzes = minSebzes;
@@ -38,8 +38,8 @@ public class Egyseg {
         this.sebesseg = sebesseg;
         this.kezdemenyezes = kezdemenyezes;
         this.specialisKepesseg = specialisKepesseg;
-        this.jelenlegiEletero = osszEletero;
-        this.eredetiEletero = osszEletero;      //osszEletero fogy, eredetiEletero nem változik
+        this.jelenlegiEletero = jelenlegiEletero;
+        this.eredetiEletero = jelenlegiEletero;      //osszEletero fogy, eredetiEletero nem változik
     }
 
 

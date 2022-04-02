@@ -30,14 +30,6 @@ public class Feltamasztas extends Varazslat {
     }
 
 
-    /*
-    @Override
-    public void hasznal(int varazsero){     //parameterbe majd a hos.varazsero jon
-        max_gyogyitas = varazsero*50
-    }
-
-     */
-
 }
 
 

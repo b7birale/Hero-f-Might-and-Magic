@@ -6,7 +6,7 @@ public class Lovag extends Ember {
 
     public Lovag(int hanyDb) {
 
-        super("Lovag",10,6,8,8,2,1,"nincs", hanyDb);
+        super("Lovag",10,6,8,8,2,1,"nincs", hanyDb*8);
 
 
     }

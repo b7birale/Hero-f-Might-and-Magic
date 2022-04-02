@@ -6,7 +6,7 @@ public class Szellem extends Eloholt {
 
     public Szellem(int hanyDb) {
 
-        super("Szellem",8,1,1,30,5,15,"nincs", hanyDb);
+        super("Szellem",8,1,1,30,5,15,"nincs", hanyDb*30);
 
     }
     

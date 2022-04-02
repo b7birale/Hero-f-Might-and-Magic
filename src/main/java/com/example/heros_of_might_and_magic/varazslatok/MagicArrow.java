@@ -26,13 +26,6 @@ public class MagicArrow extends Varazslat {
 
     }
 
-    /*
-    @Override
-    public void hasznal(int varazsero){     //parameterbe majd a hos.varazsero jon
-        sebzes = varazsero*10 + 10/20/30
-    }
-
-     */
 }
 
 
