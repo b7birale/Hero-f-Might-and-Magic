@@ -65,6 +65,7 @@ public class Egyseg {
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
+    //(double)this.rand.nextInt(this.minSebzes, this.maxSebzes))
 
 
     public void tamad(Egyseg tamadottEgyseg, int tamadas, Hos ellenfel){
