@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.heros_of_might_and_magic/com.example.heros_of_might_and_magic.HelloApplication
+                                com.example.heros_of_might_and_magic/com.example.game.megjelenites.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

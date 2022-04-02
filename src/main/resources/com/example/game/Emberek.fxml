@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="650.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.hos.egysegek.frakciok.controller.EmberController">
+   <children>
+      <Text layoutX="30.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Egységek:">
+         <font>
+            <Font name="Candara Bold Italic" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="157.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ár:">
+         <font>
+            <Font name="Candara Bold Italic" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="242.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mennyit szeretnél?">
+         <font>
+            <Font name="Candara Bold Italic" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="563.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Van:">
+         <font>
+            <Font name="Candara Bold Italic" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="420.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arany: ">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="arany" layoutX="493.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1000" wrappingWidth="70.4765625">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="25.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Földműves">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="48.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lovag">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="55.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Íjász">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="52.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gróf">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="46.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Polgár">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="146.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 arany">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="146.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6 arany">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="142.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10 arany">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="145.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8 arany">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="145.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6 arany">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="TF_foldmuves" layoutX="245.0" layoutY="145.0" />
+      <TextField fx:id="TF_ijasz" layoutX="245.0" layoutY="205.0" />
+      <TextField fx:id="TF_lovag" layoutX="245.0" layoutY="264.0" />
+      <TextField fx:id="TF_grof" layoutX="245.0" layoutY="321.0" />
+      <TextField fx:id="TF_polgar" layoutX="245.0" layoutY="379.0" />
+      <Text fx:id="mennyisegFoldmuves" layoutX="563.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="37.451171875">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="mennyisegIjasz" layoutX="563.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="37.451171875">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="mennyisegLovag" layoutX="563.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="37.451171875">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="mennyisegGrof" layoutX="563.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="37.451171875">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="mennyisegPolgar" layoutX="563.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="37.451171875">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Button layoutX="420.0" layoutY="139.0" mnemonicParsing="false" onAction="#megveszemFoldmuves" text="Megveszem" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="420.0" layoutY="202.0" mnemonicParsing="false" onAction="#megveszemIjasz" text="Megveszem" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="420.0" layoutY="261.0" mnemonicParsing="false" onAction="#megveszemLovag" text="Megveszem" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="420.0" layoutY="321.0" mnemonicParsing="false" onAction="#megveszemGrof" text="Megveszem" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="420.0" layoutY="376.0" mnemonicParsing="false" onAction="#megveszemPolgar" text="Megveszem" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="266.0" layoutY="512.0" mnemonicParsing="false" onAction="#tovabb" text="Tovább" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="24.0" />
+         </font>
+      </Button>
+      <Text fx:id="nincsElegArany" fill="RED" layoutX="169.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="271.349609375">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
