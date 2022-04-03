@@ -156,32 +156,32 @@ public class VarazslatController {
 
         if(villamcsapas){
             Villamcsapas villamcsapas = new Villamcsapas(hos);
-            villamcsapas.setAr(60);
-            villamcsapas.setManna(5);
+            //villamcsapas.setAr(60);
+            //villamcsapas.setManna(5);
             hos.addVarazslatok(villamcsapas);
         }
         if(tuzlabda){
             Tuzlabda tuzlabda = new Tuzlabda(hos);
-            tuzlabda.setAr(120);
-            tuzlabda.setManna(9);
+            //tuzlabda.setAr(120);
+            //tuzlabda.setManna(9);
             hos.addVarazslatok(tuzlabda);
         }
         if(feltamasztas){
             Feltamasztas feltamasztas = new Feltamasztas(hos);
-            feltamasztas.setAr(120);
-            feltamasztas.setManna(6);
+            //feltamasztas.setAr(120);
+            //feltamasztas.setManna(6);
             hos.addVarazslatok(feltamasztas);
         }
         if(teleport){
             Teleport teleport = new Teleport(hos);
-            teleport.setAr(100);
-            teleport.setManna(4);
+            //teleport.setAr(100);
+            //teleport.setManna(4);
             hos.addVarazslatok(teleport);
         }
         if(magikusNyilvesszo){
             MagicArrow magikusNyilvesszo = new MagicArrow(hos);
-            magikusNyilvesszo.setAr(50);
-            magikusNyilvesszo.setManna(15);
+            //magikusNyilvesszo.setAr(50);
+            //magikusNyilvesszo.setManna(15);
             hos.addVarazslatok(magikusNyilvesszo);
         }
 

@@ -22,7 +22,10 @@ public class MagicArrow extends Varazslat {
 
     @Override
     public void alkalmaz(List<Egyseg> egysegek) {
-
+        if(egysegek.size() == 1){
+            Egyseg egyseg = egysegek.get(0);
+            egyseg.sebez(10 + hos.varazsero*10);
+        }
     }
 
 }

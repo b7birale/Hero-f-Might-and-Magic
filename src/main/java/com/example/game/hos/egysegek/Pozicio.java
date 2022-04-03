@@ -9,14 +9,22 @@ public class Pozicio {
         this.oszlop = oszlop;
     }
 
-    /*
-    public void csokkentOszlop(){
 
+    public void csokkentOszlop(){
+        this.setOszlop(this.getOszlop()-1);
+    }
+    public void csokkentSor(){
+        this.setSor(this.getSor()-1);
+    }
+    public void novelOszlop(){
+        this.setOszlop(this.getOszlop()+1);
+    }
+    public void novelSor(){
+        this.setSor(this.getSor()+1);
     }
 
-     */
 
-
+    //GETTEREK ÉS SETTEREK -------------------------------------------------------------------------------------------
 
     public int getSor() {
         return sor;

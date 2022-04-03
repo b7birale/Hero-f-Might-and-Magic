@@ -16,7 +16,7 @@ public class Egyseg {
     protected int sebesseg;
     protected int kezdemenyezes;
     protected String specialisKepesseg;
-    protected Pozicio pozicio;
+    public Pozicio pozicio;
 
 
     public Egyseg() {
@@ -59,7 +59,7 @@ public class Egyseg {
     }
 
     public void csokkentEletero(int sebzes){
-        setEletero(eletero* jelenlegiEletero - sebzes);
+        setEletero(eletero * jelenlegiEletero - sebzes);
     }
 
 
@@ -70,11 +70,90 @@ public class Egyseg {
     //(double)this.rand.nextInt(this.minSebzes, this.maxSebzes))
 
 
+    public int hanyDb(){
+        if( this.jelenlegiEletero % this.eletero > 0){
+            return ( (this.jelenlegiEletero / this.eletero) +1);
+        }
+        else{
+            return (this.jelenlegiEletero / this.eletero);
+        }
+    }
+
     public void tamad(Egyseg tamadottEgyseg, int tamadas, Hos ellenfel){
-        double alapsebzes = getRandomNumber(this.minSebzes, this.maxSebzes) * this.jelenlegiEletero;
+        double alapsebzes = getRandomNumber(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
         double sebzes = alapsebzes * tamadas; //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
         sebzes = sebzes * ellenfel.vedekezes;    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
         int vegeredmeny = (int) ceil(sebzes);
+    }
+    //?? ez itt biztosan void?
+
+    public void visszaTamad(){
+        //ugyanaz mint a támad, csak sebzés = sebzés/2
+    }
+
+    public void kritikusSebzes(){
+        //ugyanaz mint a támad, csak sebzés = sebzés*2
+        //hogyan függ a szerencs tulajdonságtól?
+    }
+
+    public boolean tavolsagiTamadas(){
+
+        //visszaadja, hogy van-e a közvetlen környezetében más egység
+        //ha nincs, akkor indítható távolsági támadás
+
+        Pozicio eredeti = this.pozicio;
+        Pozicio vizsgalando = new Pozicio(eredeti.getSor(), eredeti.getOszlop());
+
+        vizsgalando.setOszlop(vizsgalando.getOszlop()-1);
+        //if(vizsgalando pozicion van egyseg){return  false;}
+        vizsgalando = eredeti;
+
+        vizsgalando.setOszlop(vizsgalando.getOszlop()+1);
+        //if(vizsgalando pozicion van egyseg){return  false;}
+        vizsgalando = eredeti;
+
+        vizsgalando.setSor(vizsgalando.getSor()+1);
+        //if(vizsgalando pozicion van egyseg){return  false;}
+        vizsgalando = eredeti;
+
+        vizsgalando.setSor(vizsgalando.getSor()-1);
+        //if(vizsgalando pozicion van egyseg){return  false;}
+        vizsgalando = eredeti;
+
+        vizsgalando.setSor(vizsgalando.getSor()+1);
+        vizsgalando.setOszlop(vizsgalando.getOszlop()+1);
+        //if(vizsgalando pozicion van egyseg){return  false;}
+        vizsgalando = eredeti;
+
+        vizsgalando.setSor(vizsgalando.getSor()-1);
+        vizsgalando.setOszlop(vizsgalando.getOszlop()+1);
+        //if(vizsgalando pozicion van egyseg){return  false;}
+        vizsgalando = eredeti;
+
+        vizsgalando.setSor(vizsgalando.getSor()+1);
+        vizsgalando.setOszlop(vizsgalando.getOszlop()-1);
+        //if(vizsgalando pozicion van egyseg){return  false;}
+        vizsgalando = eredeti;
+
+        vizsgalando.setSor(vizsgalando.getSor()-1);
+        vizsgalando.setOszlop(vizsgalando.getOszlop()-1);
+        //if(vizsgalando pozicion van egyseg){return  false;}
+        vizsgalando = eredeti;
+
+        return true;
+
+        //probléma: ez minden egységet néz, de csak az ellenséges kellene, hogy számítson
+
+    }
+
+    public boolean kozelharciTamadas(Egyseg tamadottEgyseg){
+        if( Math.abs( tamadottEgyseg.pozicio.getOszlop() - this.pozicio.getOszlop() ) <= 1 &&
+                Math.abs( tamadottEgyseg.pozicio.getSor() - this.pozicio.getSor() ) <= 1){
+            return true; // = a támadott egység a közvetlen közelében van, így indítható közelharci támadás
+        }
+        else{
+            return false;
+        }
     }
 
 
