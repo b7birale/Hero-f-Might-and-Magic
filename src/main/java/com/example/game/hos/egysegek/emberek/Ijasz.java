@@ -12,7 +12,7 @@ public class Ijasz extends Ember {
 
     public void loves(Egyseg tamadottEgyseg, int tamadas, Hos ellenfel){
         if(tavolsagiTamadas()){
-            tamad(tamadottEgyseg, tamadas, ellenfel);
+            tamad(tamadas, ellenfel, tamadottEgyseg);
         }
     }
 

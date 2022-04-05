@@ -155,30 +155,6 @@ public class EloholtController {
 
         macska.setHos(hos);
 
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-            @Override
-            public void handle(KeyEvent event) {
-
-                switch(event.getCode()) {
-
-                    case W:
-                        macska.novelSor();
-                        break;
-                    case S:
-                        macska.csokkentSor();
-                        break;
-                    case A:
-                        macska.csokkentOszlop();
-                        break;
-                    case D:
-                        macska.novelOszlop();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

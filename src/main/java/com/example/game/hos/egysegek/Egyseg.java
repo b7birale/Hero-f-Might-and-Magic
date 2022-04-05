@@ -2,6 +2,8 @@ package com.example.game.hos.egysegek;
 
 import com.example.game.hos.Hos;
 
+import java.util.Random;
+
 import static java.lang.Math.ceil;
 
 public class Egyseg {
@@ -64,10 +66,7 @@ public class Egyseg {
 
 
     //random szám generátor
-    public int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
-    }
-    //(double)this.rand.nextInt(this.minSebzes, this.maxSebzes))
+    private Random rand = new Random();
 
 
     public int hanyDb(){
@@ -79,21 +78,47 @@ public class Egyseg {
         }
     }
 
-    public void tamad(Egyseg tamadottEgyseg, int tamadas, Hos ellenfel){
-        double alapsebzes = getRandomNumber(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
-        double sebzes = alapsebzes * tamadas; //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
-        sebzes = sebzes * ellenfel.vedekezes;    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
-        int vegeredmeny = (int) ceil(sebzes);
+    public int szamolSebzes(int tamadas, Hos ellenfel){
+        double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
+        double sebzes = alapsebzes + alapsebzes*(double)(tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
+        sebzes = sebzes * (double) (ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
+        return (int) ceil(sebzes);
     }
-    //?? ez itt biztosan void?
 
-    public void visszaTamad(){
+
+    public void tamad(int tamadas, Hos ellenfel, Egyseg tamadottEgyseg){
+        tamadottEgyseg.sebez(szamolSebzes(tamadas, ellenfel));
+    }
+
+
+    public void visszaTamad(int tamadas, Hos ellenfel, Egyseg tamadottEgyseg){
         //ugyanaz mint a támad, csak sebzés = sebzés/2
+        double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
+        double sebzes = alapsebzes + alapsebzes*(double)(tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
+        sebzes = sebzes * (double) (ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
+        int vegeredmeny = (int) ceil(sebzes/2);
+        //tamadottEgyseg.csokkentEletero(vegeredmeny);  //Mi a különbség csökkentÉleterő és sebez() közt?
+        tamadottEgyseg.sebez(vegeredmeny);
     }
 
-    public void kritikusSebzes(){
+    public boolean vajonKritikusSebzes(int szerencse){
+        Random random = new Random();
+        int chance = 0;
+        chance += szerencse*5;
+        chance = 100/chance;
+        return random.nextInt(chance) == 0;
+    }
+
+    public void kritikusSebzes(int tamadas, Hos ellenfel, Egyseg tamadottEgyseg){
         //ugyanaz mint a támad, csak sebzés = sebzés*2
-        //hogyan függ a szerencs tulajdonságtól?
+        //hogyan függ a szerencse tulajdonságtól?
+        //5%
+        //+5%
+        double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
+        double sebzes = alapsebzes + alapsebzes*(double)(tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
+        sebzes = sebzes * (double) (ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
+        int vegeredmeny = (int) ceil(sebzes*2);
+        tamadottEgyseg.sebez(vegeredmeny);
     }
 
     public boolean tavolsagiTamadas(){
@@ -147,13 +172,9 @@ public class Egyseg {
     }
 
     public boolean kozelharciTamadas(Egyseg tamadottEgyseg){
-        if( Math.abs( tamadottEgyseg.pozicio.getOszlop() - this.pozicio.getOszlop() ) <= 1 &&
-                Math.abs( tamadottEgyseg.pozicio.getSor() - this.pozicio.getSor() ) <= 1){
-            return true; // = a támadott egység a közvetlen közelében van, így indítható közelharci támadás
-        }
-        else{
-            return false;
-        }
+        return Math.abs(tamadottEgyseg.pozicio.getOszlop() - this.pozicio.getOszlop()) <= 1 &&
+                Math.abs(tamadottEgyseg.pozicio.getSor() - this.pozicio.getSor()) <= 1;
+        // = a támadott egység a közvetlen közelében van, így indítható közelharci támadás
     }
 
 
@@ -219,4 +240,27 @@ public class Egyseg {
         this.specialisKepesseg = specialisKepesseg;
     }
 
+    public int getJelenlegiEletero() {
+        return jelenlegiEletero;
+    }
+
+    public void setJelenlegiEletero(int jelenlegiEletero) {
+        this.jelenlegiEletero = jelenlegiEletero;
+    }
+
+    public int getEredetiEletero() {
+        return eredetiEletero;
+    }
+
+    public void setEredetiEletero(int eredetiEletero) {
+        this.eredetiEletero = eredetiEletero;
+    }
+
+    public Pozicio getPozicio() {
+        return pozicio;
+    }
+
+    public void setPozicio(Pozicio pozicio) {
+        this.pozicio = pozicio;
+    }
 }

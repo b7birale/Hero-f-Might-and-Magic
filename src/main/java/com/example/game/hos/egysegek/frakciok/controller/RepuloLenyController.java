@@ -1,9 +1,8 @@
 package com.example.game.hos.egysegek.frakciok.controller;
 
 import com.example.game.hos.Hos;
-import com.example.game.megjelenites.SceneController;
-import com.example.game.egysegek.repulol_lenyek.*;
 import com.example.game.hos.egysegek.repulol_lenyek.*;
+import com.example.game.megjelenites.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
