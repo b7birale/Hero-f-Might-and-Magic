@@ -26,7 +26,7 @@ public class TestMagicArrow {
         Hos hos = new Hos();
         hos.setVarazsero(8);
         MagicArrow magicArrow = new MagicArrow(hos);
-        Griff griff = new Griff(10);
+        Griff griff = new Griff(hos, 10);
         magicArrow.alkalmaz(List.of(griff));
         assertEquals(210, griff.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -39,7 +39,7 @@ public class TestMagicArrow {
         Hos hos = new Hos();
         hos.setVarazsero(1);
         MagicArrow magicArrow = new MagicArrow(hos);
-        Sarkany aithusa = new Sarkany(12);
+        Sarkany aithusa = new Sarkany(hos,12);
         magicArrow.alkalmaz(List.of(aithusa));
         assertEquals(160, aithusa.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -52,7 +52,7 @@ public class TestMagicArrow {
         Hos hos = new Hos();
         hos.setVarazsero(10);
         MagicArrow magicArrow = new MagicArrow(hos);
-        Demon demon = new Demon(93);
+        Demon demon = new Demon(hos, 93);
         magicArrow.alkalmaz(List.of(demon));
         assertEquals(2680, demon.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -64,7 +64,7 @@ public class TestMagicArrow {
         Hos hos = new Hos();
         hos.setVarazsero(2);
         MagicArrow magicArrow = new MagicArrow(hos);
-        Verfarkas verfarkas = new Verfarkas(100);
+        Verfarkas verfarkas = new Verfarkas(hos, 100);
         magicArrow.alkalmaz(List.of(verfarkas));
         assertEquals(570, verfarkas.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -76,7 +76,7 @@ public class TestMagicArrow {
         Hos hos = new Hos();
         hos.setVarazsero(10);
         MagicArrow magicArrow = new MagicArrow(hos);
-        Polgar polgar = new Polgar(23);
+        Polgar polgar = new Polgar(hos, 23);
         magicArrow.alkalmaz(List.of(polgar));
         assertEquals(28, polgar.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -88,8 +88,8 @@ public class TestMagicArrow {
         Hos hos = new Hos();
         hos.setVarazsero(7);
         MagicArrow magicArrow = new MagicArrow(hos);
-        Ijasz ijasz = new Ijasz(93);
-        Pegazus pegazus = new Pegazus(49);
+        Ijasz ijasz = new Ijasz(hos, 93);
+        Pegazus pegazus = new Pegazus(hos,49);
         magicArrow.alkalmaz(List.of(ijasz, pegazus));
         assertEquals(651, ijasz.getJelenlegiEletero(), "sajnos itt hiba van :( ");
         assertEquals(1470, pegazus.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -101,7 +101,7 @@ public class TestMagicArrow {
         Hos hos = new Hos();
         hos.setVarazsero(4);
         MagicArrow magicArrow = new MagicArrow(hos);
-        Lovag lovag = new Lovag(3);
+        Lovag lovag = new Lovag(hos, 3);
         magicArrow.alkalmaz(List.of());
         assertEquals(24, lovag.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }

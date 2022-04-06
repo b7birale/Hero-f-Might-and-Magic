@@ -11,7 +11,7 @@ public class Villamcsapas extends Varazslat {
     //Egy kivalasztott ellenseges egysegre (varazsero * 30) sebzes okozasa
 
     public Villamcsapas(Hos hos) {
-        super(60, 5, hos);
+        super("Villamcsapas", 60, 5, hos);
     }
 
 

@@ -6,12 +6,13 @@ import com.example.game.hos.Hos;
 import java.util.List;
 
 public abstract class Varazslat {
-
+    protected String nev;
     protected int ar;
     protected int manna;
     protected Hos hos;
 
-    public Varazslat(int ar, int manna, Hos hos) {
+    public Varazslat(String nev, int ar, int manna, Hos hos) {
+        this.nev = nev;
         this.ar = ar;
         this.manna = manna;
         this.hos = hos;
@@ -53,5 +54,11 @@ public abstract class Varazslat {
         this.manna = manna;
     }
 
+    public String getNev() {
+        return nev;
+    }
 
+    public void setNev(String nev) {
+        this.nev = nev;
+    }
 }

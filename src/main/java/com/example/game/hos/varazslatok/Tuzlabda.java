@@ -13,7 +13,7 @@ public class Tuzlabda extends Varazslat {
 
     public Tuzlabda(Hos hos) {
 
-        super(120, 9, hos);
+        super("Tuzlabda", 120, 9, hos);
 
     }
 

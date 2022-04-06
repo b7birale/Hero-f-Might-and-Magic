@@ -29,7 +29,8 @@ public class TestEgyseg {
         //griff osszeletero: 3*30 = 90
         //66%30= 6
         //66/30=2
-        Griff griff = new Griff(3);
+        Hos hos = new Hos();
+        Griff griff = new Griff(hos, 3);
         griff.setJelenlegiEletero(66);
         assertEquals(3, griff.hanyDb(), "sajnos itt hiba van :( ");
     }
@@ -40,7 +41,8 @@ public class TestEgyseg {
         //ijasz osszeletero: 10*7 = 70
         //70%7 = 0
         //70/7 = 10
-        Ijasz ijasz = new Ijasz(10);
+        Hos hos = new Hos();
+        Ijasz ijasz = new Ijasz(hos, 10);
         assertEquals(10, ijasz.hanyDb(), "sajnos itt hiba van :( ");
     }
 
@@ -50,7 +52,8 @@ public class TestEgyseg {
         //zombi osszeletero: 9*27 = 243
         //4%9 = 4
         //4/9 = 0
-        Zombi zombi = new Zombi(27);
+        Hos hos = new Hos();
+        Zombi zombi = new Zombi(hos, 27);
         zombi.setJelenlegiEletero(4);
         assertEquals(1, zombi.hanyDb(), "sajnos itt hiba van :( ");
     }
@@ -61,7 +64,8 @@ public class TestEgyseg {
         //zombi osszeletero: 40*6 = 240
         //200%40 = 0
         //200/40 = 5
-        Fonix fonix = new Fonix(6);
+        Hos hos = new Hos();
+        Fonix fonix = new Fonix(hos,6);
         fonix.setJelenlegiEletero(200);
         assertEquals(5, fonix.hanyDb(), "sajnos itt hiba van :( ");
     }
@@ -90,10 +94,10 @@ public class TestEgyseg {
         Hos ellenfel = new Hos();
         Hos en = new Hos();
         en.setTamadas(5);
-        Griff griff = new Griff(10);
+        Griff griff = new Griff(en, 10);
         en.egysegek.add(griff);
         ellenfel.setVedekezes(4);
-        Sarkany sarkany = new Sarkany(8);
+        Sarkany sarkany = new Sarkany(ellenfel, 8);
         ellenfel.egysegek.add(sarkany);
         assertEquals(42, szamolSebzesTeszthez(en.getTamadas(), ellenfel, 7, 10), "sajnos itt hiba van :( ");
 
@@ -109,10 +113,10 @@ public class TestEgyseg {
         Hos ellenfel = new Hos();
         Hos en = new Hos();
         en.setTamadas(7);
-        Pegazus pegazus = new Pegazus(34);
+        Pegazus pegazus = new Pegazus(en, 34);
         en.egysegek.add(pegazus);
         ellenfel.setVedekezes(10);
-        Pteranodon pteranodon = new Pteranodon(9);
+        Pteranodon pteranodon = new Pteranodon(ellenfel, 9);
         ellenfel.egysegek.add(pteranodon);
         assertEquals(116, szamolSebzesTeszthez(en.getTamadas(), ellenfel, 2, 34), "sajnos itt hiba van :( ");
     }
@@ -127,10 +131,10 @@ public class TestEgyseg {
         Hos ellenfel = new Hos();
         Hos en = new Hos();
         en.setTamadas(2);
-        Grof grof = new Grof(100);
+        Grof grof = new Grof(en, 100);
         en.egysegek.add(grof);
         ellenfel.setVedekezes(2);
-        Lovag lovag = new Lovag(28);
+        Lovag lovag = new Lovag(ellenfel, 28);
         ellenfel.egysegek.add(lovag);
         assertEquals(72, szamolSebzesTeszthez(en.getTamadas(), ellenfel, 3, 100), "sajnos itt hiba van :( ");
 
@@ -142,7 +146,8 @@ public class TestEgyseg {
     @Test
     public void testSebezPegazust(){
         //pegazus eletero: 30*44 = 1320
-        Pegazus pegazus = new Pegazus(44);
+        Hos hos = new Hos();
+        Pegazus pegazus = new Pegazus(hos, 44);
         pegazus.sebez(20);
         assertEquals(1300, pegazus.jelenlegiEletero, "sajnos itt hiba van :( ");
     }
@@ -150,7 +155,8 @@ public class TestEgyseg {
     @Test
     public void testSebezVampirt(){
         //vampir eletero: 9*50 = 450
-        Vampir vampir = new Vampir(50);
+        Hos hos = new Hos();
+        Vampir vampir = new Vampir(hos, 50);
         vampir.setJelenlegiEletero(400);
         vampir.sebez(100);
         assertEquals(300, vampir.jelenlegiEletero, "sajnos itt hiba van :( ");
@@ -195,9 +201,9 @@ public class TestEgyseg {
         //demon eletero: 30*32 = 960
         Hos superman = new Hos();
         Hos batman = new Hos();
-        Demon demon = new Demon(32);
+        Demon demon = new Demon(superman, 32);
         superman.egysegek.add(demon);
-        Polgar polgar = new Polgar(19);
+        Polgar polgar = new Polgar(batman, 19);
         batman.egysegek.add(polgar);
         batman.setTamadas(3);
         batman.setVedekezes(7);
@@ -228,13 +234,13 @@ public class TestEgyseg {
         //sebzes = 192
         //114 - 192 = -78
         Hos superman = new Hos();
-        Demon demon = new Demon(32);
+        Demon demon = new Demon(superman, 32);
         superman.egysegek.add(demon);
         superman.setTamadas(10);
         superman.setVedekezes(7);
 
         Hos batman = new Hos();
-        Polgar polgar = new Polgar(19);
+        Polgar polgar = new Polgar(batman, 19);
         batman.egysegek.add(polgar);
         batman.setTamadas(6);
         batman.setVedekezes(5);
@@ -252,8 +258,10 @@ public class TestEgyseg {
 
     @Test
     public void testKozelharciTamadasIgaz(){
-        Ijasz ijasz = new Ijasz(83);
-        Fonix fonix = new Fonix(57);
+        Hos ijaszHos = new Hos();
+        Hos fonixHos = new Hos();
+        Ijasz ijasz = new Ijasz(ijaszHos, 83);
+        Fonix fonix = new Fonix(fonixHos, 57);
         Pozicio ijaszPozicio = new Pozicio(5,9);
         Pozicio fonixPozicio = new Pozicio(5,8);
         ijasz.setPozicio(ijaszPozicio);
@@ -263,8 +271,10 @@ public class TestEgyseg {
 
     @Test
     public void testKozelharciTamadasHamis(){
-        Ijasz ijasz = new Ijasz(83);
-        Fonix fonix = new Fonix(57);
+        Hos ijaszHos = new Hos();
+        Hos fonixHos = new Hos();
+        Ijasz ijasz = new Ijasz(ijaszHos, 83);
+        Fonix fonix = new Fonix(fonixHos,57);
         Pozicio ijaszPozicio = new Pozicio(5,9);
         Pozicio fonixPozicio = new Pozicio(2,9);
         ijasz.setPozicio(ijaszPozicio);

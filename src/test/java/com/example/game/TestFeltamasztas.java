@@ -26,8 +26,8 @@ public class TestFeltamasztas {
         Hos hos = new Hos();
         hos.setVarazsero(8);
         Feltamasztas feltamasztas = new Feltamasztas(hos);
-        Griff griff = new Griff(10);
-        Sarkany sarkany = new Sarkany(100);
+        Griff griff = new Griff(hos, 10);
+        Sarkany sarkany = new Sarkany(hos, 100);
         griff.setJelenlegiEletero(120);
         sarkany.setJelenlegiEletero(1100);
         feltamasztas.alkalmaz(List.of(griff, sarkany));
@@ -42,7 +42,7 @@ public class TestFeltamasztas {
         Hos hos = new Hos();
         hos.setVarazsero(3);
         Feltamasztas feltamasztas = new Feltamasztas(hos);
-        Demon demon = new Demon(93);
+        Demon demon = new Demon(hos, 93);
         demon.setJelenlegiEletero(2600);
         feltamasztas.alkalmaz(List.of());
         assertEquals(2600, demon.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -55,7 +55,7 @@ public class TestFeltamasztas {
         Hos hos = new Hos();
         hos.setVarazsero(1);
         Feltamasztas feltamasztas = new Feltamasztas(hos);
-        Fonix fonix = new Fonix(33);
+        Fonix fonix = new Fonix(hos, 33);
         fonix.setJelenlegiEletero(1300);
         feltamasztas.alkalmaz(List.of(fonix));
         assertEquals(1320, fonix.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -68,7 +68,7 @@ public class TestFeltamasztas {
         Hos hos = new Hos();
         hos.setVarazsero(10);
         Feltamasztas feltamasztas = new Feltamasztas(hos);
-        Ijasz ijasz = new Ijasz(7);
+        Ijasz ijasz = new Ijasz(hos, 7);
         ijasz.setJelenlegiEletero(24);
         feltamasztas.alkalmaz(List.of(ijasz));
         assertEquals(49, ijasz.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -81,7 +81,7 @@ public class TestFeltamasztas {
         Hos hos = new Hos();
         hos.setVarazsero(7);
         Feltamasztas feltamasztas = new Feltamasztas(hos);
-        Lovag lovag = new Lovag(221);
+        Lovag lovag = new Lovag(hos, 221);
         lovag.setJelenlegiEletero(1500);
         feltamasztas.alkalmaz(List.of(lovag));
         assertEquals(1768, lovag.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -94,7 +94,7 @@ public class TestFeltamasztas {
         Hos hos = new Hos();
         hos.setVarazsero(5);
         Feltamasztas feltamasztas = new Feltamasztas(hos);
-        Vampir vampir = new Vampir(13);
+        Vampir vampir = new Vampir(hos, 13);
         vampir.setJelenlegiEletero(0);
         feltamasztas.alkalmaz(List.of(vampir));
         assertEquals(117, vampir.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -107,7 +107,7 @@ public class TestFeltamasztas {
         Hos hos = new Hos();
         hos.setVarazsero(2);
         Feltamasztas feltamasztas = new Feltamasztas(hos);
-        Demon demon = new Demon(93);
+        Demon demon = new Demon(hos, 93);
         demon.setJelenlegiEletero(2600);
         feltamasztas.alkalmaz(List.of(demon));
         assertEquals(2700, demon.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -120,7 +120,7 @@ public class TestFeltamasztas {
         Hos hos = new Hos();
         hos.setVarazsero(1);
         Feltamasztas feltamasztas = new Feltamasztas(hos);
-        Grof grof = new Grof(40);
+        Grof grof = new Grof(hos, 40);
         grof.setJelenlegiEletero(20);
         feltamasztas.alkalmaz(List.of(grof));
         assertEquals(70, grof.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -133,7 +133,7 @@ public class TestFeltamasztas {
         Hos hos = new Hos();
         hos.setVarazsero(3);
         Feltamasztas feltamasztas = new Feltamasztas(hos);
-        Pteranodon ptera = new Pteranodon(112);
+        Pteranodon ptera = new Pteranodon(hos, 112);
         ptera.setJelenlegiEletero(150);
         feltamasztas.alkalmaz(List.of(ptera));
         assertEquals(300, ptera.getJelenlegiEletero(), "sajnos itt hiba van :( ");

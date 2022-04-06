@@ -12,7 +12,7 @@ public class MagicArrow extends Varazslat {
 
     public MagicArrow(Hos hos) {
 
-        super(50, 15, hos);
+        super("MagikusNyilvesszo", 50, 15, hos);
     }
 
     @Override

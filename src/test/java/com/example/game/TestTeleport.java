@@ -24,11 +24,11 @@ public class TestTeleport {
         Pozicio griffPozicio = new Pozicio(3,4);
         Pozicio demonPozicio = new Pozicio(6,6);
         Pozicio zombiPozicio = new Pozicio(7,1);
-        Griff griff = new Griff(10);
+        Griff griff = new Griff(hos, 10);
         griff.setPozicio(griffPozicio);
-        Demon demon = new Demon(12);
+        Demon demon = new Demon(hos, 12);
         demon.setPozicio(demonPozicio);
-        Zombi zombi = new Zombi(300);
+        Zombi zombi = new Zombi(hos, 300);
         zombi.setPozicio(zombiPozicio);
         teleport.alkalmaz(List.of(griff, demon, zombi));
         assertEquals(griffPozicio, griff.getPozicio(), "sajnos itt hiba van :( ");
@@ -41,7 +41,7 @@ public class TestTeleport {
     public void testAlkalmazEgyElemuListara(){
         Hos hos = new Hos();
         Teleport teleport = new Teleport(hos);
-        Sarkany sarkany = new Sarkany(100);
+        Sarkany sarkany = new Sarkany(hos, 100);
         Pozicio sarkanyPozicio = new Pozicio(4, 4);
         sarkany.setPozicio(sarkanyPozicio);
         teleport.alkalmaz(List.of(sarkany));
@@ -52,10 +52,10 @@ public class TestTeleport {
     public void testAlkalmazHelyesBemenetre(){
         Hos hos = new Hos();
         Teleport teleport = new Teleport(hos);
-        Ijasz ijasz = new Ijasz(121);
+        Ijasz ijasz = new Ijasz(hos, 121);
         Pozicio ijaszPozicio = new Pozicio(8, 10);
         ijasz.setPozicio(ijaszPozicio);
-        Pegazus pegazus = new Pegazus(3);
+        Pegazus pegazus = new Pegazus(hos, 3);
         Pozicio pegazusPozicio = new Pozicio(1, 2);
         pegazus.setPozicio(pegazusPozicio);
         teleport.alkalmaz(List.of(ijasz, pegazus));

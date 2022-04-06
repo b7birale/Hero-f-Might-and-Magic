@@ -138,19 +138,19 @@ public class EmberController {
 
         //macska.setHos(hos);
 
-        Foldmuves foldmuves = new Foldmuves(foldmuvesSzam);
+        Foldmuves foldmuves = new Foldmuves(hos, foldmuvesSzam);
         hos.addEgysegek(foldmuves);
 
-        Grof grof = new Grof(grofSzam);
+        Grof grof = new Grof(hos, grofSzam);
         hos.addEgysegek(grof);
 
-        Ijasz ijasz = new Ijasz(ijaszSzam);
+        Ijasz ijasz = new Ijasz(hos, ijaszSzam);
         hos.addEgysegek(ijasz);
 
-        Lovag lovag = new Lovag(lovagSzam);
+        Lovag lovag = new Lovag(hos, lovagSzam);
         hos.addEgysegek(lovag);
 
-        Polgar polgar = new Polgar(polgarSzam);
+        Polgar polgar = new Polgar(hos, polgarSzam);
         hos.addEgysegek(polgar);
 
 

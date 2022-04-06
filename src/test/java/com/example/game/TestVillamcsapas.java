@@ -25,7 +25,7 @@ public class TestVillamcsapas {
         Hos hos = new Hos();
         hos.setVarazsero(8);
         Villamcsapas villamcsapas = new Villamcsapas(hos);
-        Griff griff = new Griff(10);
+        Griff griff = new Griff(hos, 10);
         villamcsapas.alkalmaz(List.of(griff));
         assertEquals(60, griff.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -38,7 +38,7 @@ public class TestVillamcsapas {
         Hos hos = new Hos();
         hos.setVarazsero(7);
         Villamcsapas villamcsapas = new Villamcsapas(hos);
-        Foldmuves foldmuves = new Foldmuves(125);
+        Foldmuves foldmuves = new Foldmuves(hos, 125);
         villamcsapas.alkalmaz(List.of(foldmuves));
         assertEquals(165, foldmuves.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -51,7 +51,7 @@ public class TestVillamcsapas {
         Hos hos = new Hos();
         hos.setVarazsero(1);
         Villamcsapas villamcsapas = new Villamcsapas(hos);
-        Szellem szellem = new Szellem(12);
+        Szellem szellem = new Szellem(hos, 12);
         villamcsapas.alkalmaz(List.of(szellem));
         assertEquals(330, szellem.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -63,8 +63,8 @@ public class TestVillamcsapas {
         Hos hos = new Hos();
         hos.setVarazsero(2);
         Villamcsapas villamcsapas = new Villamcsapas(hos);
-        Sarkany sarkany = new Sarkany(100);
-        Zombi zombi = new Zombi(300);
+        Sarkany sarkany = new Sarkany(hos, 100);
+        Zombi zombi = new Zombi(hos, 300);
         villamcsapas.alkalmaz(List.of(sarkany, zombi));
         assertEquals(1500, sarkany.getJelenlegiEletero(), "sajnos itt hiba van :( ");
         assertEquals(2700, zombi.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -78,7 +78,7 @@ public class TestVillamcsapas {
         Hos hos = new Hos();
         hos.setVarazsero(10);
         Villamcsapas villamcsapas = new Villamcsapas(hos);
-        Demon demon = new Demon(93);
+        Demon demon = new Demon(hos, 93);
         villamcsapas.alkalmaz(List.of());   //szándékosan üres listát kap
         assertEquals(2790, demon.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }

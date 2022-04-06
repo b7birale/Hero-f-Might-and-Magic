@@ -19,6 +19,7 @@ public class Egyseg {
     protected int kezdemenyezes;
     protected String specialisKepesseg;
     public Pozicio pozicio;
+    public Hos hos;
 
 
     public Egyseg() {
@@ -33,7 +34,8 @@ public class Egyseg {
         this.specialisKepesseg = "nincs";
     }
 
-    public Egyseg(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int jelenlegiEletero) {
+    public Egyseg(Hos hos, String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int jelenlegiEletero) {
+        this.hos = hos;
         this.nev = nev;
         this.ar = ar;
         this.minSebzes = minSebzes;
@@ -262,5 +264,13 @@ public class Egyseg {
 
     public void setPozicio(Pozicio pozicio) {
         this.pozicio = pozicio;
+    }
+
+    public String getNev() {
+        return nev;
+    }
+
+    public void setNev(String nev) {
+        this.nev = nev;
     }
 }

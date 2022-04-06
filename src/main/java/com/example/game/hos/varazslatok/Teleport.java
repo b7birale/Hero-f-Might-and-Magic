@@ -12,7 +12,7 @@ public class Teleport extends Varazslat {
 
     public Teleport(Hos hos) {
 
-        super(100, 4, hos);
+        super("Teleport", 100, 4, hos);
     }
 
     @Override

@@ -1,10 +1,12 @@
 package com.example.game.hos.egysegek.frakciok.modell;
 
+import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Egyseg;
 
 public class Ember extends Egyseg {
 
-    public Ember(String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int jelenlegiEletero) {
+    public Ember(Hos hos, String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int jelenlegiEletero) {
+        this.hos = hos;
         this.nev = nev;
         this.ar = ar;
         this.minSebzes = minSebzes;

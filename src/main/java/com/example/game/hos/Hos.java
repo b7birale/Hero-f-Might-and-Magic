@@ -16,6 +16,8 @@ public class Hos {
     public int varazsero;
     public int manna;
 
+    public int db; //Ez mire való itt?
+
     public List<Varazslat> varazslatok;
     public List<Egyseg> egysegek;
 
@@ -68,6 +70,13 @@ public class Hos {
     }
 
 
+    public void varazsol(String tipus, List<Egyseg> egysegek) {
+        varazslatok.stream()
+                .filter(varazslat -> tipus.equals(varazslat.getNev()))
+                .findFirst()
+                .ifPresent(varazslat -> varazslat.vegrehajt(egysegek));
+    }
+
 
 
 
@@ -105,6 +114,21 @@ public class Hos {
         return varazsero;
     }
 
+    public List<Varazslat> getVarazslatok() {
+        return varazslatok;
+    }
+
+    public List<Egyseg> getEgysegek() {
+        return egysegek;
+    }
+
+    public void setVarazslatok(List<Varazslat> varazslatok) {
+        this.varazslatok = varazslatok;
+    }
+
+    public void setEgysegek(List<Egyseg> egysegek) {
+        this.egysegek = egysegek;
+    }
 
     public void setTamadas(int tamadas) {
         this.tamadas = tamadas;
@@ -130,4 +154,13 @@ public class Hos {
         this.varazsero = varazsero;
     }
 
+
+    //??
+    public int getDb() {
+        return db;
+    }
+
+    public void setDb(int db) {
+        this.db = db;
+    }
 }

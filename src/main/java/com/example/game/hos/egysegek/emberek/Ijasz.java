@@ -6,8 +6,8 @@ import com.example.game.hos.egysegek.frakciok.modell.Ember;
 
 public class Ijasz extends Ember {
 
-    public Ijasz(int hanyDb) {
-        super("Ijasz",6,2,4,7,4,9,"loves", hanyDb*7);
+    public Ijasz(Hos hos, int hanyDb) {
+        super(hos, "Ijasz",6,2,4,7,4,9,"loves", hanyDb*7);
     }
 
     public void loves(Egyseg tamadottEgyseg, int tamadas, Hos ellenfel){

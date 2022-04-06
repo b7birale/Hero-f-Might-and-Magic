@@ -135,19 +135,19 @@ public class EloholtController {
         //Pozicio macska = loader.getController();
         //???
 
-        Demon demon = new Demon(demonSzam);
+        Demon demon = new Demon(hos, demonSzam);
         hos.addEgysegek(demon);
 
-        Szellem szellem = new Szellem(szellemSzam);
+        Szellem szellem = new Szellem(hos, szellemSzam);
         hos.addEgysegek(szellem);
 
-        Vampir vampir = new Vampir(vampirSzam);
+        Vampir vampir = new Vampir(hos, vampirSzam);
         hos.addEgysegek(vampir);
 
-        Verfarkas verfarkas = new Verfarkas(verfarkasSzam);
+        Verfarkas verfarkas = new Verfarkas(hos, verfarkasSzam);
         hos.addEgysegek(verfarkas);
 
-        Zombi zombi = new Zombi(zombiSzam);
+        Zombi zombi = new Zombi(hos, zombiSzam);
         hos.addEgysegek(zombi);
 
         macska.setHos(hos);

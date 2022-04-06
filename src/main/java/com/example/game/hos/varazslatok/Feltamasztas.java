@@ -12,7 +12,7 @@ public class Feltamasztas extends Varazslat {
     //de az eredeti egysegszamnal több nem lehet;
 
     public Feltamasztas(Hos hos) {
-        super(120, 6, hos);
+        super("Feltamasztas", 120, 6, hos);
     }
 
     @Override

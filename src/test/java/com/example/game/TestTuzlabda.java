@@ -31,8 +31,8 @@ public class TestTuzlabda {
         Hos hos = new Hos();
         hos.setVarazsero(8);
         Tuzlabda tuzlabda = new Tuzlabda(hos);
-        Griff griff = new Griff(10);
-        Sarkany sarkany = new Sarkany(100);
+        Griff griff = new Griff(hos, 10);
+        Sarkany sarkany = new Sarkany(hos, 100);
         tuzlabda.alkalmaz(List.of(sarkany, griff));
         assertEquals(140, griff.getJelenlegiEletero(), "sajnos itt hiba van :( ");
         assertEquals(1340, sarkany.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -45,7 +45,7 @@ public class TestTuzlabda {
         Hos hos = new Hos();
         hos.setVarazsero(2);
         Tuzlabda tuzlabda = new Tuzlabda(hos);
-        Demon demon = new Demon(93);
+        Demon demon = new Demon(hos, 93);
         tuzlabda.alkalmaz(List.of(demon));
         assertEquals(2750, demon.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -61,10 +61,10 @@ public class TestTuzlabda {
         Hos hos = new Hos();
         hos.setVarazsero(5);
         Tuzlabda tuzlabda = new Tuzlabda(hos);
-        Ijasz ijasz = new Ijasz(7);
-        Grof grof = new Grof(40);
-        Lovag lovag = new Lovag(221);
-        Foldmuves foldmuves = new Foldmuves(112);
+        Ijasz ijasz = new Ijasz(hos, 7);
+        Grof grof = new Grof(hos, 40);
+        Lovag lovag = new Lovag(hos, 221);
+        Foldmuves foldmuves = new Foldmuves(hos, 112);
         tuzlabda.alkalmaz(List.of(ijasz, grof, lovag, foldmuves));
         assertEquals(-51, ijasz.getJelenlegiEletero(), "sajnos itt hiba van :( ");
         assertEquals(100, grof.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -82,9 +82,9 @@ public class TestTuzlabda {
         Hos hos = new Hos();
         hos.setVarazsero(1);
         Tuzlabda tuzlabda = new Tuzlabda(hos);
-        Vampir vampir = new Vampir(2);
-        Verfarkas verfarkas = new Verfarkas(341);
-        Zombi zombi = new Zombi(73);
+        Vampir vampir = new Vampir(hos, 2);
+        Verfarkas verfarkas = new Verfarkas(hos, 341);
+        Zombi zombi = new Zombi(hos, 73);
         tuzlabda.alkalmaz(List.of(vampir, verfarkas, zombi));
         assertEquals(-2, vampir.getJelenlegiEletero(), "sajnos itt hiba van :( ");
         assertEquals(2026, verfarkas.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -97,7 +97,7 @@ public class TestTuzlabda {
         Hos hos = new Hos();
         hos.setVarazsero(10);
         Tuzlabda tuzlabda = new Tuzlabda(hos);
-        Vampir vampir = new Vampir(2);
+        Vampir vampir = new Vampir(hos, 2);
         tuzlabda.alkalmaz(List.of());
         assertEquals(18, vampir.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }

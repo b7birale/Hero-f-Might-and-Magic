@@ -135,19 +135,19 @@ public class RepuloLenyController {
 
         //HOGYAN TÁROLOM EL EGY EGYSZERŰ LISTÁBAN, HOGY AZ EGYES EGYSÉGEKBŐL MENNYI VAN??
 
-        Griff griff = new Griff(griffSzam);
+        Griff griff = new Griff(hos, griffSzam);
         hos.addEgysegek(griff);
 
-        Fonix fonix = new Fonix(fonixSzam);
+        Fonix fonix = new Fonix(hos, fonixSzam);
         hos.addEgysegek(fonix);
 
-        Sarkany sarkany = new Sarkany(sarkanySzam);
+        Sarkany sarkany = new Sarkany(hos, sarkanySzam);
         hos.addEgysegek(sarkany);
 
-        Pteranodon pteranodon = new Pteranodon(pteranodonSzam);
+        Pteranodon pteranodon = new Pteranodon(hos, pteranodonSzam);
         hos.addEgysegek(pteranodon);
 
-        Pegazus pegazus = new Pegazus(pegazusSzam);
+        Pegazus pegazus = new Pegazus(hos, pegazusSzam);
         hos.addEgysegek(pegazus);
 
 
