@@ -80,8 +80,8 @@ public class Egyseg {
 
     public int szamolSebzes(int tamadas, Hos ellenfel){
         double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
-        double sebzes = alapsebzes + alapsebzes*(double)(tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
-        sebzes = sebzes * (double) (ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
+        double sebzes = alapsebzes + alapsebzes*((double)tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
+        sebzes = sebzes * ((double)ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
         return (int) ceil(sebzes);
     }
 
@@ -94,8 +94,8 @@ public class Egyseg {
     public void visszaTamad(int tamadas, Hos ellenfel, Egyseg tamadottEgyseg){
         //ugyanaz mint a támad, csak sebzés = sebzés/2
         double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
-        double sebzes = alapsebzes + alapsebzes*(double)(tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
-        sebzes = sebzes * (double) (ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
+        double sebzes = alapsebzes + alapsebzes*((double)tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
+        sebzes = sebzes * ((double)ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
         int vegeredmeny = (int) ceil(sebzes/2);
         //tamadottEgyseg.csokkentEletero(vegeredmeny);  //Mi a különbség csökkentÉleterő és sebez() közt?
         tamadottEgyseg.sebez(vegeredmeny);
@@ -115,8 +115,8 @@ public class Egyseg {
         //5%
         //+5%
         double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
-        double sebzes = alapsebzes + alapsebzes*(double)(tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
-        sebzes = sebzes * (double) (ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
+        double sebzes = alapsebzes + alapsebzes*((double)tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
+        sebzes = sebzes * ((double)ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
         int vegeredmeny = (int) ceil(sebzes*2);
         tamadottEgyseg.sebez(vegeredmeny);
     }

@@ -14,6 +14,7 @@ public class Ember extends Egyseg {
         this.kezdemenyezes = kezdemenyezes;
         this.specialisKepesseg = specialisKepesseg;
         this.jelenlegiEletero = jelenlegiEletero;
+        this.eredetiEletero = jelenlegiEletero;
     }
 
 }

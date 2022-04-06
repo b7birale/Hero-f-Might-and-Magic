@@ -1,9 +1,9 @@
 package com.example.game.megjelenites;
 
-public class Csatater {
+public class CsataterSajat {
     private Mezo[][] mezok = new Mezo[12][10];
 
-    public Csatater() {
+    public CsataterSajat() {
         for(int i = 0; i < this.mezok.length; ++i) {
             for(int j = 0; j < this.mezok[0].length; ++j) {
                 this.mezok[i][j] = new Mezo();
