@@ -2,6 +2,7 @@ package com.example.game.hos.egysegek.frakciok.controller;
 
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.eloholtak.*;
+import com.example.game.megjelenites.Csatater;
 import com.example.game.megjelenites.CsataterControllerSajat;
 import com.example.game.megjelenites.SceneController;
 import javafx.event.ActionEvent;
@@ -47,6 +48,9 @@ public class EloholtController {
     private int szellemSzam;
     private int verfarkasSzam;
 
+    private boolean vasarolt = false;
+    @FXML
+    private Text nemVasarolt;
 
     @FXML
     private Text nincsElegArany;
@@ -72,6 +76,7 @@ public class EloholtController {
             SceneController.arany = SceneController.arany - Integer.parseInt(TF_demon.getText())*6; // 6 = démon ára
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegDemon.setText(String.valueOf(demonSzam));
+            vasarolt = true;
         }
     }
 
@@ -84,6 +89,7 @@ public class EloholtController {
             SceneController.arany = SceneController.arany - Integer.parseInt(TF_zombi.getText())*12;
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegZombi.setText(String.valueOf(zombiSzam));
+            vasarolt = true;
         }
     }
 
@@ -96,6 +102,7 @@ public class EloholtController {
             SceneController.arany = SceneController.arany - Integer.parseInt(TF_vampir.getText())*7;
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegVampir.setText(String.valueOf(vampirSzam));
+            vasarolt = true;
         }
     }
 
@@ -108,6 +115,7 @@ public class EloholtController {
             SceneController.arany = SceneController.arany - Integer.parseInt(TF_szellem.getText())*8;
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegSzellem.setText(String.valueOf(szellemSzam));
+            vasarolt = true;
         }
     }
 
@@ -120,6 +128,7 @@ public class EloholtController {
             SceneController.arany = SceneController.arany - Integer.parseInt(TF_verfarkas.getText())*15;
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegVerfarkas.setText(String.valueOf(verfarkasSzam));
+            vasarolt = true;
         }
     }
 
@@ -128,34 +137,49 @@ public class EloholtController {
     private Scene scene;
     private Parent root;
     public void tovabb(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("csatater.fxml"));
-        root = loader.load();
+        if(vasarolt){
 
-        CsataterControllerSajat macska = loader.getController();
-        //Pozicio macska = loader.getController();
-        //???
+            /*
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("csatater.fxml"));
+            root = loader.load();
 
-        Demon demon = new Demon(hos, demonSzam);
-        hos.addEgysegek(demon);
+            CsataterControllerSajat macska = loader.getController();
+            //Pozicio macska = loader.getController();
+            //???
 
-        Szellem szellem = new Szellem(hos, szellemSzam);
-        hos.addEgysegek(szellem);
+             */
 
-        Vampir vampir = new Vampir(hos, vampirSzam);
-        hos.addEgysegek(vampir);
+            Demon demon = new Demon(hos, demonSzam);
+            hos.addEgysegek(demon);
 
-        Verfarkas verfarkas = new Verfarkas(hos, verfarkasSzam);
-        hos.addEgysegek(verfarkas);
+            Szellem szellem = new Szellem(hos, szellemSzam);
+            hos.addEgysegek(szellem);
 
-        Zombi zombi = new Zombi(hos, zombiSzam);
-        hos.addEgysegek(zombi);
+            Vampir vampir = new Vampir(hos, vampirSzam);
+            hos.addEgysegek(vampir);
 
-        macska.setHos(hos);
+            Verfarkas verfarkas = new Verfarkas(hos, verfarkasSzam);
+            hos.addEgysegek(verfarkas);
+
+            Zombi zombi = new Zombi(hos, zombiSzam);
+            hos.addEgysegek(zombi);
+
+            //macska.setHos(hos);
 
 
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+            Csatater csatater = new Csatater(hos);
+            csatater.draw();
+            stage.setResizable(true);
+            stage.setFullScreen(true);
+        }
+        else{
+            nemVasarolt.setText("Még nem vásároltál egységet!");
+        }
+
     }
 }

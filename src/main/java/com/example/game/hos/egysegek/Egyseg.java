@@ -55,15 +55,26 @@ public class Egyseg {
     }
 
     public void sebez(int mennyivel){
-        this.jelenlegiEletero -= mennyivel;
+        if(this.jelenlegiEletero - mennyivel >= 0 ){
+            this.jelenlegiEletero -= mennyivel;
+        }
+        else{
+            this.jelenlegiEletero = 0;
+        }
     }
 
     public void gyogyit(int mennyivel){
         this.jelenlegiEletero = Math.min(eredetiEletero, this.jelenlegiEletero + mennyivel);
     }
 
+
     public void csokkentEletero(int sebzes){
-        setEletero(eletero * jelenlegiEletero - sebzes);
+        if(eletero * jelenlegiEletero - sebzes >= 0){
+            setEletero(eletero * jelenlegiEletero - sebzes);
+        }
+        else{
+            setEletero(0);
+        }
     }
 
 

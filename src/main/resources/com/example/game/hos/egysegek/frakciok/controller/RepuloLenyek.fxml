@@ -148,10 +148,15 @@
             <Font name="Candara" size="20.0" />
          </font>
       </Text>
-      <Button layoutX="266.0" layoutY="478.0" mnemonicParsing="false" onAction="#megveszemFonix" text="Tovább">
+      <Button layoutX="266.0" layoutY="478.0" mnemonicParsing="false" onAction="#tovabb" text="Tovább">
          <font>
             <Font name="Candara" size="24.0" />
          </font>
       </Button>
+      <Text fx:id="nemVasarolt" fill="RED" layoutX="167.0" layoutY="586.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   " textAlignment="CENTER" wrappingWidth="298.89617919921875">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

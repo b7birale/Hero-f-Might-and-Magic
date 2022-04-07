@@ -2,6 +2,7 @@ package com.example.game.hos.egysegek.frakciok.controller;
 
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.repulol_lenyek.*;
+import com.example.game.megjelenites.Csatater;
 import com.example.game.megjelenites.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,6 +48,10 @@ public class RepuloLenyController {
     private int fonixSzam;
 
 
+    private boolean vasarolt = false;
+    @FXML
+    private Text nemVasarolt;
+
     @FXML
     private Text nincsElegArany;
 
@@ -71,6 +76,7 @@ public class RepuloLenyController {
             SceneController.arany = SceneController.arany - Integer.parseInt(TF_griff.getText())*15; // 6 = démon ára
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegGriff.setText(String.valueOf(griffSzam));
+            vasarolt = true;
         }
     }
 
@@ -83,6 +89,7 @@ public class RepuloLenyController {
             SceneController.arany = SceneController.arany - Integer.parseInt(TF_sarkany.getText())*10;
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegSarkany.setText(String.valueOf(sarkanySzam));
+            vasarolt = true;
         }
     }
 
@@ -95,6 +102,7 @@ public class RepuloLenyController {
             SceneController.arany = SceneController.arany - Integer.parseInt(TF_pteranodon.getText())*15;
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegPteranodon.setText(String.valueOf(pteranodonSzam));
+            vasarolt = true;
         }
     }
 
@@ -107,6 +115,7 @@ public class RepuloLenyController {
             SceneController.arany = SceneController.arany - Integer.parseInt(TF_pegazus.getText())*7;
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegPegazus.setText(String.valueOf(pegazusSzam));
+            vasarolt = true;
         }
     }
 
@@ -119,6 +128,7 @@ public class RepuloLenyController {
             SceneController.arany = SceneController.arany - Integer.parseInt(TF_fonix.getText())*12;
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegFonix.setText(String.valueOf(fonixSzam));
+            vasarolt = true;
         }
     }
 
@@ -127,39 +137,45 @@ public class RepuloLenyController {
     private Scene scene;
     private Parent root;
     public void tovabb(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("csatater.fxml"));
-        root = loader.load();
+        if(vasarolt){
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("csatater.fxml"));
+            //root = loader.load();
 
-        // Csatater macska = loader.getController();
-        //macska.writeGold(SceneController.arany);
+            // Csatater macska = loader.getController();
+            //macska.writeGold(SceneController.arany);
 
-        //HOGYAN TÁROLOM EL EGY EGYSZERŰ LISTÁBAN, HOGY AZ EGYES EGYSÉGEKBŐL MENNYI VAN??
+            //HOGYAN TÁROLOM EL EGY EGYSZERŰ LISTÁBAN, HOGY AZ EGYES EGYSÉGEKBŐL MENNYI VAN??
 
-        Griff griff = new Griff(hos, griffSzam);
-        hos.addEgysegek(griff);
+            Griff griff = new Griff(hos, griffSzam);
+            hos.addEgysegek(griff);
 
-        Fonix fonix = new Fonix(hos, fonixSzam);
-        hos.addEgysegek(fonix);
+            Fonix fonix = new Fonix(hos, fonixSzam);
+            hos.addEgysegek(fonix);
 
-        Sarkany sarkany = new Sarkany(hos, sarkanySzam);
-        hos.addEgysegek(sarkany);
+            Sarkany sarkany = new Sarkany(hos, sarkanySzam);
+            hos.addEgysegek(sarkany);
 
-        Pteranodon pteranodon = new Pteranodon(hos, pteranodonSzam);
-        hos.addEgysegek(pteranodon);
+            Pteranodon pteranodon = new Pteranodon(hos, pteranodonSzam);
+            hos.addEgysegek(pteranodon);
 
-        Pegazus pegazus = new Pegazus(hos, pegazusSzam);
-        hos.addEgysegek(pegazus);
+            Pegazus pegazus = new Pegazus(hos, pegazusSzam);
+            hos.addEgysegek(pegazus);
 
+            //macska.setHos(hos);
 
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
 
+            Csatater csatater = new Csatater(hos);
+            csatater.draw();
+            stage.setResizable(true);
+            stage.setFullScreen(true);
+        }
+        else {
+            nemVasarolt.setText("Még nem vásároltál egységet!");
+        }
 
-        //macska.setHos(hos);
-
-
-
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 }

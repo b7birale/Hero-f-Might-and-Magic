@@ -20,11 +20,12 @@ public class TestTeleport {
     @Test
     public void testAlkalmazHaromElemuListara(){
         Hos hos = new Hos();
+        Hos ellenfel = new Hos();
         Teleport teleport = new Teleport(hos);
         Pozicio griffPozicio = new Pozicio(3,4);
         Pozicio demonPozicio = new Pozicio(6,6);
         Pozicio zombiPozicio = new Pozicio(7,1);
-        Griff griff = new Griff(hos, 10);
+        Griff griff = new Griff(ellenfel, 10);
         griff.setPozicio(griffPozicio);
         Demon demon = new Demon(hos, 12);
         demon.setPozicio(demonPozicio);

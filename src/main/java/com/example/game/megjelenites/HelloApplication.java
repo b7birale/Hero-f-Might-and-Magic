@@ -48,8 +48,6 @@ public class HelloApplication extends Application {
         stage.setScene(new Scene(root));
         stage.show();
 
-        
-
     }
 
 
