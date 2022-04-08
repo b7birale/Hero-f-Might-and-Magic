@@ -6,6 +6,9 @@ import java.util.Random;
 
 import static java.lang.Math.ceil;
 
+/**
+ * Egyseg osztaly
+ */
 public class Egyseg {
 
     protected String nev;
@@ -122,6 +125,12 @@ public class Egyseg {
         return random.nextInt(chance) == 0;
     }
 
+    /**
+     * Kiszamolja a kritikus sebzest
+     * @param tamadas
+     * @param ellenfel
+     * @param tamadottEgyseg
+     */
     public void kritikusSebzes(int tamadas, Hos ellenfel, Egyseg tamadottEgyseg){
         //ugyanaz mint a támad, csak sebzés = sebzés*2
         //hogyan függ a szerencse tulajdonságtól?

@@ -138,6 +138,9 @@ public class RepuloLenyController {
     private Parent root;
     public void tovabb(ActionEvent event) throws IOException {
         if(vasarolt){
+
+            Csatater csatater = new Csatater(hos);
+
             //FXMLLoader loader = new FXMLLoader(getClass().getResource("csatater.fxml"));
             //root = loader.load();
 
@@ -164,11 +167,10 @@ public class RepuloLenyController {
             //macska.setHos(hos);
 
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            scene = new Scene(csatater);
             stage.setScene(scene);
             stage.show();
 
-            Csatater csatater = new Csatater(hos);
             csatater.draw();
             stage.setResizable(true);
             stage.setFullScreen(true);

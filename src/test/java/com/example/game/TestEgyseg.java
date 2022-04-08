@@ -246,7 +246,7 @@ public class TestEgyseg {
         batman.setVedekezes(5);
         //superman tamadja meg batmant
         kritikusSebzesTeszthez(superman.getTamadas(), batman, polgar, 3, 32);
-        assertEquals(-78, polgar.getJelenlegiEletero(), "sajnos itt hiba van :( ");
+        assertEquals(0, polgar.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
 
     //************** vajonKritikusSebzes() metódus tesztelése **************

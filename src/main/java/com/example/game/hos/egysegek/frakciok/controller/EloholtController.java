@@ -149,6 +149,8 @@ public class EloholtController {
 
              */
 
+            Csatater csatater = new Csatater(hos);
+
             Demon demon = new Demon(hos, demonSzam);
             hos.addEgysegek(demon);
 
@@ -168,11 +170,10 @@ public class EloholtController {
 
 
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            scene = new Scene(csatater);
             stage.setScene(scene);
             stage.show();
 
-            Csatater csatater = new Csatater(hos);
             csatater.draw();
             stage.setResizable(true);
             stage.setFullScreen(true);
