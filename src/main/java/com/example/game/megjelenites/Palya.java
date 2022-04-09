@@ -33,17 +33,24 @@ public class Palya {
         //  osszesEgyseg.addAll(egysegek);
     }
 
-    public void lehelyezEgyseg(final Egyseg egyseg, final Pozicio pozicio) {
-        getMezo(pozicio).lehelyezEgyseg(egyseg);
+    public void lehelyezEgyseg(final Egyseg egyseg) {
+        getMezo(egyseg.getPozicio()).lehelyezEgyseg(egyseg);
     }
 
     public void lehelyezEllenfel(final Egyseg egyseg, final Pozicio pozicio) {
         getMezo(pozicio).lehelyezEgyseg(egyseg);
     }
 
+    private boolean mozoghatE(Egyseg egyseg, Pozicio cel){
+        return Math.abs(egyseg.getPozicio().getSor() - cel.getSor()) <= egyseg.getSebesseg()
+                && Math.abs(egyseg.getPozicio().getOszlop() - cel.getOszlop()) <= egyseg.getSebesseg();
+    }
+
     public void mozgatEgyseg(final Egyseg egyseg, final Pozicio pozicio) {
-        getMezo(egyseg.getPozicio()).leveszEgyseg();
-        getMezo(pozicio).lehelyezEgyseg(egyseg);
+        if(mozoghatE(egyseg, pozicio)) {
+            getMezo(egyseg.getPozicio()).leveszEgyseg();
+            getMezo(pozicio).lehelyezEgyseg(egyseg);
+        }
     }
 
     public List<Egyseg> getEgysegek3x3asTeruleten(final Pozicio pozicio) {

@@ -32,6 +32,7 @@ public class FrakcioController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
     public void eloholtak(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Eloholtak.fxml"));
         root = loader.load();
@@ -40,6 +41,8 @@ public class FrakcioController {
         macska.writeGold(SceneController.arany);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setHeight(689);
+        stage.setWidth(918);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -53,6 +56,8 @@ public class FrakcioController {
         macska.writeGold(SceneController.arany);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setHeight(689);
+        stage.setWidth(918);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -66,6 +71,8 @@ public class FrakcioController {
         macska.writeGold(SceneController.arany);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setHeight(689);
+        stage.setWidth(918);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

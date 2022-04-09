@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.hos.egysegek.frakciok.controller.RepuloLenyController">
+<AnchorPane prefHeight="689.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.hos.egysegek.frakciok.controller.RepuloLenyController">
    <children>
       <Text layoutX="432.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arany:">
          <font>
@@ -148,12 +148,177 @@
             <Font name="Candara" size="20.0" />
          </font>
       </Text>
-      <Button layoutX="266.0" layoutY="478.0" mnemonicParsing="false" onAction="#tovabb" text="Tovább">
+      <Button layoutX="412.0" layoutY="558.0" mnemonicParsing="false" onAction="#tovabb" text="Tovább">
          <font>
             <Font name="Candara" size="24.0" />
          </font>
       </Button>
       <Text fx:id="nemVasarolt" fill="RED" layoutX="167.0" layoutY="586.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   " textAlignment="CENTER" wrappingWidth="298.89617919921875">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Button layoutX="656.0" layoutY="141.0" mnemonicParsing="false" onAction="#griffSorPlusz" text="+" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="724.0" layoutY="141.0" mnemonicParsing="false" onAction="#griffSorMinusz" prefHeight="20.0" prefWidth="26.0" text="-" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="786.0" layoutY="140.0" mnemonicParsing="false" onAction="#griffOszlopPlusz" text="+" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="847.0" layoutY="140.0" mnemonicParsing="false" onAction="#griffOszlopMinusz" prefHeight="20.0" prefWidth="26.0" text="-" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Text layoutX="656.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hol szeretnéd elhelyezni?" wrappingWidth="223.696044921875">
+         <font>
+            <Font name="Candara Bold Italic" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="griffPozicioSor" layoutX="689.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="26.399999999999864">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="griffPozicioOszlop" layoutX="813.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.399999999999864">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Text>
+      <Button layoutX="656.0" layoutY="200.0" mnemonicParsing="false" onAction="#sarkanySorPlusz" text="+" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="656.0" layoutY="260.0" mnemonicParsing="false" onAction="#pteranodonSorPlusz" text="+" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="656.0" layoutY="321.0" mnemonicParsing="false" onAction="#pegazusSorPlusz" text="+" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="656.0" layoutY="379.0" mnemonicParsing="false" onAction="#fonixSorPlusz" text="+" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="786.0" layoutY="200.0" mnemonicParsing="false" onAction="#sarkanyOszlopPlusz" text="+" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="786.0" layoutY="258.0" mnemonicParsing="false" onAction="#pteranodonOszlopPlusz" text="+" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="786.0" layoutY="322.0" mnemonicParsing="false" onAction="#pegazusOszlopPlusz" text="+" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="786.0" layoutY="381.0" mnemonicParsing="false" onAction="#fonixOszlopPlusz" text="+" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="724.0" layoutY="200.0" mnemonicParsing="false" onAction="#sarkanySorMinusz" prefHeight="20.0" prefWidth="26.0" text="-" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="724.0" layoutY="260.0" mnemonicParsing="false" onAction="#pteranodonSorMinusz" prefHeight="20.0" prefWidth="26.0" text="-" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="724.0" layoutY="321.0" mnemonicParsing="false" onAction="#pegazusSorMinusz" prefHeight="20.0" prefWidth="26.0" text="-" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="724.0" layoutY="381.0" mnemonicParsing="false" onAction="#fonixSorMinusz" prefHeight="20.0" prefWidth="26.0" text="-" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="847.0" layoutY="200.0" mnemonicParsing="false" onAction="#sarkanyOszlopMinusz" prefHeight="20.0" prefWidth="26.0" text="-" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="847.0" layoutY="258.0" mnemonicParsing="false" onAction="#pteranodonOszlopMinusz" prefHeight="20.0" prefWidth="26.0" text="-" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="847.0" layoutY="321.0" mnemonicParsing="false" onAction="#pegazusOszlopMinusz" prefHeight="20.0" prefWidth="26.0" text="-" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="847.0" layoutY="381.0" mnemonicParsing="false" onAction="#fonixOszlopMinusz" prefHeight="20.0" prefWidth="26.0" text="-" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+      <Text fx:id="sarkanyPozicioSor" layoutX="685.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.399999999999864">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="sarkanyPozicioOszlop" layoutX="813.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.399999999999864">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="pteranodonPozicioSor" layoutX="685.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.399999999999864">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="pteranodonPozicioOszlop" layoutX="813.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.399999999999864">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="pegazusPozicioSor" layoutX="685.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.399999999999864">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="pegazusPozicioOszlop" layoutX="813.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.399999999999864">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="fonixPozicioSor" layoutX="685.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.399999999999864">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="fonixPozicioOszlop" layoutX="813.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.399999999999864">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="682.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(sor)" wrappingWidth="50.09613037109375">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="793.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(oszlop)" wrappingWidth="73.885498046875">
          <font>
             <Font name="Candara" size="20.0" />
          </font>

@@ -16,12 +16,12 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.NonInvertibleTransformException;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 public class Csatater extends Parent {
 
@@ -29,32 +29,34 @@ public class Csatater extends Parent {
     private Hos ellenfel = new EllenfelHos();
     private CsataterController csataterController;
     private Hos hos;
+    /*
     private Pozicio pozicio;
     private Egyseg foldmuves;
     private Varazslat villamcsapas;
+
+     */
+
     private Canvas jatekterCanvas;
     private Affine affine;
-    int koordinataX;
-    int koordinataY;
-    private int ellenfelSor;
-    private int hosSor = 0;
+    int oszlop;
+    int sor;
+    private final Label tulajdonsagKiir = new Label();
+    //private int ellenfelSor;
+    //private int hosSor = 0;
 
 
     public Csatater(Hos hos) {
 
-        this.ellenfelSor = 0;
-        this.foldmuves = new Foldmuves(hos, hos.getDb());
-        this.villamcsapas = new Villamcsapas(hos);
         this.hos = hos;
-        this.csataterController = new CsataterController();
-        this.pozicio = new Pozicio(koordinataY, koordinataX);
+        this.csataterController = new CsataterController(hos);
+        Pozicio pozicio = new Pozicio(sor, oszlop);
 
         jatekterCanvas = new Canvas(600, 400);
         affine = new Affine();
         affine.appendScale(600 / 12f, 400 / 10f);
         jatekterCanvas.setLayoutX(325);
         jatekterCanvas.setLayoutY(200);
-        jatekterCanvas.setOnMousePressed(this::egerLenyomas);
+        jatekterCanvas.setOnMouseClicked(this::egerLenyomas);
 
         Button inicializal = new Button("mehet");
         inicializal.setOnAction(ActionEvent -> {
@@ -106,14 +108,35 @@ public class Csatater extends Parent {
 
         try {
             Point2D koordinata = this.affine.inverseTransform(egerX, egerY);
-            // X = OSZLOP
-            koordinataX = (int) koordinata.getX();
-            // Y = SOR
-            koordinataY = (int) koordinata.getY();
-            System.out.println("Oszlop: " + koordinataX + ", Sor: " + koordinataY);
+            Pozicio kattintottPozicio = new Pozicio((int) koordinata.getY(), (int) koordinata.getX());
+            Mezo kattintottMezo = csataterController.getMezo(kattintottPozicio);
+
+            if (kattintottMezo.ures()) {
+                csataterController.mozgatEgyseg(kattintottPozicio);
+            } else {
+                csataterController.tamad(kattintottMezo.getEgyseg());
+            }
+
+
+            kiiratEgysegInfo();
+            frissitKepernyot();
 
         } catch (NonInvertibleTransformException e) {
             System.out.println("Nem lehet invertálni");
+        }
+    }
+
+    private void kiiratEgysegInfo() {
+        if (!getPalya().getMezo(new Pozicio(sor, oszlop)).ures()) {
+            tulajdonsagKiir.setTextFill(Color.RED);
+            tulajdonsagKiir.setFont(new Font("Arial", 20));
+            tulajdonsagKiir.setText("Az egység neve: " + jelenlegi().getEgyseg().getNev() +
+                    "\nDarabszáma: " + jelenlegi().getEgyseg().hanyDb() + "\nÉleterejük összesen: " +
+                    jelenlegi().getEgyseg().getJelenlegiEletero() + "\nLépések száma: " +
+                    jelenlegi().getEgyseg().getSebesseg());
+            tulajdonsagKiir.setLayoutX(325);
+            tulajdonsagKiir.setLayoutY(10);
+            getChildren().add(tulajdonsagKiir);
         }
     }
 
@@ -135,20 +158,12 @@ public class Csatater extends Parent {
         }
     }
 
-    public void ellenfelLetesz() {
-        ellenfel.getEgysegek()
-                .stream()
-                .forEach(egyseg -> {
-                    csataterController.lehelyez(new Pozicio(ellenfelSor++, Palya.OSZLOPOK_SZAMA - 1));
-                });
-        frissitKepernyot();
-    }
 
     public void egysegLetesz() {
-        for (int i = 0; i < hos.getEgysegek().size(); i++) {
-            csataterController.lehelyez(new Pozicio(hosSor++, 1));
-            frissitKepernyot();
-        }
+        hos.getEgysegek()
+                .forEach(csataterController::lehelyez);
+
+        frissitKepernyot();
     }
 
 
@@ -159,85 +174,77 @@ public class Csatater extends Parent {
 
         for (int sor = 0; sor < Palya.SOROK_SZAMA; sor++) {
             for (int oszlop = 0; oszlop < Palya.OSZLOPOK_SZAMA; oszlop++) {
-
-                if (!csataterController.getPalya().getMezo(new Pozicio(sor, oszlop)).ures()) {
-                    for (int i = 0; i < hos.getEgysegek().size(); i++) {
-
-                        if (Objects.equals(hos.getEgysegek().get(i).getNev(), "Foldmuves")) {
-                            e.setFill(Color.RED);
-                            e.fillRect(0, 0, 1, 1);
-                            //hos.getEgysegek().remove(0);
-                        }
-                        else if (Objects.equals(hos.getEgysegek().get(i).getNev(), "Ijasz")) {
-                            e.setFill(Color.GREEN);
-                            e.fillRect(0, 1, 1, 1);
-                            //hos.getEgysegek().remove(0);
-                        }
-                        else if (Objects.equals(hos.getEgysegek().get(i).getNev(), "Griff")){
-                            e.setFill(Color.PINK);
-                            e.fillRect(0,2, 1, 1);
-                            //hos.getEgysegek().remove(0);
-                        }
-                        else if (Objects.equals(hos.getEgysegek().get(i).getNev(), "Zombi")){
-                            e.setFill(Color.GRAY);
-                            e.fillRect(0,3, 1, 1);
-                            //hos.getEgysegek().remove(0);
-                        }
-                        else if (Objects.equals(hos.getEgysegek().get(i).getNev(), "Lovag")){
-                            e.setFill(Color.YELLOW);
-                            e.fillRect(0,4, 1, 1);
-                            //hos.getEgysegek().remove(0);
-                        }
-                    }
+                final Mezo jelenlegiMezo = getPalya().getMezo(new Pozicio(sor, oszlop));
+                if (!jelenlegiMezo.ures()) {
+                    e.setFill(Color.valueOf(jelenlegiMezo.getEgyseg().getSzin()));
+                } else {
+                    e.setFill(Color.LIGHTGRAY);
                 }
+                e.fillRect(oszlop, sor, 1, 1);
+                festRacsozat();
+                getChildren().remove(tulajdonsagKiir);
             }
         }
     }
 
-    public void varazslatGombok() {
-        List<Button> varazslatGombok =
-                hos.getVarazslatok()
-                        .stream()
-                        .map(varazslat1 -> new Button(varazslat1.getNev()))
-                        .toList();
+        public void varazslatGombok () {
+            List<Button> varazslatGombok =
+                    hos.getVarazslatok()
+                            .stream()
+                            .map(varazslat1 -> new Button(varazslat1.getNev()))
+                            .toList();
 
-        int meret = 80;
-        for (int i = 0; i < varazslatGombok.size(); i++) {
-            varazslatGombok.get(i).setLayoutX(10);
-            varazslatGombok.get(i).setLayoutY(meret);
-            meret += 40;
-            varazslatGombok.get(i).setOnAction(actionEvent -> {
-                hos.varazsol(villamcsapas.getNev(), hos.getEgysegek());
-            });
-
-            varazslatGombok.get(i).setOnAction(actionEvent -> {
-                //itt kéne a varázslat sebzését levonni az egységek életerejéből
-                //nem működik ebben a szarban már semmi
-                villamcsapas.vegrehajt(hos.getEgysegek());
-                System.out.println(foldmuves.getJelenlegiEletero());
-            });
+            int meret = 80;
+            for (Button button : varazslatGombok) {
+                button.setLayoutX(10);
+                button.setLayoutY(meret);
+                meret += 40;
+            }
+            getChildren().addAll(varazslatGombok);
         }
 
-        getChildren().addAll(varazslatGombok);
-    }
+
+        private void festRacsozat () {
+            GraphicsContext g = this.jatekterCanvas.getGraphicsContext2D();
+            g.setTransform(this.affine);
+            g.setStroke(Color.BLACK);
+            g.setLineWidth(0.03);
+            for (int i = 0; i <= 12; i++) {
+                g.strokeLine(i, 0, i, 10);
+            }
+            for (int j = 0; j <= 10; j++) {
+                g.strokeLine(0, j, 12, j);
+            }
+        }
+
+        private Mezo jelenlegi () {
+            return getPalya().getMezo(new Pozicio(sor, oszlop));
+        }
+
+        private Palya getPalya () {
+            return csataterController.getPalya();
+        }
 
 
-    public CsataterController getCsataterController() {
-        return csataterController;
-    }
+        //GETTEREK ÉS SETTEREK
 
-    public void setCsataterController(CsataterController csataterController) {
-        this.csataterController = csataterController;
-    }
+        public CsataterController getCsataterController () {
+            return csataterController;
+        }
 
-    public Hos getHos() {
-        return hos;
-    }
+        public void setCsataterController (CsataterController csataterController){
+            this.csataterController = csataterController;
+        }
 
-    public void setHos(Hos hos) {
-        this.hos = hos;
-    }
+        public Hos getHos () {
+            return hos;
+        }
+
+        public void setHos (Hos hos){
+            this.hos = hos;
+        }
 
 
-    //// TODO: 2022. 04. 03. Kitölteni képpel vagy színnel a cellákat
+        //// TODO: 2022. 04. 03. Kitölteni képpel vagy színnel a cellákat
+
 }

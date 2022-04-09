@@ -58,7 +58,7 @@ public class Hos {
 
     public void tamadEgyseggel(Egyseg tamadottEgyseg, Hos ellenfel){
         int egysegIndex = 0;
-        egysegek.get(egysegIndex).tamad(tamadas, ellenfel, tamadottEgyseg);
+        egysegek.get(egysegIndex).tamad(tamadottEgyseg);
     }
 
     public void addVarazslatok(Varazslat varazslat) {

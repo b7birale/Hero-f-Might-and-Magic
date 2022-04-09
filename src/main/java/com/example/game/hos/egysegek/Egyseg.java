@@ -23,6 +23,7 @@ public class Egyseg {
     protected String specialisKepesseg;
     public Pozicio pozicio;
     public Hos hos;
+    protected String szin;
 
 
     public Egyseg() {
@@ -94,16 +95,16 @@ public class Egyseg {
         }
     }
 
-    public int szamolSebzes(int tamadas, Hos ellenfel){
+    public int szamolSebzes(Egyseg ellenfelEgyseg){
         double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
-        double sebzes = alapsebzes + alapsebzes*((double)tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
-        sebzes = sebzes * ((double)ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
+        double sebzes = alapsebzes + alapsebzes*((double)hos.getTamadas()/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
+        sebzes = sebzes * ((double)ellenfelEgyseg.getHos().getVedekezes()/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
         return (int) ceil(sebzes);
     }
 
 
-    public void tamad(int tamadas, Hos ellenfel, Egyseg tamadottEgyseg){
-        tamadottEgyseg.sebez(szamolSebzes(tamadas, ellenfel));
+    public void tamad(Egyseg tamadottEgyseg){
+        tamadottEgyseg.sebez(szamolSebzes(tamadottEgyseg));
     }
 
 
@@ -292,5 +293,21 @@ public class Egyseg {
 
     public void setNev(String nev) {
         this.nev = nev;
+    }
+
+    public Hos getHos() {
+        return hos;
+    }
+
+    public void setHos(Hos hos) {
+        this.hos = hos;
+    }
+
+    public String getSzin() {
+        return szin;
+    }
+
+    public void setSzin(String szin) {
+        this.szin = szin;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.game.hos.egysegek.frakciok.controller;
 
 import com.example.game.hos.Hos;
+import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.megjelenites.Csatater;
 import com.example.game.megjelenites.SceneController;
 import com.example.game.hos.egysegek.emberek.*;
@@ -131,6 +132,238 @@ public class EmberController {
             vasarolt = true;
         }
     }
+
+
+    //POZÍCIÓK BEÁLLÍTÁSA ------------------------------------------------------------------------------
+
+    private Pozicio foldmuvesPozicio = null;
+    private Pozicio ijaszPozicio = null;
+    private Pozicio grofPozicio = null;
+    private Pozicio lovagPozicio = null;
+    private Pozicio polgarPozicio = null;
+
+    @FXML
+    private Text foldmuvesPozicioSor;
+    @FXML
+    private Text foldmuvesPozicioOszlop;
+    @FXML
+    private Text ijaszPozicioSor;
+    @FXML
+    private Text ijaszPozicioOszlop;
+    @FXML
+    private Text grofPozicioSor;
+    @FXML
+    private Text grofPozicioOszlop;
+    @FXML
+    private Text lovagPozicioSor;
+    @FXML
+    private Text lovagPozicioOszlop;
+    @FXML
+    private Text polgarPozicioSor;
+    @FXML
+    private Text polgarPozicioOszlop;
+
+    public void foldmuvesSorPlusz() {
+        if(foldmuvesPozicio == null){
+            foldmuvesPozicio = new Pozicio(0,0);
+        }
+        if (foldmuvesSzam > 0 && foldmuvesPozicio.getSor() < 9) {
+            foldmuvesPozicio.novelSor();
+            foldmuvesPozicioSor.setText(String.valueOf(foldmuvesPozicio.getSor()));
+        }
+    }
+
+    public void foldmuvesSorMinusz() {
+        if(foldmuvesPozicio == null){
+            foldmuvesPozicio = new Pozicio(0,0);
+        }
+        if (foldmuvesSzam > 0 && foldmuvesPozicio.getSor() > 0) {
+            foldmuvesPozicio.csokkentSor();
+            foldmuvesPozicioSor.setText(String.valueOf(foldmuvesPozicio.getSor()));
+        }
+    }
+
+    public void foldmuvesOszlopPlusz() {
+        if(foldmuvesPozicio == null){
+            foldmuvesPozicio = new Pozicio(0,0);
+        }
+        if (foldmuvesSzam > 0 && foldmuvesPozicio.getOszlop() < 1) {
+            foldmuvesPozicio.novelOszlop();
+            foldmuvesPozicioOszlop.setText(String.valueOf(foldmuvesPozicio.getOszlop()));
+        }
+    }
+
+    public void foldmuvesOszlopMinusz() {
+        if(foldmuvesPozicio == null){
+            foldmuvesPozicio = new Pozicio(0,0);
+        }
+        if (foldmuvesSzam > 0 && foldmuvesPozicio.getOszlop() > 0) {
+            foldmuvesPozicio.csokkentOszlop();
+            foldmuvesPozicioOszlop.setText(String.valueOf(foldmuvesPozicio.getOszlop()));
+        }
+    }
+
+    public void ijaszSorPlusz() {
+        if(ijaszPozicio == null){
+            ijaszPozicio = new Pozicio(0,0);
+        }
+        if (ijaszSzam > 0 && ijaszPozicio.getSor() < 9) {
+            ijaszPozicio.novelSor();
+            ijaszPozicioSor.setText(String.valueOf(ijaszPozicio.getSor()));
+        }
+    }
+
+    public void ijaszSorMinusz() {
+        if(ijaszPozicio == null){
+            ijaszPozicio = new Pozicio(0,0);
+        }
+        if (ijaszSzam > 0 && ijaszPozicio.getSor() > 0) {
+            ijaszPozicio.csokkentSor();
+            ijaszPozicioSor.setText(String.valueOf(ijaszPozicio.getSor()));
+        }
+    }
+
+    public void ijaszOszlopPlusz() {
+        if(ijaszPozicio == null){
+            ijaszPozicio = new Pozicio(0,0);
+        }
+        if (ijaszSzam > 0 && ijaszPozicio.getOszlop() < 1) {
+            ijaszPozicio.novelOszlop();
+            ijaszPozicioOszlop.setText(String.valueOf(ijaszPozicio.getOszlop()));
+        }
+    }
+
+    public void ijaszOszlopMinusz() {
+        if(ijaszPozicio == null){
+            ijaszPozicio = new Pozicio(0,0);
+        }
+        if (ijaszSzam > 0 && ijaszPozicio.getOszlop() > 0) {
+            ijaszPozicio.csokkentOszlop();
+            ijaszPozicioOszlop.setText(String.valueOf(ijaszPozicio.getOszlop()));
+        }
+    }
+
+    public void grofSorPlusz() {
+        if(grofPozicio == null){
+            grofPozicio = new Pozicio(0,0);
+        }
+        if (grofSzam > 0 && grofPozicio.getSor() < 9) {
+            grofPozicio.novelSor();
+            grofPozicioSor.setText(String.valueOf(grofPozicio.getSor()));
+        }
+    }
+
+    public void grofSorMinusz() {
+        if(grofPozicio == null){
+            grofPozicio = new Pozicio(0,0);
+        }
+        if (grofSzam > 0 && grofPozicio.getSor() > 0) {
+            grofPozicio.csokkentSor();
+            grofPozicioSor.setText(String.valueOf(grofPozicio.getSor()));
+        }
+    }
+
+    public void grofOszlopPlusz() {
+        if(grofPozicio == null){
+            grofPozicio = new Pozicio(0,0);
+        }
+        if (grofSzam > 0 && grofPozicio.getOszlop() < 1) {
+            grofPozicio.novelOszlop();
+            grofPozicioOszlop.setText(String.valueOf(grofPozicio.getOszlop()));
+        }
+    }
+
+    public void grofOszlopMinusz() {
+        if(grofPozicio == null){
+            grofPozicio = new Pozicio(0,0);
+        }
+        if (grofSzam > 0 && grofPozicio.getOszlop() > 0) {
+            grofPozicio.csokkentOszlop();
+            grofPozicioOszlop.setText(String.valueOf(grofPozicio.getOszlop()));
+        }
+    }
+
+    public void lovagSorPlusz() {
+        if(lovagPozicio == null){
+            lovagPozicio = new Pozicio(0,0);
+        }
+        if (lovagSzam > 0 && lovagPozicio.getSor() < 9) {
+            lovagPozicio.novelSor();
+            lovagPozicioSor.setText(String.valueOf(lovagPozicio.getSor()));
+        }
+    }
+
+    public void lovagSorMinusz() {
+        if(lovagPozicio == null){
+            lovagPozicio = new Pozicio(0,0);
+        }
+        if (lovagSzam > 0 && lovagPozicio.getSor() > 0) {
+            lovagPozicio.csokkentSor();
+            lovagPozicioSor.setText(String.valueOf(lovagPozicio.getSor()));
+        }
+    }
+
+    public void lovagOszlopPlusz() {
+        if(lovagPozicio == null){
+            lovagPozicio = new Pozicio(0,0);
+        }
+        if (lovagSzam > 0 && lovagPozicio.getOszlop() < 1) {
+            lovagPozicio.novelOszlop();
+            lovagPozicioOszlop.setText(String.valueOf(lovagPozicio.getOszlop()));
+        }
+    }
+
+    public void lovagOszlopMinusz() {
+        if(lovagPozicio == null){
+            lovagPozicio = new Pozicio(0,0);
+        }
+        if (lovagSzam > 0 && lovagPozicio.getOszlop() > 0) {
+            lovagPozicio.csokkentOszlop();
+            lovagPozicioOszlop.setText(String.valueOf(lovagPozicio.getOszlop()));
+        }
+    }
+
+    public void polgarSorPlusz() {
+        if(polgarPozicio == null){
+            polgarPozicio = new Pozicio(0,0);
+        }
+        if (polgarSzam > 0 && polgarPozicio.getSor() < 9) {
+            polgarPozicio.novelSor();
+            polgarPozicioSor.setText(String.valueOf(polgarPozicio.getSor()));
+        }
+    }
+
+    public void polgarSorMinusz() {
+        if(polgarPozicio == null){
+            polgarPozicio = new Pozicio(0,0);
+        }
+        if (polgarSzam > 0 && polgarPozicio.getSor() > 0) {
+            polgarPozicio.csokkentSor();
+            polgarPozicioSor.setText(String.valueOf(polgarPozicio.getSor()));
+        }
+    }
+
+    public void polgarOszlopPlusz() {
+        if(polgarPozicio == null){
+            polgarPozicio = new Pozicio(0,0);
+        }
+        if (polgarSzam > 0 && polgarPozicio.getOszlop() < 1) {
+            polgarPozicio.novelOszlop();
+            polgarPozicioOszlop.setText(String.valueOf(polgarPozicio.getOszlop()));
+        }
+    }
+
+    public void polgarOszlopMinusz() {
+        if(polgarPozicio == null){
+            polgarPozicio = new Pozicio(0,0);
+        }
+        if (polgarSzam > 0 && polgarPozicio.getOszlop() > 0) {
+            polgarPozicio.csokkentOszlop();
+            polgarPozicioOszlop.setText(String.valueOf(polgarPozicio.getOszlop()));
+        }
+    }
+
+
 
 
     private Stage stage;

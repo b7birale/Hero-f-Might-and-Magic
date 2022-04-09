@@ -10,9 +10,9 @@ public class Ijasz extends Ember {
         super(hos, "Ijasz",6,2,4,7,4,9,"loves", hanyDb*7);
     }
 
-    public void loves(Egyseg tamadottEgyseg, int tamadas, Hos ellenfel){
+    public void loves(Egyseg tamadottEgyseg){
         if(tavolsagiTamadas()){
-            tamad(tamadas, ellenfel, tamadottEgyseg);
+            tamad(tamadottEgyseg);
         }
     }
 

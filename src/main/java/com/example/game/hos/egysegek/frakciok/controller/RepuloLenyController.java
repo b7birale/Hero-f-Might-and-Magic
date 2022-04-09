@@ -1,6 +1,7 @@
 package com.example.game.hos.egysegek.frakciok.controller;
 
 import com.example.game.hos.Hos;
+import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.repulol_lenyek.*;
 import com.example.game.megjelenites.Csatater;
 import com.example.game.megjelenites.SceneController;
@@ -133,6 +134,237 @@ public class RepuloLenyController {
     }
 
 
+    //POZÍCIÓK BEÁLLÍTÁSA ------------------------------------------------------------------------------
+
+    private Pozicio griffPozicio = null;
+    private Pozicio sarkanyPozicio = null;
+    private Pozicio pegazusPozicio = null;
+    private Pozicio pteranodonPozicio = null;
+    private Pozicio fonixPozicio = null;
+
+    @FXML
+    private Text griffPozicioSor;
+    @FXML
+    private Text griffPozicioOszlop;
+    @FXML
+    private Text sarkanyPozicioSor;
+    @FXML
+    private Text sarkanyPozicioOszlop;
+    @FXML
+    private Text pegazusPozicioSor;
+    @FXML
+    private Text pegazusPozicioOszlop;
+    @FXML
+    private Text pteranodonPozicioSor;
+    @FXML
+    private Text pteranodonPozicioOszlop;
+    @FXML
+    private Text fonixPozicioSor;
+    @FXML
+    private Text fonixPozicioOszlop;
+
+    public void griffSorPlusz() {
+        if(griffPozicio == null){
+            griffPozicio = new Pozicio(0,0);
+        }
+        if (griffSzam > 0 && griffPozicio.getSor() < 9) {
+            griffPozicio.novelSor();
+            griffPozicioSor.setText(String.valueOf(griffPozicio.getSor()));
+        }
+    }
+
+    public void griffSorMinusz() {
+        if(griffPozicio == null){
+            griffPozicio = new Pozicio(0,0);
+        }
+        if (griffSzam > 0 && griffPozicio.getSor() > 0) {
+            griffPozicio.csokkentSor();
+            griffPozicioSor.setText(String.valueOf(griffPozicio.getSor()));
+        }
+    }
+
+    public void griffOszlopPlusz() {
+        if(griffPozicio == null){
+            griffPozicio = new Pozicio(0,0);
+        }
+        if (griffSzam > 0 && griffPozicio.getOszlop() < 1) {
+            griffPozicio.novelOszlop();
+            griffPozicioOszlop.setText(String.valueOf(griffPozicio.getOszlop()));
+        }
+    }
+
+    public void griffOszlopMinusz() {
+        if(griffPozicio == null){
+            griffPozicio = new Pozicio(0,0);
+        }
+        if (griffSzam > 0 && griffPozicio.getOszlop() > 0) {
+            griffPozicio.csokkentOszlop();
+            griffPozicioOszlop.setText(String.valueOf(griffPozicio.getOszlop()));
+        }
+    }
+
+    public void sarkanySorPlusz() {
+        if(sarkanyPozicio == null){
+            sarkanyPozicio = new Pozicio(0,0);
+        }
+        if (sarkanySzam > 0 && sarkanyPozicio.getSor() < 9) {
+            sarkanyPozicio.novelSor();
+            sarkanyPozicioSor.setText(String.valueOf(sarkanyPozicio.getSor()));
+        }
+    }
+
+    public void sarkanySorMinusz() {
+        if(sarkanyPozicio == null){
+            sarkanyPozicio = new Pozicio(0,0);
+        }
+        if (sarkanySzam > 0 && sarkanyPozicio.getSor() > 0) {
+            sarkanyPozicio.csokkentSor();
+            sarkanyPozicioSor.setText(String.valueOf(sarkanyPozicio.getSor()));
+        }
+    }
+
+    public void sarkanyOszlopPlusz() {
+        if(sarkanyPozicio == null){
+            sarkanyPozicio = new Pozicio(0,0);
+        }
+        if (sarkanySzam > 0 && sarkanyPozicio.getOszlop() < 1) {
+            sarkanyPozicio.novelOszlop();
+            sarkanyPozicioOszlop.setText(String.valueOf(sarkanyPozicio.getOszlop()));
+        }
+    }
+
+    public void sarkanyOszlopMinusz() {
+        if(sarkanyPozicio == null){
+            sarkanyPozicio = new Pozicio(0,0);
+        }
+        if (sarkanySzam > 0 && sarkanyPozicio.getOszlop() > 0) {
+            sarkanyPozicio.csokkentOszlop();
+            sarkanyPozicioOszlop.setText(String.valueOf(sarkanyPozicio.getOszlop()));
+        }
+    }
+
+    public void pegazusSorPlusz() {
+        if(pegazusPozicio == null){
+            pegazusPozicio = new Pozicio(0,0);
+        }
+        if (pegazusSzam > 0 && pegazusPozicio.getSor() < 9) {
+            pegazusPozicio.novelSor();
+            pegazusPozicioSor.setText(String.valueOf(pegazusPozicio.getSor()));
+        }
+    }
+
+    public void pegazusSorMinusz() {
+        if(pegazusPozicio == null){
+            pegazusPozicio = new Pozicio(0,0);
+        }
+        if (pegazusSzam > 0 && pegazusPozicio.getSor() > 0) {
+            pegazusPozicio.csokkentSor();
+            pegazusPozicioSor.setText(String.valueOf(pegazusPozicio.getSor()));
+        }
+    }
+
+    public void pegazusOszlopPlusz() {
+        if(pegazusPozicio == null){
+            pegazusPozicio = new Pozicio(0,0);
+        }
+        if (pegazusSzam > 0 && pegazusPozicio.getOszlop() < 1) {
+            pegazusPozicio.novelOszlop();
+            pegazusPozicioOszlop.setText(String.valueOf(pegazusPozicio.getOszlop()));
+        }
+    }
+
+    public void pegazusOszlopMinusz() {
+        if(pegazusPozicio == null){
+            pegazusPozicio = new Pozicio(0,0);
+        }
+        if (pegazusSzam > 0 && pegazusPozicio.getOszlop() > 0) {
+            pegazusPozicio.csokkentOszlop();
+            pegazusPozicioOszlop.setText(String.valueOf(pegazusPozicio.getOszlop()));
+        }
+    }
+
+    public void pteranodonSorPlusz() {
+        if(pteranodonPozicio == null){
+            pteranodonPozicio = new Pozicio(0,0);
+        }
+        if (pteranodonSzam > 0 && pteranodonPozicio.getSor() < 9) {
+            pteranodonPozicio.novelSor();
+            pteranodonPozicioSor.setText(String.valueOf(pteranodonPozicio.getSor()));
+        }
+    }
+
+    public void pteranodonSorMinusz() {
+        if(pteranodonPozicio == null){
+            pteranodonPozicio = new Pozicio(0,0);
+        }
+        if (pteranodonSzam > 0 && pteranodonPozicio.getSor() > 0) {
+            pteranodonPozicio.csokkentSor();
+            pteranodonPozicioSor.setText(String.valueOf(pteranodonPozicio.getSor()));
+        }
+    }
+
+    public void pteranodonOszlopPlusz() {
+        if(pteranodonPozicio == null){
+            pteranodonPozicio = new Pozicio(0,0);
+        }
+        if (pteranodonSzam > 0 && pteranodonPozicio.getOszlop() < 1) {
+            pteranodonPozicio.novelOszlop();
+            pteranodonPozicioOszlop.setText(String.valueOf(pteranodonPozicio.getOszlop()));
+        }
+    }
+
+    public void pteranodonOszlopMinusz() {
+        if(pteranodonPozicio == null){
+            pteranodonPozicio = new Pozicio(0,0);
+        }
+        if (pteranodonSzam > 0 && pteranodonPozicio.getOszlop() > 0) {
+            pteranodonPozicio.csokkentOszlop();
+            pteranodonPozicioOszlop.setText(String.valueOf(pteranodonPozicio.getOszlop()));
+        }
+    }
+
+    public void fonixSorPlusz() {
+        if(fonixPozicio == null){
+            fonixPozicio = new Pozicio(0,0);
+        }
+        if (fonixSzam > 0 && fonixPozicio.getSor() < 9) {
+            fonixPozicio.novelSor();
+            fonixPozicioSor.setText(String.valueOf(fonixPozicio.getSor()));
+        }
+    }
+
+    public void fonixSorMinusz() {
+        if(fonixPozicio == null){
+            fonixPozicio = new Pozicio(0,0);
+        }
+        if (fonixSzam > 0 && fonixPozicio.getSor() > 0) {
+            fonixPozicio.csokkentSor();
+            fonixPozicioSor.setText(String.valueOf(fonixPozicio.getSor()));
+        }
+    }
+
+    public void fonixOszlopPlusz() {
+        if(fonixPozicio == null){
+            fonixPozicio = new Pozicio(0,0);
+        }
+        if (fonixSzam > 0 && fonixPozicio.getOszlop() < 1) {
+            fonixPozicio.novelOszlop();
+            fonixPozicioOszlop.setText(String.valueOf(fonixPozicio.getOszlop()));
+        }
+    }
+
+    public void fonixOszlopMinusz() {
+        if(fonixPozicio == null){
+            fonixPozicio = new Pozicio(0,0);
+        }
+        if (fonixSzam > 0 && fonixPozicio.getOszlop() > 0) {
+            fonixPozicio.csokkentOszlop();
+            fonixPozicioOszlop.setText(String.valueOf(fonixPozicio.getOszlop()));
+        }
+    }
+
+
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -179,5 +411,48 @@ public class RepuloLenyController {
             nemVasarolt.setText("Még nem vásároltál egységet!");
         }
 
+    }
+
+
+    //GETTEREK ÉS SETTEREK ----------------------------------------------------------
+
+    public Pozicio getGriffPozicio() {
+        return griffPozicio;
+    }
+
+    public void setGriffPozicio(Pozicio griffPozicio) {
+        this.griffPozicio = griffPozicio;
+    }
+
+    public Pozicio getSarkanyPozicio() {
+        return sarkanyPozicio;
+    }
+
+    public void setSarkanyPozicio(Pozicio sarkanyPozicio) {
+        this.sarkanyPozicio = sarkanyPozicio;
+    }
+
+    public Pozicio getPegazusPozicio() {
+        return pegazusPozicio;
+    }
+
+    public void setPegazusPozicio(Pozicio pegazusPozicio) {
+        this.pegazusPozicio = pegazusPozicio;
+    }
+
+    public Pozicio getPteranodonPozicio() {
+        return pteranodonPozicio;
+    }
+
+    public void setPteranodonPozicio(Pozicio pteranodonPozicio) {
+        this.pteranodonPozicio = pteranodonPozicio;
+    }
+
+    public Pozicio getFonixPozicio() {
+        return fonixPozicio;
+    }
+
+    public void setFonixPozicio(Pozicio fonixPozicio) {
+        this.fonixPozicio = fonixPozicio;
     }
 }

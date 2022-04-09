@@ -31,8 +31,6 @@ public class EllenfelHos extends Hos{
 
     }
     public void leHelyez(Pozicio pozicio) {
-        palya.lehelyezEgyseg(new Griff(new Hos(), 100),pozicio);
-        palya.lehelyezEgyseg(new Ijasz(new Hos(), 100),pozicio);
-        palya.lehelyezEgyseg(new Zombi(new Hos(), 100),pozicio);
+
     }
 }
