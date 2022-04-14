@@ -1,5 +1,6 @@
 package com.example.game.hos.egysegek.frakciok.controller;
 
+import com.example.game.hos.EmberiHos;
 import com.example.game.hos.Hos;
 import com.example.game.megjelenites.SceneController;
 import javafx.event.ActionEvent;
@@ -13,9 +14,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Ez a controller osztálya annak az ablaknak, ahol kiválasztjuk a frakciót azaz,
+ *  hogy milyen tipusú egységekből szeretnénk válogatni.
+ * Ezen ablak megjelenítése, formázása a célja.
+ * Adatokat gyűjt a játékos hőséhez. Ez a negyedik ilyen ablak.
+ */
 public class FrakcioController {
 
-    Hos hos = new Hos();
+    Hos hos = new EmberiHos();
 
     public void setHos(Hos hos) {
         this.hos = hos;
@@ -39,6 +46,7 @@ public class FrakcioController {
 
         EloholtController macska = loader.getController();
         macska.writeGold(SceneController.arany);
+        macska.setHos(hos);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setHeight(689);
@@ -54,6 +62,7 @@ public class FrakcioController {
 
         EmberController macska = loader.getController();
         macska.writeGold(SceneController.arany);
+        macska.setHos(hos);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setHeight(689);
@@ -69,6 +78,8 @@ public class FrakcioController {
 
         RepuloLenyController macska = loader.getController();
         macska.writeGold(SceneController.arany);
+
+        macska.setHos(hos);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setHeight(689);

@@ -1,7 +1,9 @@
 package com.example.game.hos.egysegek.frakciok.controller;
 
+import com.example.game.hos.EmberiHos;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
+import com.example.game.hos.egysegek.eloholtak.*;
 import com.example.game.hos.egysegek.repulol_lenyek.*;
 import com.example.game.megjelenites.Csatater;
 import com.example.game.megjelenites.SceneController;
@@ -12,14 +14,26 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
+/**
+ * Ez a controller osztálya annak az ablaknak, ahol megvásároljuk az egységeket,
+ *  amennyiben az előző ablakban a Repülő Lények frakciót választottuk.
+ * Ezen ablak megjelenítése, formázása a célja.
+ * Adatokat gyűjt be, amelyek szükségesek a játékos hősének véglegesítéséhez.
+ * Itt vásárolnunk kell legalább egy egységet és pozíciót választani neki, különben nem kezdhető meg a játék.
+ * Ez az ablak minden esetben ötödikként fog megjelenni.
+ */
 public class RepuloLenyController {
 
-    Hos hos = new Hos();
+    Hos hos = new EmberiHos();
     public void setHos(Hos hos) {
         this.hos = hos;
     }
@@ -47,6 +61,12 @@ public class RepuloLenyController {
     private int pteranodonSzam;
     private int pegazusSzam;
     private int fonixSzam;
+
+    private boolean vettGriffet = false;
+    private boolean vettSarkanyt = false;
+    private boolean vettFonixet = false;
+    private boolean vettPegazust = false;
+    private boolean vettPteranodont = false;
 
 
     private boolean vasarolt = false;
@@ -78,6 +98,10 @@ public class RepuloLenyController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegGriff.setText(String.valueOf(griffSzam));
             vasarolt = true;
+            vettGriffet = true;
+        }
+        if (griffPozicio == null) {
+            griffPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -91,6 +115,10 @@ public class RepuloLenyController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegSarkany.setText(String.valueOf(sarkanySzam));
             vasarolt = true;
+            vettSarkanyt = true;
+        }
+        if (sarkanyPozicio == null) {
+            sarkanyPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -104,6 +132,10 @@ public class RepuloLenyController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegPteranodon.setText(String.valueOf(pteranodonSzam));
             vasarolt = true;
+            vettPteranodont = true;
+        }
+        if (pteranodonPozicio == null) {
+            pteranodonPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -117,6 +149,10 @@ public class RepuloLenyController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegPegazus.setText(String.valueOf(pegazusSzam));
             vasarolt = true;
+            vettPegazust = true;
+        }
+        if (pegazusPozicio == null) {
+            pegazusPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -130,6 +166,10 @@ public class RepuloLenyController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegFonix.setText(String.valueOf(fonixSzam));
             vasarolt = true;
+            vettFonixet = true;
+        }
+        if (fonixPozicio == null) {
+            fonixPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -371,39 +411,57 @@ public class RepuloLenyController {
     public void tovabb(ActionEvent event) throws IOException {
         if(vasarolt){
 
-            Csatater csatater = new Csatater(hos);
+            List<Pozicio> egysegPoziciok =
+                    Stream.of(
+                                    griffPozicio,
+                                    fonixPozicio,
+                                    sarkanyPozicio,
+                                    pteranodonPozicio,
+                                    pegazusPozicio
+                            )
+                            .filter(Objects::nonNull).toList();
 
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource("csatater.fxml"));
-            //root = loader.load();
+            if (egysegPoziciok.stream().distinct().count() != egysegPoziciok.size()) {
+                nemVasarolt.setText("Nem tehetsz két különböző egységet azonos pozícióra!");
+                return;
+            }
 
-            // Csatater macska = loader.getController();
-            //macska.writeGold(SceneController.arany);
+            if (vettGriffet) {
+                Griff griff = new Griff(hos, griffSzam, griffPozicio);
+                hos.addEgysegek(griff);
+            }
 
-            //HOGYAN TÁROLOM EL EGY EGYSZERŰ LISTÁBAN, HOGY AZ EGYES EGYSÉGEKBŐL MENNYI VAN??
+            if (vettSarkanyt) {
+                Sarkany sarkany = new Sarkany(hos, sarkanySzam, sarkanyPozicio);
+                hos.addEgysegek(sarkany);
+            }
 
-            Griff griff = new Griff(hos, griffSzam);
-            hos.addEgysegek(griff);
+            if (vettFonixet) {
+                Fonix fonix = new Fonix(hos, fonixSzam, fonixPozicio);
+                hos.addEgysegek(fonix);
+            }
 
-            Fonix fonix = new Fonix(hos, fonixSzam);
-            hos.addEgysegek(fonix);
+            if (vettPegazust) {
+                Pegazus pegazus = new Pegazus(hos, pegazusSzam, pegazusPozicio);
+                hos.addEgysegek(pegazus);
+            }
 
-            Sarkany sarkany = new Sarkany(hos, sarkanySzam);
-            hos.addEgysegek(sarkany);
+            if (vettPteranodont) {
+                Pteranodon pteranodon = new Pteranodon(hos, pteranodonSzam, pteranodonPozicio);
+                hos.addEgysegek(pteranodon);
+            }
 
-            Pteranodon pteranodon = new Pteranodon(hos, pteranodonSzam);
-            hos.addEgysegek(pteranodon);
 
-            Pegazus pegazus = new Pegazus(hos, pegazusSzam);
-            hos.addEgysegek(pegazus);
 
-            //macska.setHos(hos);
-
+            Csatater csatater = new Csatater(hos, "repuloLeny");
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(csatater);
             stage.setScene(scene);
             stage.show();
 
             csatater.draw();
+            csatater.egysegLetesz();
+            scene.setFill(Color.LIMEGREEN);
             stage.setResizable(true);
             stage.setFullScreen(true);
         }

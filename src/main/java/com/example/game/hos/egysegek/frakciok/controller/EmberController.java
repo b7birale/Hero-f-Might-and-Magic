@@ -1,7 +1,9 @@
 package com.example.game.hos.egysegek.frakciok.controller;
 
+import com.example.game.hos.EmberiHos;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
+import com.example.game.hos.egysegek.eloholtak.*;
 import com.example.game.megjelenites.Csatater;
 import com.example.game.megjelenites.SceneController;
 import com.example.game.hos.egysegek.emberek.*;
@@ -12,14 +14,26 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
+/**
+ * Ez a controller osztálya annak az ablaknak, ahol megvásároljuk az egységeket,
+ *  amennyiben az előző ablakban az Ember frakciót választottuk.
+ * Ezen ablak megjelenítése, formázása a célja.
+ * Adatokat gyűjt be, amelyek szükségesek a játékos hősének véglegesítéséhez.
+ * Itt vásárolnunk kell legalább egy egységet és pozíciót választani neki, különben nem kezdhető meg a játék.
+ * Ez az ablak minden esetben ötödikként fog megjelenni.
+ */
 public class EmberController {
 
-    Hos hos = new Hos();
+    Hos hos = new EmberiHos();
     public void setHos(Hos hos) {
         this.hos = hos;
     }
@@ -48,6 +62,12 @@ public class EmberController {
     private int lovagSzam;
     private int grofSzam;
     private int polgarSzam;
+
+    private boolean vettFoldmuvest = false;
+    private boolean vettIjaszt = false;
+    private boolean vettLovagot = false;
+    private boolean vettGrofot = false;
+    private boolean vettPolgart = false;
 
     private boolean vasarolt = false;
     @FXML
@@ -78,6 +98,10 @@ public class EmberController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegFoldmuves.setText(String.valueOf(foldmuvesSzam));
             vasarolt = true;
+            vettFoldmuvest = true;
+        }
+        if (foldmuvesPozicio == null) {
+            foldmuvesPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -91,6 +115,10 @@ public class EmberController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegIjasz.setText(String.valueOf(ijaszSzam));
             vasarolt = true;
+            vettIjaszt = true;
+        }
+        if (ijaszPozicio == null) {
+            ijaszPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -104,6 +132,10 @@ public class EmberController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegLovag.setText(String.valueOf(lovagSzam));
             vasarolt = true;
+            vettLovagot = true;
+        }
+        if (lovagPozicio == null) {
+            lovagPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -117,6 +149,10 @@ public class EmberController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegGrof.setText(String.valueOf(grofSzam));
             vasarolt = true;
+            vettGrofot = true;
+        }
+        if (grofPozicio == null) {
+            grofPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -130,6 +166,10 @@ public class EmberController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegPolgar.setText(String.valueOf(polgarSzam));
             vasarolt = true;
+            vettPolgart = true;
+        }
+        if (polgarPozicio == null) {
+            polgarPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -372,40 +412,56 @@ public class EmberController {
     public void tovabb(ActionEvent event) throws IOException {
         if(vasarolt){
 
-            Csatater csatater = new Csatater(hos);
+            List<Pozicio> egysegPoziciok =
+                    Stream.of(
+                                    foldmuvesPozicio,
+                                    ijaszPozicio,
+                                    lovagPozicio,
+                                    grofPozicio,
+                                    polgarPozicio
+                            )
+                            .filter(Objects::nonNull).toList();
 
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource("csatater.fxml"));
-            //root = loader.load();
+            if (egysegPoziciok.stream().distinct().count() != egysegPoziciok.size()) {
+                nemVasarolt.setText("Nem tehetsz két különböző egységet azonos pozícióra!");
+                return;
+            }
 
-            // Csatater macska = loader.getController();
-            //macska.writeGold(SceneController.arany);
+            if (vettFoldmuvest) {
+                Foldmuves foldmuves = new Foldmuves(hos, foldmuvesSzam, foldmuvesPozicio);
+                hos.addEgysegek(foldmuves);
+            }
 
-            //HOGYAN TÁROLOM EL EGY EGYSZERŰ LISTÁBAN, HOGY AZ EGYES EGYSÉGEKBŐL MENNYI VAN??
+            if (vettIjaszt) {
+                Ijasz ijasz = new Ijasz(hos, ijaszSzam, ijaszPozicio);
+                hos.addEgysegek(ijasz);
+            }
 
-            //macska.setHos(hos);
+            if (vettGrofot) {
+                Grof grof = new Grof(hos, grofSzam, grofPozicio);
+                hos.addEgysegek(grof);
+            }
 
-            Foldmuves foldmuves = new Foldmuves(hos, foldmuvesSzam);
-            hos.addEgysegek(foldmuves);
+            if (vettLovagot) {
+                Lovag lovag = new Lovag(hos, lovagSzam, lovagPozicio);
+                hos.addEgysegek(lovag);
+            }
 
-            Grof grof = new Grof(hos, grofSzam);
-            hos.addEgysegek(grof);
-
-            Ijasz ijasz = new Ijasz(hos, ijaszSzam);
-            hos.addEgysegek(ijasz);
-
-            Lovag lovag = new Lovag(hos, lovagSzam);
-            hos.addEgysegek(lovag);
-
-            Polgar polgar = new Polgar(hos, polgarSzam);
-            hos.addEgysegek(polgar);
+            if (vettPolgart) {
+                Polgar polgar = new Polgar(hos, polgarSzam, polgarPozicio);
+                hos.addEgysegek(polgar);
+            }
 
 
+            Csatater csatater = new Csatater(hos, "ember");
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(csatater);
             stage.setScene(scene);
             stage.show();
 
             csatater.draw();
+            csatater.egysegLetesz();
+            scene.setFill(Color.LIMEGREEN);
             stage.setResizable(true);
             stage.setFullScreen(true);
         }

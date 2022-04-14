@@ -1,5 +1,6 @@
 package com.example.game.hos.varazslatok;
 
+import com.example.game.hos.EmberiHos;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
@@ -30,6 +31,11 @@ public class Teleport extends Varazslat {
             masodikEgyseg.pozicio = elsoEgyseg.pozicio;
             elsoEgyseg.pozicio = puffer;
         }
+    }
+
+    @Override
+    public int hatoKor() {
+        return 100;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.game.hos.varazslatok;
 
+import com.example.game.hos.EmberiHos;
 import com.example.game.hos.Hos;
 import com.example.game.megjelenites.SceneController;
 import com.example.game.hos.egysegek.frakciok.controller.FrakcioController;
@@ -14,9 +15,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Ez a controller osztálya annak az ablaknak, ahol megvásároljuk a varázslatokat.
+ * Ezen ablak megjelenítése, formázása a célja.
+ * Adatokat gyűjt a játékos hőséhez. Ez a harmadik ilyen ablak.
+ */
 public class VarazslatController {
 
-    Hos hos = new Hos();
+    Hos hos = new EmberiHos();
 
     public void setHos(Hos hos) {
         this.hos = hos;
@@ -35,6 +41,11 @@ public class VarazslatController {
     private Text villamcsapas_megvette;
     boolean villamcsapas = false;
 
+    /**
+     * Megvásárolja a villámcsapás varázslatot.
+     * A vásárlás csak akkor történik meg ténylegesen, ha van elég aranyunk és még nem vettük meg.
+     * Ellenkező esetben megjelenik a figyelmeztető szöveg.
+     */
     public void buyVillamcsapas(){
         if(!villamcsapas && SceneController.arany - 60 >= 0){
             villamcsapas = true;
@@ -139,8 +150,14 @@ public class VarazslatController {
     private Scene scene;
     private Parent root;
 
+    /**
+     * Az alul megjelenő tovább gomb metódusa.
+     * Továbblépteti a felhasználót a következő ablakra.
+     * Eltárolja a hősről szerzett új információkat.
+     * @param event
+     * @throws IOException
+     */
     public void tovabb(ActionEvent event) throws IOException {
-        //Parent root = FXMLLoader.load(getClass().getResource("Frakciok.fxml"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Frakciok.fxml"));
         root = loader.load();
@@ -148,48 +165,29 @@ public class VarazslatController {
         FrakcioController macska = loader.getController();
         macska.writeGold(SceneController.arany);
 
-        //ITT ÉN NEM TUDOM MI TÖRTÉNIK ÉS MI NEM ?!
-
-        //List<Varazslat> varazslatok = new ArrayList<Varazslat>();   //próbálkozás, ami nem nagyon jött be, de azért itthagyom egyelőre
-
-        //hos.addVarazslatok();
 
         if(villamcsapas){
             Villamcsapas villamcsapas = new Villamcsapas(hos);
-            //villamcsapas.setAr(60);
-            //villamcsapas.setManna(5);
             hos.addVarazslatok(villamcsapas);
         }
         if(tuzlabda){
             Tuzlabda tuzlabda = new Tuzlabda(hos);
-            //tuzlabda.setAr(120);
-            //tuzlabda.setManna(9);
             hos.addVarazslatok(tuzlabda);
         }
         if(feltamasztas){
             Feltamasztas feltamasztas = new Feltamasztas(hos);
-            //feltamasztas.setAr(120);
-            //feltamasztas.setManna(6);
             hos.addVarazslatok(feltamasztas);
         }
         if(teleport){
             Teleport teleport = new Teleport(hos);
-            //teleport.setAr(100);
-            //teleport.setManna(4);
             hos.addVarazslatok(teleport);
         }
         if(magikusNyilvesszo){
             MagicArrow magikusNyilvesszo = new MagicArrow(hos);
-            //magikusNyilvesszo.setAr(50);
-            //magikusNyilvesszo.setManna(15);
             hos.addVarazslatok(magikusNyilvesszo);
         }
 
-
         macska.setHos(hos);
-
-
-
 
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

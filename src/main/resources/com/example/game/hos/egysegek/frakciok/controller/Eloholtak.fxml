@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -323,5 +324,91 @@
             <Font name="Candara" size="20.0" />
          </font>
       </Text>
+      <Line endX="100.0" layoutX="910.0" layoutY="577.0" rotate="90.0" startX="-88.84583282470703" startY="0.8340972661972046" />
+      <Line endX="82.7012939453125" endY="0.28704833984375" layoutX="834.0" layoutY="482.0" startX="-159.1778564453125" startY="-0.6776123046875" />
+      <Line endX="86.7012939453125" endY="0.54705810546875" layoutX="830.0" layoutY="672.0" startX="-152.3472900390625" startY="-0.41845703125" />
+      <Line endX="100.65991973876953" endY="0.7438003420829773" layoutX="670.0" layoutY="575.0" rotate="90.0" startX="-88.18505859375" startY="2.1601123809814453" stroke="RED" strokeWidth="2.0" />
+      <Line endX="100.0" layoutX="790.0" layoutY="576.0" rotate="90.0" startX="-88.84583282470703" startY="0.8340972661972046" />
+      <Line endX="100.0" layoutX="850.0" layoutY="576.0" rotate="90.0" startX="-88.84583282470703" startY="0.8340972661972046" />
+      <Line endX="100.0" layoutX="710.0" layoutY="576.0" rotate="90.0" startX="-88.84583282470703" startY="0.8340972661972046" stroke="RED" strokeWidth="2.0" />
+      <Line endX="100.0" layoutX="690.0" layoutY="576.0" rotate="90.0" startX="-88.84583282470703" startY="0.8340972661972046" />
+      <Line endX="100.0" layoutX="730.0" layoutY="576.0" rotate="90.0" startX="-88.84583282470703" startY="0.8340972661972046" />
+      <Line endX="100.0" layoutX="750.0" layoutY="576.0" rotate="90.0" startX="-87.0" startY="0.8340972661972046" />
+      <Line endX="100.0" layoutX="770.0" layoutY="576.0" rotate="90.0" startX="-88.84583282470703" startY="0.8340972661972046" />
+      <Line endX="100.0" layoutX="810.0" layoutY="576.0" rotate="90.0" startX="-88.84583282470703" startY="0.8340972661972046" />
+      <Line endX="100.0" layoutX="870.0" layoutY="576.0" rotate="90.0" startX="-88.84583282470703" startY="0.8340972661972046" />
+      <Line endX="100.0" layoutX="830.0" layoutY="576.0" rotate="90.0" startX="-88.84583282470703" startY="0.8340972661972046" />
+      <Line endX="100.0" layoutX="890.0" layoutY="576.0" rotate="90.0" startX="-88.84583282470703" startY="0.8340972661972046" />
+      <Line endX="78.452880859375" endY="-0.6776123046875" layoutX="836.0" layoutY="502.0" startX="-158.3472900390625" startY="-0.6776123046875" />
+      <Line endX="80.452880859375" endY="-0.6776123046875" layoutX="834.0" layoutY="522.0" startX="-158.3472900390625" startY="-0.6776123046875" />
+      <Line endX="78.452880859375" endY="-0.6776123046875" layoutX="837.0" layoutY="541.0" startX="-159.3472900390625" startY="-0.6776123046875" />
+      <Line endX="82.7012939453125" endY="-0.6776123046875" layoutX="831.0" layoutY="560.0" startX="-153.3472900390625" startY="-0.6776123046875" />
+      <Line endX="80.452880859375" endY="-0.6776123046875" layoutX="834.0" layoutY="580.0" startX="-156.3472900390625" startY="-1.54803466796875" />
+      <Line endX="78.452880859375" endY="-0.6776123046875" layoutX="836.0" layoutY="617.0" startX="-158.3472900390625" startY="-0.6776123046875" />
+      <Line endX="78.452880859375" endY="-0.6776123046875" layoutX="838.0" layoutY="599.0" startX="-160.3472900390625" startY="-0.6776123046875" />
+      <Line endX="78.452880859375" endY="-0.6776123046875" layoutX="837.0" layoutY="635.0" startX="-158.3472900390625" startY="-0.6776123046875" />
+      <Line endX="78.452880859375" endY="-0.6776123046875" layoutX="838.0" layoutY="654.0" startX="-160.3472900390625" startY="-0.6776123046875" />
+      <Text layoutX="657.0" layoutY="512.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="698.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="657.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="657.0" layoutY="532.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="657.0" layoutY="551.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="657.0" layoutY="570.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="657.0" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="657.0" layoutY="612.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="657.0" layoutY="626.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="657.0" layoutY="645.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="657.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="678.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Line endX="-37.39996337890625" endY="0.615264892578125" layoutX="751.0" layoutY="480.0" startX="-74.7625732421875" startY="0.615264892578125" stroke="RED" strokeWidth="2.0" />
+      <Line endX="-37.39996337890625" endY="0.615264892578125" layoutX="754.0" layoutY="671.0" startX="-74.7625732421875" startY="0.615264892578125" stroke="RED" strokeWidth="2.0" />
    </children>
 </AnchorPane>

@@ -1,10 +1,16 @@
 package com.example.game.hos.varazslatok;
 
+import com.example.game.exception.NincsElegMannaException;
+import com.example.game.exception.VarazslatokCsakEgysegekreAlkalmazhatoakException;
+import com.example.game.hos.EmberiHos;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.Hos;
 
 import java.util.List;
 
+/**
+ * Absztrakt osztály. Az egyes varázslatok ősosztályaként szolgál.
+ */
 public abstract class Varazslat {
     protected String nev;
     protected int ar;
@@ -18,13 +24,27 @@ public abstract class Varazslat {
         this.hos = hos;
     }
 
-    public void vegrehajt(List<Egyseg> egysegek){
-        if(vanElegManna()){
+    /**
+     * Amennyiben van elég mannánk, alkalmazza az adott varázslatot a paraméterben kapott egységen vagy egységeken
+     *  és levonja a megfelelő mannaösszeget is.
+     * @param egysegek Azon egységek listája, amin alkalmazni szándékozzuk az adott varázslatot.
+     */
+    public void vegrehajt(List<Egyseg> egysegek) throws NincsElegMannaException, VarazslatokCsakEgysegekreAlkalmazhatoakException {
+        if(egysegek == null || egysegek.isEmpty()){
+            throw new VarazslatokCsakEgysegekreAlkalmazhatoakException();
+        } else if (!vanElegManna()) {
+            throw new NincsElegMannaException();
+        } else {
             alkalmaz(egysegek);
             hos.fizet(getMannaAr());
         }
     }
 
+    /**
+     * Megvizsgálja, hogy van-e elég mannánk az adott varázslat végrehajtásához.
+     * Ha nincs hamissal, ha van igazzal tér vissza.
+     * @return Van-e elég mannánk a varázslat végrehajtásához.
+     */
     public boolean vanElegManna(){
         return hos.manna >= getMannaAr();
     }
@@ -33,7 +53,7 @@ public abstract class Varazslat {
 
     public abstract void alkalmaz(List<Egyseg> egysegek);
 
-
+    public abstract int hatoKor();
 
 
     //GETTEREK ÉS SETTEREK ---------------------------------------------------------------------------------------------

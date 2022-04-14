@@ -1,5 +1,6 @@
 package com.example.game.hos.egysegek;
 
+import com.example.game.exception.NemTamadhatodMegASajatEgysegedException;
 import com.example.game.hos.Hos;
 
 import java.util.Random;
@@ -7,9 +8,9 @@ import java.util.Random;
 import static java.lang.Math.ceil;
 
 /**
- * Egyseg osztaly
+ * Egy egységet valósít meg. A különböző egységek ősosztályaként szolgál.
  */
-public class Egyseg {
+public class Egyseg implements Comparable<Egyseg> {
 
     protected String nev;
     protected int ar;   //itt minden protected!
@@ -19,7 +20,7 @@ public class Egyseg {
     protected int maxSebzes;
     protected int eletero;
     protected int sebesseg;
-    protected int kezdemenyezes;
+    protected Integer kezdemenyezes;
     protected String specialisKepesseg;
     public Pozicio pozicio;
     public Hos hos;
@@ -38,7 +39,8 @@ public class Egyseg {
         this.specialisKepesseg = "nincs";
     }
 
-    public Egyseg(Hos hos, String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg, int kezdemenyezes, String specialisKepesseg, int jelenlegiEletero) {
+    public Egyseg(Hos hos, String nev, int ar, int minSebzes, int maxSebzes, int eletero, int sebesseg,
+                  int kezdemenyezes, String specialisKepesseg, int jelenlegiEletero, String szin, Pozicio pozicio) {
         this.hos = hos;
         this.nev = nev;
         this.ar = ar;
@@ -46,18 +48,30 @@ public class Egyseg {
         this.maxSebzes = maxSebzes;
         this.eletero = eletero;
         this.sebesseg = sebesseg;
-        this.kezdemenyezes = kezdemenyezes;
+        this.kezdemenyezes = kezdemenyezes + hos.getMoral();
         this.specialisKepesseg = specialisKepesseg;
         this.jelenlegiEletero = jelenlegiEletero;
         this.eredetiEletero = jelenlegiEletero;      //osszEletero fogy, eredetiEletero nem változik
+        this.szin = szin;
+        this.pozicio = pozicio;
     }
 
 
-    public void mozgas(){
-        this.pozicio.setSor(this.pozicio.getSor()-1);
-        this.pozicio.setOszlop(this.pozicio.getOszlop()+1);
+    /**
+     * Visszaadja él-e még az adott egység vagy már halott.
+     * @return true, ha halott az egység, false, ha még él
+     */
+    public boolean halottE(){
+        return jelenlegiEletero <= 0;
     }
 
+    /**
+     * Sebzést hajt végre az adott egységen.
+     * Levonja az adott egység jelenlegi, összesített életerejéből a sebzés mértékét.
+     * Amennyiben ez több, mint az életerő, úgy nullára állítja az életerőt.
+     * Ezzel biztosítja, hogy az életerő ne lehessen negatív szám.
+     * @param mennyivel A sebzés mértéke.
+     */
     public void sebez(int mennyivel){
         if(this.jelenlegiEletero - mennyivel >= 0 ){
             this.jelenlegiEletero -= mennyivel;
@@ -67,25 +81,22 @@ public class Egyseg {
         }
     }
 
+    /**
+     * Megnöveli az adott egység életerejét a paraméterben kapott értékkel vagy visszaállítja azt az eredeti értékérére.
+     * Azt választja, amelyik esetben kisebb lesz az életerő a gyógyítás után.
+     * @param mennyivel A gyógyítás maximális mértéke.
+     */
     public void gyogyit(int mennyivel){
         this.jelenlegiEletero = Math.min(eredetiEletero, this.jelenlegiEletero + mennyivel);
     }
 
-
-    public void csokkentEletero(int sebzes){
-        if(eletero * jelenlegiEletero - sebzes >= 0){
-            setEletero(eletero * jelenlegiEletero - sebzes);
-        }
-        else{
-            setEletero(0);
-        }
-    }
-
-
     //random szám generátor
     private Random rand = new Random();
 
-
+    /**
+     * Kiszámolja hány elem (ember/lény/állat) van az adott egységben.
+     * @return Hány darab elem van az adott egységben.
+     */
     public int hanyDb(){
         if( this.jelenlegiEletero % this.eletero > 0){
             return ( (this.jelenlegiEletero / this.eletero) +1);
@@ -95,6 +106,12 @@ public class Egyseg {
         }
     }
 
+    /**
+     * Kiszámítja a sebzés mértékét.
+     * Függ a támadó egységet birtokló hős támadás tulajdonságától és a támadott egységet birtokló hős védekezés tulajdonságától.
+     * @param ellenfelEgyseg A megtámadandó egység.
+     * @return A sebzés értéke. Mindig egész szám.
+     */
     public int szamolSebzes(Egyseg ellenfelEgyseg){
         double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
         double sebzes = alapsebzes + alapsebzes*((double)hos.getTamadas()/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
@@ -102,9 +119,22 @@ public class Egyseg {
         return (int) ceil(sebzes);
     }
 
-
+    /*
     public void tamad(Egyseg tamadottEgyseg){
         tamadottEgyseg.sebez(szamolSebzes(tamadottEgyseg));
+    }
+
+     */
+
+    public boolean isEllenfelEgysegE(Egyseg egyseg){
+        return this.hos != egyseg.getHos();
+    }
+
+    public void tamad(Egyseg ellenfelEgyseg) {
+        if(!isEllenfelEgysegE(ellenfelEgyseg)){
+            throw new NemTamadhatodMegASajatEgysegedException();
+        }
+        ellenfelEgyseg.sebez(szamolSebzes(ellenfelEgyseg));
     }
 
 
@@ -127,10 +157,10 @@ public class Egyseg {
     }
 
     /**
-     * Kiszamolja a kritikus sebzest
-     * @param tamadas
-     * @param ellenfel
-     * @param tamadottEgyseg
+     * Kiszamolja a kritikus sebzést és végre is hajtja azt az ellenséges egységen.
+     * @param tamadas A támadó egység hősének támadás tulajdonsága.
+     * @param ellenfel A megtámadott egység hőse, azaz az ellenséges hős.
+     * @param tamadottEgyseg A megtámadott egység.
      */
     public void kritikusSebzes(int tamadas, Hos ellenfel, Egyseg tamadottEgyseg){
         //ugyanaz mint a támad, csak sebzés = sebzés*2
@@ -144,6 +174,7 @@ public class Egyseg {
         tamadottEgyseg.sebez(vegeredmeny);
     }
 
+    /*
     public boolean tavolsagiTamadas(){
 
         //visszaadja, hogy van-e a közvetlen környezetében más egység
@@ -193,11 +224,22 @@ public class Egyseg {
         //probléma: ez minden egységet néz, de csak az ellenséges kellene, hogy számítson
 
     }
+     */
+
 
     public boolean kozelharciTamadas(Egyseg tamadottEgyseg){
         return Math.abs(tamadottEgyseg.pozicio.getOszlop() - this.pozicio.getOszlop()) <= 1 &&
                 Math.abs(tamadottEgyseg.pozicio.getSor() - this.pozicio.getSor()) <= 1;
         // = a támadott egység a közvetlen közelében van, így indítható közelharci támadás
+    }
+
+    public boolean isGep(){
+        return hos.isGep();
+    }
+
+    @Override
+    public int compareTo(final Egyseg o) {
+        return o.kezdemenyezes.compareTo(this.kezdemenyezes);
     }
 
 

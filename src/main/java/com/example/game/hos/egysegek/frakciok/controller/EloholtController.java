@@ -1,25 +1,36 @@
 package com.example.game.hos.egysegek.frakciok.controller;
 
+import com.example.game.hos.EmberiHos;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.eloholtak.*;
 import com.example.game.megjelenites.Csatater;
-import com.example.game.megjelenites.CsataterControllerSajat;
 import com.example.game.megjelenites.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
+/**
+ * Ez a controller osztálya annak az ablaknak, ahol megvásároljuk az egységeket,
+ *  amennyiben az előző ablakban a Élőholt frakciót választottuk.
+ * Ezen ablak megjelenítése, formázása a célja.
+ * Adatokat gyűjt be, amelyek szükségesek a játékos hősének véglegesítéséhez.
+ * Itt vásárolnunk kell legalább egy egységet és pozíciót választani neki, különben nem kezdhető meg a játék.
+ * Ez az ablak minden esetben ötödikként fog megjelenni.
+ */
 public class EloholtController {
-    Hos hos = new Hos();
+    Hos hos = new EmberiHos();
 
     public void setHos(Hos hos) {
         this.hos = hos;
@@ -48,6 +59,12 @@ public class EloholtController {
     private int vampirSzam;
     private int szellemSzam;
     private int verfarkasSzam;
+
+    private boolean vettDemont = false;
+    private boolean vettSzellemet = false;
+    private boolean vettVampirt = false;
+    private boolean vettZombit = false;
+    private boolean vettVerfarkast = false;
 
     private boolean vasarolt = false;
     @FXML
@@ -78,6 +95,10 @@ public class EloholtController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegDemon.setText(String.valueOf(demonSzam));
             vasarolt = true;
+            vettDemont = true;
+        }
+        if (demonPozicio == null) {
+            demonPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -91,6 +112,10 @@ public class EloholtController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegZombi.setText(String.valueOf(zombiSzam));
             vasarolt = true;
+            vettZombit = true;
+        }
+        if (zombiPozicio == null) {
+            zombiPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -104,6 +129,10 @@ public class EloholtController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegVampir.setText(String.valueOf(vampirSzam));
             vasarolt = true;
+            vettVampirt = true;
+        }
+        if (vampirPozicio == null) {
+            vampirPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -117,6 +146,10 @@ public class EloholtController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegSzellem.setText(String.valueOf(szellemSzam));
             vasarolt = true;
+            vettSzellemet = true;
+        }
+        if (szellemPozicio == null) {
+            szellemPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -130,6 +163,10 @@ public class EloholtController {
             arany.setText(String.valueOf(SceneController.arany));
             mennyisegVerfarkas.setText(String.valueOf(verfarkasSzam));
             vasarolt = true;
+            vettVerfarkast = true;
+        }
+        if (verfarkasPozicio == null) {
+            verfarkasPozicio = new Pozicio(0, 0);
         }
     }
 
@@ -370,42 +407,57 @@ public class EloholtController {
     public void tovabb(ActionEvent event) throws IOException {
         if(vasarolt){
 
-            /*
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("csatater.fxml"));
-            root = loader.load();
+            List<Pozicio> egysegPoziciok =
+                    Stream.of(
+                                    demonPozicio,
+                                    vampirPozicio,
+                                    szellemPozicio,
+                                    verfarkasPozicio,
+                                    zombiPozicio
+                            )
+                            .filter(Objects::nonNull).toList();
 
-            CsataterControllerSajat macska = loader.getController();
-            //Pozicio macska = loader.getController();
-            //???
+            if (egysegPoziciok.stream().distinct().count() != egysegPoziciok.size()) {
+                nemVasarolt.setText("Nem tehetsz két különböző egységet azonos pozícióra!");
+                return;
+            }
 
-             */
+            if (vettDemont) {
+                Demon demon = new Demon(hos, demonSzam, demonPozicio);
+                hos.addEgysegek(demon);
+            }
 
-            Csatater csatater = new Csatater(hos);
+            if (vettSzellemet) {
+                Szellem szellem = new Szellem(hos, szellemSzam, szellemPozicio);
+                hos.addEgysegek(szellem);
+            }
 
-            Demon demon = new Demon(hos, demonSzam);
-            hos.addEgysegek(demon);
+            if (vettVampirt) {
+                Vampir vampir = new Vampir(hos, vampirSzam, vampirPozicio);
+                hos.addEgysegek(vampir);
+            }
 
-            Szellem szellem = new Szellem(hos, szellemSzam);
-            hos.addEgysegek(szellem);
+            if (vettZombit) {
+                Zombi zombi = new Zombi(hos, zombiSzam, zombiPozicio);
+                hos.addEgysegek(zombi);
+            }
 
-            Vampir vampir = new Vampir(hos, vampirSzam);
-            hos.addEgysegek(vampir);
-
-            Verfarkas verfarkas = new Verfarkas(hos, verfarkasSzam);
-            hos.addEgysegek(verfarkas);
-
-            Zombi zombi = new Zombi(hos, zombiSzam);
-            hos.addEgysegek(zombi);
-
-            //macska.setHos(hos);
+            if (vettVerfarkast) {
+                Verfarkas verfarkas = new Verfarkas(hos, verfarkasSzam, verfarkasPozicio);
+                hos.addEgysegek(verfarkas);
+            }
 
 
+
+            Csatater csatater = new Csatater(hos, "eloholt");
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(csatater);
             stage.setScene(scene);
             stage.show();
 
             csatater.draw();
+            csatater.egysegLetesz();
+            scene.setFill(Color.LIMEGREEN);
             stage.setResizable(true);
             stage.setFullScreen(true);
         }

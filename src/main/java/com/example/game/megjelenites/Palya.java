@@ -1,6 +1,7 @@
 package com.example.game.megjelenites;
 
 
+import com.example.game.exception.NemTudMozogniException;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.egysegek.Pozicio;
 
@@ -20,7 +21,6 @@ public class Palya {
 
     private Mezo[][] mezok = new Mezo[SOROK_SZAMA][OSZLOPOK_SZAMA];
 
-    private List<Egyseg> osszesEgyseg;
 
     public Palya() {
         for (int i = 0; i < SOROK_SZAMA; i++) {
@@ -29,31 +29,27 @@ public class Palya {
             }
         }
 
-        //  osszesEgyseg = new ArrayList<>();
-        //  osszesEgyseg.addAll(egysegek);
     }
 
     public void lehelyezEgyseg(final Egyseg egyseg) {
         getMezo(egyseg.getPozicio()).lehelyezEgyseg(egyseg);
     }
 
-    public void lehelyezEllenfel(final Egyseg egyseg, final Pozicio pozicio) {
-        getMezo(pozicio).lehelyezEgyseg(egyseg);
-    }
 
     private boolean mozoghatE(Egyseg egyseg, Pozicio cel){
         return Math.abs(egyseg.getPozicio().getSor() - cel.getSor()) <= egyseg.getSebesseg()
                 && Math.abs(egyseg.getPozicio().getOszlop() - cel.getOszlop()) <= egyseg.getSebesseg();
     }
 
-    public void mozgatEgyseg(final Egyseg egyseg, final Pozicio pozicio) {
-        if(mozoghatE(egyseg, pozicio)) {
-            getMezo(egyseg.getPozicio()).leveszEgyseg();
-            getMezo(pozicio).lehelyezEgyseg(egyseg);
+    public void mozgatEgyseg(final Egyseg egyseg, final Pozicio pozicio) throws NemTudMozogniException {
+        if(!mozoghatE(egyseg, pozicio)) {
+            throw new NemTudMozogniException();
         }
+        getMezo(egyseg.getPozicio()).leveszEgyseg();
+        getMezo(pozicio).lehelyezEgyseg(egyseg);
     }
 
-    public List<Egyseg> getEgysegek3x3asTeruleten(final Pozicio pozicio) {
+    public List<Egyseg> getEgysegekNxNesTeruleten(final Pozicio pozicio, int n) {
         return getPoziciokAdottPozicioKorul(pozicio)
                 .stream()
                 .filter(this::palyanVanE)

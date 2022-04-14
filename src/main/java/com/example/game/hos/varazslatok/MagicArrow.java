@@ -1,10 +1,12 @@
 
 package com.example.game.hos.varazslatok;
 
+import com.example.game.hos.EmberiHos;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.Hos;
 
 import java.util.List;
+
 
 public class MagicArrow extends Varazslat {
 
@@ -28,6 +30,10 @@ public class MagicArrow extends Varazslat {
         }
     }
 
+    @Override
+    public int hatoKor() {
+        return 100;
+    }
 }
 
 

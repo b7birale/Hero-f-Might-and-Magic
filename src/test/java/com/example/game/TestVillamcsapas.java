@@ -1,6 +1,9 @@
 package com.example.game;
 
+import com.example.game.hos.EmberiHos;
+import com.example.game.hos.GepiHos;
 import com.example.game.hos.Hos;
+import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.eloholtak.Demon;
 import com.example.game.hos.egysegek.eloholtak.Szellem;
 import com.example.game.hos.egysegek.eloholtak.Zombi;
@@ -22,11 +25,12 @@ public class TestVillamcsapas {
         //griff eletero: 30*10 = 300
         //sebzes = 30*8 = 240
         //300-240 = 60
-        Hos hos = new Hos();
-        Hos ellenfel = new Hos();
+        Hos hos = new EmberiHos();
+        Hos ellenfel = new EmberiHos();
         hos.setVarazsero(8);
         Villamcsapas villamcsapas = new Villamcsapas(hos);
-        Griff griff = new Griff(ellenfel, 10);
+        Pozicio griffPozicio = new Pozicio(2, 2);
+        Griff griff = new Griff(ellenfel, 10, griffPozicio);
         villamcsapas.alkalmaz(List.of(griff));
         assertEquals(60, griff.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -36,11 +40,12 @@ public class TestVillamcsapas {
         //foldmuves eletero: 3*125 = 375
         //sebzes: 30*7 = 210
         //375-210 = 165
-        Hos hos = new Hos();
-        Hos ellenfel = new Hos();
+        Hos hos = new EmberiHos();
+        Hos ellenfel = new EmberiHos();
         hos.setVarazsero(7);
         Villamcsapas villamcsapas = new Villamcsapas(hos);
-        Foldmuves foldmuves = new Foldmuves(ellenfel, 125);
+        Pozicio foldmuvesPozicio = new Pozicio(2, 2);
+        Foldmuves foldmuves = new Foldmuves(ellenfel, 125, foldmuvesPozicio);
         villamcsapas.alkalmaz(List.of(foldmuves));
         assertEquals(165, foldmuves.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -50,11 +55,12 @@ public class TestVillamcsapas {
         //szellem eletero: 30*12 = 360
         //sebzes: 30*1 = 30
         //360-30 = 330
-        Hos hos = new Hos();
-        Hos ellenfel = new Hos();
+        Hos hos = new EmberiHos();
+        Hos ellenfel = new EmberiHos();
         hos.setVarazsero(1);
         Villamcsapas villamcsapas = new Villamcsapas(hos);
-        Szellem szellem = new Szellem(ellenfel, 12);
+        Pozicio szellemPozicio = new Pozicio(2, 2);
+        Szellem szellem = new Szellem(ellenfel, 12, szellemPozicio);
         villamcsapas.alkalmaz(List.of(szellem));
         assertEquals(330, szellem.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }
@@ -63,12 +69,14 @@ public class TestVillamcsapas {
     public void testAlkalmazTobbElemuListara(){
         //sarkany eletero: 100*15 = 1500
         //zombi eletero: 9*300 = 2700
-        Hos hos = new Hos();
-        Hos ellenfel = new Hos();
+        Hos hos = new EmberiHos();
+        Hos ellenfel = new EmberiHos();
         hos.setVarazsero(2);
         Villamcsapas villamcsapas = new Villamcsapas(hos);
-        Sarkany sarkany = new Sarkany(ellenfel, 100);
-        Zombi zombi = new Zombi(ellenfel, 300);
+        Pozicio sarkanyPozicio = new Pozicio(2, 2);
+        Pozicio zombiPozicio = new Pozicio(3, 2);
+        Sarkany sarkany = new Sarkany(ellenfel, 100, sarkanyPozicio);
+        Zombi zombi = new Zombi(ellenfel, 300, zombiPozicio);
         villamcsapas.alkalmaz(List.of(sarkany, zombi));
         assertEquals(1500, sarkany.getJelenlegiEletero(), "sajnos itt hiba van :( ");
         assertEquals(2700, zombi.getJelenlegiEletero(), "sajnos itt hiba van :( ");
@@ -79,11 +87,12 @@ public class TestVillamcsapas {
         //demon eletero: 30*93 = 2790
         //sebzes: 10*30 = 300
         //2790-300 = 2490
-        Hos hos = new Hos();
-        Hos ellenfel = new Hos();
+        Hos hos = new EmberiHos();
+        Hos ellenfel = new EmberiHos();
         hos.setVarazsero(10);
         Villamcsapas villamcsapas = new Villamcsapas(hos);
-        Demon demon = new Demon(ellenfel, 93);
+        Pozicio demonPozicio = new Pozicio(2, 2);
+        Demon demon = new Demon(ellenfel, 93, demonPozicio);
         villamcsapas.alkalmaz(List.of());   //szándékosan üres listát kap
         assertEquals(2790, demon.getJelenlegiEletero(), "sajnos itt hiba van :( ");
     }

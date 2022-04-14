@@ -1,8 +1,8 @@
 package com.example.game.hos;
 
 
-import com.example.game.megjelenites.SceneController;
 import com.example.game.hos.varazslatok.VarazslatController;
+import com.example.game.megjelenites.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,12 +16,21 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import static java.lang.Math.ceil;
-import static java.lang.Math.round;
+
+/**
+ * Ez a controller osztálya annak az ablaknak, ahol megvásároljuk a tulajdonságpontokat.
+ * Ezen ablak megjelenítése, formázása a célja.
+ * Adatokat gyűjt a játékos hőséhez. Ez a második ilyen ablak.
+ */
 
 public class TulajdonsagController {
 
-    Hos hos = new Hos();
+    Hos hos = new EmberiHos();
 
+    /**
+     * Kiírja, mennyi arannyal rendelkezünk jelenleg.
+     * @param mennyiseg Az arany mennyisége. Mindig pozitív egész szám vagy nulla.
+     */
     public void writeGold(int mennyiseg) {
         arany.setText(String.valueOf(mennyiseg));
     }
@@ -36,6 +45,10 @@ public class TulajdonsagController {
     private int szerencse;
     private int varazsero;
 
+
+    /**
+     * Konstruktor. Minden tulajdonság értékét beállítja egyre.
+     */
     public TulajdonsagController() {
         this.vasarlasokSzama = 0;
         this.ar = 0;
@@ -59,6 +72,11 @@ public class TulajdonsagController {
     @FXML
     private Text arany;
 
+    /**
+     * Egy pontnyi támadást vásárlunk vele.
+     * A vásárlás abban az esetben történik meg ténylegesen, ha van elég aranyunk hozzá,
+     * illetve ha a már meglévő támadáspontok száma kevesebb, mint 10.
+     */
     public void plusTamadas() {
         ar = arSzamitas();
         if(this.tamadas + 1 <= 10 && ar <= SceneController.arany){
@@ -234,8 +252,14 @@ public class TulajdonsagController {
     private Scene scene;
     private Parent root;
 
+    /**
+     * Az alul megjelenő tovább gomb metódusa.
+     * Továbblépteti a felhasználót a következő ablakra.
+     * Eltárolja a hősről szerzett információkat.
+     * @param event
+     * @throws IOException
+     */
     public void tovabb(ActionEvent event) throws IOException {
-        //Parent root = FXMLLoader.load(getClass().getResource("Varazslatok.fxml"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Varazslatok.fxml"));
         root = loader.load();
@@ -249,12 +273,8 @@ public class TulajdonsagController {
         hos.setTudas(tudas);
         hos.setVarazsero(varazsero);
         hos.setSzerencse(szerencse);
+        hos.setManna(tudas * 10);
         macska.setHos(hos);
-
-        /*
-        macska.zombikiir(EgysegController.zombidb);
-
-        */
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
