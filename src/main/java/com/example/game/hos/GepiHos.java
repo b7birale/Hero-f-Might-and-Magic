@@ -32,12 +32,12 @@ public class GepiHos extends Hos {
         valaszthatoEgysegek = new ArrayList<>();
         valaszthatoVarazslatok = new ArrayList<>();
         this.arany = 0;
-        this.tamadas = 4;
-        this.vedekezes = 5;
-        this.tudas = 3;
-        this.moral = 2;
-        this.varazsero = 4;
-        this.szerencse = 1;
+        this.tamadas = rand.nextInt(1, 10);
+        this.vedekezes = rand.nextInt(1, 10);
+        this.tudas = rand.nextInt(1, 10);
+        this.moral = rand.nextInt(1, 10);
+        this.varazsero = rand.nextInt(1, 10);
+        this.szerencse = rand.nextInt(1, 10);
         this.manna = 0;
 
         if(frakcio.equals("ember")){

@@ -48,7 +48,7 @@ public class Egyseg implements Comparable<Egyseg> {
         this.maxSebzes = maxSebzes;
         this.eletero = eletero;
         this.sebesseg = sebesseg;
-        this.kezdemenyezes = kezdemenyezes + hos.getMoral();
+        this.kezdemenyezes = kezdemenyezes;
         this.specialisKepesseg = specialisKepesseg;
         this.jelenlegiEletero = jelenlegiEletero;
         this.eredetiEletero = jelenlegiEletero;      //osszEletero fogy, eredetiEletero nem változik

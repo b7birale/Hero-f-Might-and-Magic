@@ -9,7 +9,7 @@ public class Verfarkas extends Eloholt {
     public Verfarkas(Hos hos, int hanyDb, Pozicio pozicio) {
 
         super(hos, "Verfarkas",15,9,11,6,10,4,
-                "vonyitas", hanyDb*6, "blue", pozicio);
+                "nincs", hanyDb*6, "blue", pozicio);
 
     }
 }

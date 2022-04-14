@@ -239,8 +239,10 @@ public class Csatater extends Parent {
 
     private Label ellenfelTulajdonsagLabel() {
         Label ellenfelTulajdonsagLabel = new Label();
-        ellenfelTulajdonsagLabel.setText("Tulajdonsagok\n    tamadas = 4\n    vedekezes = 5\n    tudas = 3\n" +
-                "    moral = 2\n    varazsero = 4\n    szerencse = 1");
+        ellenfelTulajdonsagLabel.setText("Tulajdonsagok\n" +
+                "    tamadas = " + ellenfel.getTamadas() + "\n    vedekezes = " + ellenfel.getVedekezes() +
+                "\n    tudas = " + ellenfel.getTudas() + "\n    moral = " + ellenfel.getMoral() +
+                "\n    varazsero = " + ellenfel.getVarazsero() + "\n    szerencse = " + ellenfel.getSzerencse());
         ellenfelTulajdonsagLabel.setTextFill(Color.WHITE);
         ellenfelTulajdonsagLabel.setFont(new Font("Candara", 20));
         ellenfelTulajdonsagLabel.setLayoutX(1000);

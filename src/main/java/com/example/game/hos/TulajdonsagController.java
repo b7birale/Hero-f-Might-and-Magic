@@ -87,6 +87,7 @@ public class TulajdonsagController {
             tamadasSzam.setText(String.valueOf(tamadas));
             arany.setText(String.valueOf(SceneController.arany));
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
+            nincsElegArany.setText("   ");
         }
         else{
             if(ar > SceneController.arany){
@@ -115,6 +116,7 @@ public class TulajdonsagController {
             vedekezesSzam.setText(String.valueOf(vedekezes));
             arany.setText(String.valueOf(SceneController.arany));
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
+            nincsElegArany.setText("   ");
         }
         else{
             if(ar > SceneController.arany){
@@ -142,6 +144,7 @@ public class TulajdonsagController {
             moralSzam.setText(String.valueOf(moral));
             arany.setText(String.valueOf(SceneController.arany));
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
+            nincsElegArany.setText("   ");
         }
         else{
             if(ar > SceneController.arany){
@@ -169,6 +172,7 @@ public class TulajdonsagController {
             szerencseSzam.setText(String.valueOf(szerencse));
             arany.setText(String.valueOf(SceneController.arany));
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
+            nincsElegArany.setText("   ");
         }
         else{
             if(ar > SceneController.arany){
@@ -197,6 +201,7 @@ public class TulajdonsagController {
             varazseroSzam.setText(String.valueOf(varazsero));
             arany.setText(String.valueOf(SceneController.arany));
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
+            nincsElegArany.setText("   ");
         }
         else{
             if(ar > SceneController.arany){
@@ -225,6 +230,7 @@ public class TulajdonsagController {
             tudasSzam.setText(String.valueOf(tudas));
             arany.setText(String.valueOf(SceneController.arany));
             Ar.setText(String.valueOf(arSzamitas() + " arany"));
+            nincsElegArany.setText("   ");
         }
         else{
             if(ar > SceneController.arany){

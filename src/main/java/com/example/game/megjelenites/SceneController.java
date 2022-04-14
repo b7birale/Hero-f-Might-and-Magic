@@ -34,7 +34,6 @@ public class SceneController {
 
 
     public void konnyu(ActionEvent event) throws IOException {
-        //Parent root = FXMLLoader.load(getClass().getResource("Tulajdonsagok.fxml"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Tulajdonsagok.fxml"));
         root = loader.load();
@@ -53,7 +52,6 @@ public class SceneController {
     }
 
     public void kozepes(ActionEvent event) throws IOException {
-        //Parent root = FXMLLoader.load(getClass().getResource("Tulajdonsagok.fxml"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Tulajdonsagok.fxml"));
         root = loader.load();
@@ -74,8 +72,6 @@ public class SceneController {
     }
 
     public void nehez(ActionEvent event) throws IOException {
-        //Parent root = FXMLLoader.load(getClass().getResource("Tulajdonsagok.fxml"));
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Tulajdonsagok.fxml"));
         root = loader.load();
 
