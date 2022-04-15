@@ -305,6 +305,49 @@ public class Csatater extends Parent {
         getChildren().add(hibaLabel);
     }
 
+    //JELENLEGI KÖR KIIRATÁSA
+    private void kiirKor() {
+        Label kor = new Label();
+        kor.setFont(new Font("Candara", 20));
+        kor.setTextFill(Color.WHITE);
+        kor.setText(csataterController.korszamlalo() + ".kör");
+        kor.setLayoutX(10);
+        kor.setLayoutY(600);
+        getChildren().add(kor);
+    }
+
+    //Jáéték vége
+    private void vesztettNyertDontetlen() {
+        if (csataterController.isNyertel()) {
+            Label nyertel = new Label();
+            nyertel.setFont(new Font("Arial", 80));
+            nyertel.setTextFill(Color.GREEN);
+            nyertel.setText("Győzelem");
+            nyertel.setLayoutX(400);
+            nyertel.setLayoutY(300);
+            getChildren().add(nyertel);
+            jatekterCanvas.setVisible(false);
+        } else if (csataterController.isVesztettel()) {
+            Label vesztettel = new Label();
+            vesztettel.setFont(new Font("Arial", 80));
+            vesztettel.setTextFill(Color.RED);
+            vesztettel.setText("Vereség");
+            vesztettel.setLayoutX(400);
+            vesztettel.setLayoutY(300);
+            getChildren().add(vesztettel);
+            jatekterCanvas.setVisible(false);
+        } else if (csataterController.isDontetlen()) {
+            Label dontetlen = new Label();
+            dontetlen.setFont(new Font("Arial", 80));
+            dontetlen.setTextFill(Color.BLUE);
+            dontetlen.setText("Döntetlen");
+            dontetlen.setLayoutX(400);
+            dontetlen.setLayoutY(300);
+            getChildren().add(dontetlen);
+            jatekterCanvas.setVisible(false);
+        }
+    }
+
     //BILLENYTŰK ÉS EGÉR-KLIKKELÉS--------------------------------
 
     private void gombElenged(KeyEvent keyEvent) {
@@ -312,7 +355,9 @@ public class Csatater extends Parent {
     }
 
     private void gombLenyomas(KeyEvent keyEvent) {
-        lenyomottGomb = keyEvent.getCode().getChar();
+        if (gombbolVarazslatTipusba.containsKey(keyEvent.getCode().getChar())) {
+            lenyomottGomb = keyEvent.getCode().getChar();
+        }
     }
 
     private void egerLenyomas(MouseEvent event) {
@@ -337,14 +382,22 @@ public class Csatater extends Parent {
             }
 
             if(button == MouseButton.SECONDARY){
+                if(kattintottMezo.ures()){
+                    throw new AkciokCsakEgysegekreAlkalmazhatoakException();
+                }
+                Egyseg kattintottEgyseg = kattintottMezo.getEgyseg();
                 csataterController.tamadHos(kattintottMezo.getEgyseg());
                 kiiratEllenfelEgysegInfo(kattintottMezo.getEgyseg());
+                kiiratEllenfelEgysegInfo(kattintottEgyseg);
+                vesztettNyertDontetlen();
             }
             else if (kattintottMezo.ures() && button == MouseButton.PRIMARY) {
                 csataterController.mozgatEgyseg(kattintottPozicio);
             } else if(button == MouseButton.PRIMARY){
+                Egyseg kattintottEgyseg = kattintottMezo.getEgyseg();
                 csataterController.tamad(kattintottMezo.getEgyseg());
-                kiiratEllenfelEgysegInfo(kattintottMezo.getEgyseg());
+                kiiratEllenfelEgysegInfo(kattintottEgyseg);
+                vesztettNyertDontetlen();
             }
             frissitKepernyot();
             kiiratSajatEgysegInfo(kattintottPozicio);
@@ -355,6 +408,7 @@ public class Csatater extends Parent {
         catch (NemTudMozogniException | NincsAdottTipusuVarazslatException |
                 NincsElegMannaException | EztAGombotNemHasznalhatodException |
                 VarazslatokCsakEgysegekreAlkalmazhatoakException e) {
+            e.printStackTrace();
             kiiratHiba(e.getMessage());
         }
 
@@ -421,6 +475,11 @@ public class Csatater extends Parent {
                 }
                 e.fillRect(oszlop, sor, 1, 1);
                 festRacsozat();
+                for (int i = 0; i < ellenfel.getEgysegek().size(); i++) {
+                    e.setLineWidth(0.15);
+                    e.setStroke(Color.GOLD);
+                    e.strokeRect(ellenfel.getEgysegek().get(i).getPozicio().getOszlop(),ellenfel.getEgysegek().get(i).getPozicio().getSor(),1,1);
+                }
                 getChildren().remove(kiirManna);
                 kiirManna();
                 getChildren().remove(sajatTulajdonsagKiir);

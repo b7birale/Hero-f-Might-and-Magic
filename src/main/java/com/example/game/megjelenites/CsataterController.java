@@ -1,9 +1,6 @@
 package com.example.game.megjelenites;
 
-import com.example.game.exception.NemTamadhatodMegASajatEgysegedException;
-import com.example.game.exception.NemTudMozogniException;
-import com.example.game.exception.NincsAdottTipusuVarazslatException;
-import com.example.game.exception.NincsElegMannaException;
+import com.example.game.exception.*;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.egysegek.Pozicio;
@@ -21,6 +18,8 @@ public class CsataterController {
     private int jelenlegiEgysegIndex;
     private Hos hos;
     private Hos ellenfel;
+    private int kor;
+    private boolean vesztettel, nyertel, dontetlen;
 
     public CsataterController(Hos hos, Hos ellenfel){
         palya = new Palya();
@@ -31,6 +30,10 @@ public class CsataterController {
         this.hos = hos;
         this.ellenfel = ellenfel;
         Collections.sort(osszesEgyseg);
+        this.kor = 1;
+        this.vesztettel = false;
+        this.nyertel = false;
+        this.dontetlen = false;
     }
 
     public void mozgatEgyseg(Pozicio pozicio) throws NemTudMozogniException {
@@ -43,19 +46,22 @@ public class CsataterController {
         kovetkezoLepes();
     }
 
+
     public void lehelyez(Egyseg egyseg) {
         palya.lehelyezEgyseg(egyseg);
     }
 
     public void varazsol(String nev, Pozicio pozicio) throws NincsAdottTipusuVarazslatException, NincsElegMannaException {
         //todo Host kell finomitani
+        if(hos.isAkciotVegrehajtott()){
+            throw new MarEgyAkciotVegrehajtottalAHosselEbbenAKorbenException();
+        }
         if (!hos.isEllenfelEgysegE(palya.getMezo(pozicio).getEgyseg())) {
             throw new NemTamadhatodMegASajatEgysegedException();
         }
         Varazslat varazslat = hos.getVarazslat(nev);
         List<Egyseg> egysegek = palya.getEgysegekNxNesTeruleten(pozicio, varazslat.hatoKor());
         hos.varazsol(varazslat, egysegek);
-        kovetkezoLepes();
     }
 
     public void varakozik(){
@@ -79,26 +85,53 @@ public class CsataterController {
         kovetkezoLepes();
     }
 
-    private void kovetkezoLepes(){
-        if(hos.halottE() || ellenfel.halottE()){
-            System.out.println("Nyert");
+    public int korszamlalo() {
+        if (jelenlegiEgysegIndex == 0) {
+            kor++;
         }
-        jelenlegiEgysegIndex = (jelenlegiEgysegIndex + 1) %osszesEgyseg.size();
-        while(osszesEgyseg.get(jelenlegiEgysegIndex).isGep()){
-            Egyseg egyseg = osszesEgyseg.get(jelenlegiEgysegIndex);
-            if(egyseg.isGep()){
-                Pozicio pozicio = egyseg.getPozicio();
-                //try {
-                //      palya.mozgatEgyseg(egyseg,new Pozicio(pozicio.getSor(),pozicio.getOszlop() - 1));
-                //} catch (NemTudMozogniException e) {
-                //    e.printStackTrace();
-                //}
-            }
-            jelenlegiEgysegIndex = (jelenlegiEgysegIndex + 1) %osszesEgyseg.size();
-        }
+        return kor;
+    }
+
+    private Egyseg jelenlegiEgyseg() {
+        return osszesEgyseg.get(jelenlegiEgysegIndex);
     }
 
 
+    private void kovetkezoLepes(){
+
+        if (hos.halottE()) {
+            vesztettel = true;
+        } else if (ellenfel.halottE()) {
+            nyertel = true;
+        } else if (hos.halottE() && ellenfel.halottE()) {
+            dontetlen = true;
+        }
+        novelEgysegIndex();
+        while (jelenlegiEgyseg().isGep()) {
+            Egyseg egyseg = jelenlegiEgyseg();
+            if (egyseg.isGep()) {
+                palya.getBarmelySzomszedosEllenfel(egyseg)
+                        .ifPresentOrElse(egyseg::tamad, () -> gepMozog(egyseg));
+            }
+            novelEgysegIndex();
+        }
+    }
+
+    private void gepMozog(Egyseg egyseg) {
+        Pozicio kovPozicio = egyseg.randomKovetkezoPozicio(egyseg.getPozicio());
+        while (!palya.palyanVanE(kovPozicio) || !palya.getMezo(kovPozicio).ures()) {
+            kovPozicio = egyseg.randomKovetkezoPozicio(egyseg.getPozicio());
+        }
+        palya.mozgatEgyseg(egyseg, kovPozicio);
+    }
+
+    private void novelEgysegIndex() {
+        jelenlegiEgysegIndex = (jelenlegiEgysegIndex + 1) % osszesEgyseg.size();
+        if(jelenlegiEgysegIndex == 0){
+            hos.setAkciotVegrehajtott(false);
+            ellenfel.setAkciotVegrehajtott(false);
+        }
+    }
 
 
 
@@ -121,6 +154,18 @@ public class CsataterController {
      */
 
     //GETTEREK ÉS SETTEREK
+
+    public boolean isVesztettel() {
+        return vesztettel;
+    }
+
+    public boolean isNyertel() {
+        return nyertel;
+    }
+
+    public boolean isDontetlen() {
+        return dontetlen;
+    }
 
     public Palya getPalya() {
         return palya;

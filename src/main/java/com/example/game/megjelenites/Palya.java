@@ -8,6 +8,7 @@ import com.example.game.hos.egysegek.Pozicio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -50,7 +51,7 @@ public class Palya {
     }
 
     public List<Egyseg> getEgysegekNxNesTeruleten(final Pozicio pozicio, int n) {
-        return getPoziciokAdottPozicioKorul(pozicio)
+        return getPoziciokAdottPozicioKorul(pozicio, n)
                 .stream()
                 .filter(this::palyanVanE)
                 .map(this::getMezo)
@@ -59,8 +60,9 @@ public class Palya {
                 .collect(toList());
     }
 
+    /*
     private List<Mezo> getSzomszedosCellak(final Pozicio pozicio) {
-        return getPoziciokAdottPozicioKorul(pozicio)
+        return getPoziciokAdottPozicioKorul(pozicio, 1)
                 .stream()
                 .filter(this::palyanVanE)
                 .filter(not(pozicio::equals))
@@ -68,13 +70,43 @@ public class Palya {
                 .collect(toList());
     }
 
+     */
+
+    public List<Egyseg> getSzomszedosEgysegek(Pozicio pozicio) {
+        return getPoziciokAdottPozicioKorul(pozicio, 1)
+                .stream()
+                .filter(this::palyanVanE)
+                .filter(not(pozicio::equals))
+                .map(this::getMezo)
+                .filter(not(Mezo::ures))
+                .map(Mezo::getEgyseg)
+                .collect(toList());
+    }
+
+    public Optional<Egyseg> getElsoSzomszedosEllenfel(Egyseg egyseg){
+        return getSzomszedosEgysegek(egyseg.getPozicio()).stream()
+                .filter(egyseg::isEllenfelEgysegE)
+                .findFirst();
+    }
+
+    public Optional<Egyseg> getBarmelySzomszedosEllenfel(Egyseg egyseg){
+        return getSzomszedosEgysegek(egyseg.getPozicio()).stream()
+                .filter(egyseg::isEllenfelEgysegE)
+                .findFirst();
+    }
+
+    public boolean vanEllensegesSzomszed(Egyseg egyseg) {
+        return getBarmelySzomszedosEllenfel(egyseg).isPresent();
+    }
+
+
     /**
      * megadott pozicio is benne van
      */
-    private List<Pozicio> getPoziciokAdottPozicioKorul(final Pozicio pozicio) {
+    private List<Pozicio> getPoziciokAdottPozicioKorul(final Pozicio pozicio, int n) {
         List<Pozicio> poziciok = new ArrayList<>();
-        for (int i = pozicio.getSor()-1; i <= pozicio.getSor()+1; i++) {
-            for (int j = pozicio.getOszlop()-1; j <= pozicio.getOszlop()+1; j++) {
+        for (int i = pozicio.getSor()-n; i <= pozicio.getSor()+n; i++) {
+            for (int j = pozicio.getOszlop()-n; j <= pozicio.getOszlop()+n; j++) {
                 poziciok.add(new Pozicio(i, j));
             }
         }

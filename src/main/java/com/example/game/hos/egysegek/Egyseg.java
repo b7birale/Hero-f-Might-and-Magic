@@ -244,6 +244,19 @@ public class Egyseg implements Comparable<Egyseg> {
 
 
 
+    public Pozicio randomKovetkezoPozicio(Pozicio pozicio){
+        int randomVizszintesElmozdulas = rand.nextInt(sebesseg * -1, sebesseg + 1);
+        int randomFuggolegesElmozdulas = rand.nextInt(sebesseg * -1, sebesseg + 1);
+
+        while (randomFuggolegesElmozdulas == 0 && randomVizszintesElmozdulas == 0){
+            randomVizszintesElmozdulas = rand.nextInt(sebesseg * -1, sebesseg + 1);
+            randomFuggolegesElmozdulas = rand.nextInt(sebesseg * -1, sebesseg + 1);
+        }
+
+        return pozicio.osszead(randomVizszintesElmozdulas,randomFuggolegesElmozdulas);
+    }
+
+
 
 
 

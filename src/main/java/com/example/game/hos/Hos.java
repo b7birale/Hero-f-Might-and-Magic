@@ -24,7 +24,7 @@ public abstract class Hos {
     public int szerencse;
     public int varazsero;
     public int manna;
-
+    protected boolean akciotVegrehajtott;
 
     public List<Varazslat> varazslatok;
     public List<Egyseg> egysegek;
@@ -49,6 +49,7 @@ public abstract class Hos {
         this.szerencse = szerencse;
         this.varazsero = varazsero;
         this.manna = manna;
+        this.akciotVegrehajtott = false;
         varazslatok = new ArrayList<>();
         egysegek = new ArrayList<>();
     }
@@ -66,6 +67,7 @@ public abstract class Hos {
     public void tamad(Egyseg tamadottEgyseg){
         int sebzes = this.tamadas * 10;
         tamadottEgyseg.sebez(sebzes);
+        akciotVegrehajtott = true;
     }
 
     /**
@@ -87,6 +89,7 @@ public abstract class Hos {
     public void varazsol(Varazslat varazslat, List<Egyseg> egysegek) throws NincsElegMannaException,
             VarazslatokCsakEgysegekreAlkalmazhatoakException {
         varazslat.vegrehajt(egysegek);
+        akciotVegrehajtott = true;
     }
 
     public Varazslat getVarazslat(String nev) throws NincsAdottTipusuVarazslatException {
@@ -119,6 +122,14 @@ public abstract class Hos {
 
 
     //GETTEREK ÉS SETTEREK ------------------------------------------------------------------------------
+
+    public boolean isAkciotVegrehajtott() {
+        return akciotVegrehajtott;
+    }
+
+    public void setAkciotVegrehajtott(boolean akciotVegrehajtott) {
+        this.akciotVegrehajtott = akciotVegrehajtott;
+    }
 
     public int getTamadas() {
         return tamadas;

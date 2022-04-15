@@ -7,7 +7,7 @@ package com.example.game.hos;
 public class EmberiHos extends Hos {
 
     public EmberiHos() {
-        super(1,1,1,1,1,1,0);
+        super(1,1,1,1,1,1,10);
     }
 
     @Override

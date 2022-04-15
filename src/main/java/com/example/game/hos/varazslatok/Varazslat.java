@@ -1,5 +1,6 @@
 package com.example.game.hos.varazslatok;
 
+import com.example.game.exception.AkciokCsakEgysegekreAlkalmazhatoakException;
 import com.example.game.exception.NincsElegMannaException;
 import com.example.game.exception.VarazslatokCsakEgysegekreAlkalmazhatoakException;
 import com.example.game.hos.EmberiHos;
@@ -31,7 +32,7 @@ public abstract class Varazslat {
      */
     public void vegrehajt(List<Egyseg> egysegek) throws NincsElegMannaException, VarazslatokCsakEgysegekreAlkalmazhatoakException {
         if(egysegek == null || egysegek.isEmpty()){
-            throw new VarazslatokCsakEgysegekreAlkalmazhatoakException();
+            throw new AkciokCsakEgysegekreAlkalmazhatoakException();
         } else if (!vanElegManna()) {
             throw new NincsElegMannaException();
         } else {

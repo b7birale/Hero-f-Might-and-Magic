@@ -19,19 +19,27 @@ import java.util.Random;
 public class GepiHos extends Hos {
 
     private final Random rand = new Random();
-    private int arany;
+    private double arany;
+
+    private double ar;
+    private int kepessegszam;
 
     List<Pozicio> meglevoPoziciok;
     List<Egyseg> valaszthatoEgysegek;
     List<Varazslat> valaszthatoVarazslatok;
 
     public GepiHos(String frakcio) {
+
+        super(1,1,1,1,1,1,10);
+        this.arany = 0;
+        this.ar = 5.0;
+
         egysegek = new ArrayList<>();
         varazslatok = new ArrayList<>();
         meglevoPoziciok = new ArrayList<>();
         valaszthatoEgysegek = new ArrayList<>();
         valaszthatoVarazslatok = new ArrayList<>();
-        this.arany = 0;
+
         this.tamadas = rand.nextInt(1, 10);
         this.vedekezes = rand.nextInt(1, 10);
         this.tudas = rand.nextInt(1, 10);
@@ -69,8 +77,11 @@ public class GepiHos extends Hos {
         valaszthatoVarazslatok.add(new Tuzlabda(this));
         valaszthatoVarazslatok.add(new MagicArrow(this));
         valaszthatoVarazslatok.add(new Teleport(this));
+
+
         valasztEgysegek();
         valasztVarazslatok();
+        generalTulajdonsag();
     }
 
     @Override
@@ -138,4 +149,51 @@ public class GepiHos extends Hos {
         meglevoPoziciok.add(pozicio);
         return pozicio;
     }
+
+    //?
+    private double arSzamitas(){
+        if(kepessegszam == 1){
+            ar = 5.0;
+            kepessegszam++;
+            return 5.0;
+        } else {
+            ar = ar * 1.1;
+            kepessegszam++;
+            return Math.ceil(ar);
+        }
+    }
+
+    private void generalTulajdonsag() {
+        while (arany <= 1000 - ar) {
+            int generalRandomSzam = rand.nextInt(0, 7);
+
+            switch (generalRandomSzam) {
+                case 1:
+                    this.setTamadas(getTamadas() + 1);
+                    arany = arany + arSzamitas();
+                    break;
+                case 2:
+                    this.setVedekezes(getVedekezes() + 1);
+                    arany = arany + arSzamitas();
+                    break;
+                case 3:
+                    this.setVarazsero(getVarazsero() + 1);
+                    arany = arany + arSzamitas();
+                    break;
+                case 4:
+                    this.setTudas(getTudas() + 1);
+                    arany = arany + arSzamitas();
+                    break;
+                case 5:
+                    this.setMoral(getMoral() + 1);
+                    arany = arany + arSzamitas();
+                    break;
+                case 6:
+                    this.setSzerencse(getSzerencse() + 1);
+                    arany = arany + arSzamitas();
+                    break;
+            }
+        }
+    }
+
 }

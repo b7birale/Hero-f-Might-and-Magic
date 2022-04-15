@@ -9,6 +9,14 @@ public class Pozicio {
         this.oszlop = oszlop;
     }
 
+    public  Pozicio osszead(Pozicio pozicio){
+        return new Pozicio(sor + pozicio.sor, oszlop + pozicio.oszlop);
+    }
+
+    public  Pozicio osszead(int sor, int oszlop){
+        return new Pozicio(this.sor + sor, this.oszlop + oszlop);
+    }
+
 
     public void csokkentOszlop(){
         this.setOszlop(this.getOszlop()-1);
