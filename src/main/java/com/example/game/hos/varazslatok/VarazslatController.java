@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
+ * A Varazslat kontroller osztálya.
  * Ez a controller osztálya annak az ablaknak, ahol megvásároljuk a varázslatokat.
  * Ezen ablak megjelenítése, formázása a célja.
  * Adatokat gyűjt a játékos hőséhez. Ez a harmadik ilyen ablak.
@@ -106,18 +107,18 @@ public class VarazslatController {
 
 
     @FXML
-    private Text teleport_megvette;
-    boolean teleport = false;
-    public void buyTeleport(){
-        if(!teleport && SceneController.arany - 100 >= 0) {
-            teleport = true;
-            teleport_megvette.setText("Megvetted!");
+    private Text erosites_megvette;
+    boolean erosites = false;
+    public void buyErosites(){
+        if(!erosites && SceneController.arany - 100 >= 0) {
+            erosites = true;
+            erosites_megvette.setText("Megvetted!");
             SceneController.arany = SceneController.arany - 100;
             arany.setText(String.valueOf(SceneController.arany));
         }
         else{
-            if(teleport){
-                teleport_megvette.setText("Már megvetted!");
+            if(erosites){
+                erosites_megvette.setText("Már megvetted!");
             }
             else{
                 nincsElegArany.setText("Nincs elég aranyad!");
@@ -178,9 +179,9 @@ public class VarazslatController {
             Feltamasztas feltamasztas = new Feltamasztas(hos);
             hos.addVarazslatok(feltamasztas);
         }
-        if(teleport){
-            Teleport teleport = new Teleport(hos);
-            hos.addVarazslatok(teleport);
+        if(erosites){
+            Erosites erosites = new Erosites(hos);
+            hos.addVarazslatok(erosites);
         }
         if(magikusNyilvesszo){
             MagicArrow magikusNyilvesszo = new MagicArrow(hos);

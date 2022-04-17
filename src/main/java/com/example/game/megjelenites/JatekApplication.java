@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * "Főosztály". Ez a program belépési pontja. Ez az osztály indítja el a játékot.
+ */
 public class JatekApplication extends Application {
     //@Override
 

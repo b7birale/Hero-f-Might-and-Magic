@@ -1,5 +1,28 @@
 #Heros of Might and Magic játék
 ##Üdvözöllek a játékomban!
+###A játék beüzemelése
+
+A játék Java 17-es verziójában íródott, így a futtatáshoz szükséged lesz egy fordítóra,
+ami kezelni tudja ezt.
+
+Mivel a játék elkészítéséhez JavaFx-et is használtam, ezért ez is rá kell, hogy legyen
+telepítve a futtatásához. Szintén a 17-es verzióra lesz szükség. Ez utóbbi telepítésének
+menete:
+1. Felmész a következő linkre: https://gluonhq.com/products/javafx/
+2. Lejjebb görgetve a Downloads-hoz kiválasztod a megfellő szűrőket
+A verziónál válaszd a 17.0.2-eset. Az Operációs rendszernél válaszd ki milyen operációs
+rednszer van a számítógépeden. Az architektúránál válaszd ki, hogy hány bites a rendszered.
+Végül a típusnál válaszd az SDK-t. Így eredményül egyetlen lehetőséget fog feldobni. Ezt
+kell letöltened a zöld Download gomb segítségével.
+3. Így letölt neked egy .zip kiterjesztésű fájlt, amit ki kell csomagolnod egy tetszőleges mappába.
+4. Ez tartalmazni fog egy .jar kiterjesztésű fájlt. Ezt kell lefuttatnod. Győződj meg róla,
+hogy ezt közvetlen a terminálból (windowson cmd) teszed!
+5. Ezután lépj be az imént kicsomagolt mappába. Ott látni fogsz egy lib nevű mappát.
+Ebbe is lépj bele és másold ki fentről az elérési útvonalát.
+6. Végül írd be a következő sort a terminálba/cmd-be bemásolva az imént 
+lecopy-zott sort a megfelelő helyre: java --module-path "_IDE MÁSOLD BE AZ ELÉRÉSI 
+ÚTVONALAT_" --add-modules javafx.controls,javafx.fxml -jar game.jar
+
 ###Nehézségi szintek
 Kérlek válassz nehézségi szintet!
 1. Könnyű: 1300 arany
@@ -116,20 +139,51 @@ A program legenerálja az ellenfél tulajdonságait és varázslatait.
 Ezeket a csatatér mellett jobb oldalon tekintheted meg. Ilyenkor választ magának 
 egységeket is, melyeket rögtön le is helyez a pálya utolsó két oszlopának celláiba.
 
-A csata körökre van osztva. Minden körben egy egység egy alkalommal lép. Először lépnek a magasabb
-kezdeményezésű egységek, majd pedig az alacsonyabb kezdeményezésű egységek.
-A hősök tetszőleges időpontban cseledhetnek, de körönként legfeljebb csak egyszer. Tehát ha a te
-egyik egységed következik, akkor dönthetsz úgy, hogy először a hősöd használod és csak 
-utána lépsz az adott egységgel. Természetesen ugyanerre a gép ellenfélnek is van lehetősége.
+A csata körökre van osztva. Minden körben egy egység egy alkalommal lép. Először lépnek a 
+magasabb kezdeményezésű egységek, majd pedig az alacsonyabb kezdeményezésű egységek.
+A hősök tetszőleges időpontban cselekedhetnek, de körönként legfeljebb csak egyszer.
+Tehát ha a te egyik egységed következik, akkor dönthetsz úgy, hogy először a hősöd használod
+és csak utána lépsz az adott egységgel. Természetesen ugyanerre a gépi ellenfélnek is van
+lehetősége.
+
 A hős nem foglal helyet a csatatéren és nem lehet megölni. A hős kétféle cselekvést tud
 végezni: támadás, illetve varázslás. A kettő közül egy körben csak az egyiket tudja
-elvégezni. Támadás esetén egy kiválasztott ellenséges egységre mér adott mértékű (hős támadás tulajdonsága * 10) sebzést.
-Varázslás esetén a játékos kiválasztja a használni kívánt varázslatot, és annak hatásai érvényesülnek (nyilván lennie kell elég mannának a varázslathoz). A varázslatok sebzés értékeire nincs
-hatással az ellenséges hős védekezés tulajdonsága.
-Egy adott egység, amikor rá kerül a sor, akkor három dolgot tud csinálni: mozogni, várakozni, illetve támadni. Ezek közül egy körben csak az egyiket tudja csinálni.
- Mozgás: az egység pozíciót vált a játékmez®n (tehát "arrébb megy"). Legfeljebb annyi
-mez®t tud mozogni, amennyi az egység sebessége. A mozgás iránya tetsz®leges, akár
-jobbra, balra, fel, le, átlósan, kacskaringósan (pl. ha más egységet kell kikerülni) történhet.
- Várakozás: az egység az adott körb®l kimarad.
- Támadás: az ellenséges egység megtámadása. Közelharci támadás csak szomszédos egység ellen indítható, míg távolsági támadás csak akkor indítható, ha az egység közvetlen
-környezetében nincs ellenséges egység.
+elvégezni.
+1. **Támadás:** Egy kiválasztott ellenséges egységre mér adott mértékű 
+(hős támadás tulajdonsága * 10) sebzést. Ehhez kattints jobb gombbal a megtámadni kívánt 
+ellenséges egységre!
+2. **Varázslás:** Tartsd lenyomva a megfelelő billentyűt miközben bal gombbal a kiválasztott
+egységre klikkelsz. Csak akkor fog működni a varázslat, ha van hozzá elég mannád
+és meg is vásároltad az adott varázslatot előzetesen aranyért.
+
+**Varázslat billenytűkombinációk:**
+
+' V ' + bal klikk = villámcsapás
+
+' Z ' + bal klikk = tűzlabda
+
+' F ' + bal klikk = feltámasztás
+
+' N ' + bal klikk = mágikus nyílvessző
+
+' T ' + bal klikk = erosites
+
+
+Egy adott egység, amikor rá kerül a sor, akkor három dolgot tud csinálni: 
+mozogni, várakozni, illetve támadni. Ezek közül egy körben csak az egyiket tudja csinálni.
+
+1.**Mozgás:** az egység pozíciót vált a játékmezőn ("arrébb megy"). Ehhez kattints bal 
+gombbal arra az üres mezőre, ahová lépni szeretnél. Legfeljebb annyi mezőt tud mozogni
+az egységed, amennyi a sebessége. A mozgás iránya tetszőleges, akár jobbra, balra,
+fel, le, átlósan, kacskaringósan (pl. ha más egységet kell kikerülni) történhet.
+
+2.**Várakozás:** az egység az adott körből kimarad. Ehhez nyomd meg a bal felső
+sarokban található "várakozás" gombot.
+
+3.**Támadás:** egy ellenséges egység megtámadása. Ehhez kattints bal gombbal arra
+az ellenséges egységre, amit meg szeretnél támadni. Közelharci támadás csak szomszédos 
+egység ellen indítható, míg távolsági támadás csak akkor indítható, ha az egység
+közvetlen környezetében nincs ellenséges egység. Ez utóbbira csak az íjász képes.
+
+A játék akkor ér véget, ha az egyik hős összes egysége meghal. Amennyiben egyszerre halnak meg
+mindkét hős egységei, a játék döntetlennel zárul.

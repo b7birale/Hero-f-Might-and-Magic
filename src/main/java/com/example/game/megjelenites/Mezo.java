@@ -8,10 +8,11 @@ import com.example.game.hos.egysegek.emberek.Foldmuves;
 
 import java.util.Objects;
 
+/**
+ * A csatatér egy mezőjét valósítja meg.
+ */
 public class Mezo {
 
-    private Foldmuves foldmuves;
-    private Hos hos;
     private Egyseg egyseg;
     private Pozicio pozicio;
 
@@ -23,9 +24,6 @@ public class Mezo {
         return egyseg == null;
     }
 
-    public boolean foldmuvesVanRajta(){
-        return Objects.equals(hos.getEgysegek().get(0).getNev(), "Foldmuves");
-    }
 
     public Egyseg getEgyseg() {
         return egyseg;

@@ -24,12 +24,13 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
+ * Az Ember osztály controller osztálya.
  * Ez a controller osztálya annak az ablaknak, ahol megvásároljuk az egységeket,
  *  amennyiben az előző ablakban az Ember frakciót választottuk.
  * Ezen ablak megjelenítése, formázása a célja.
  * Adatokat gyűjt be, amelyek szükségesek a játékos hősének véglegesítéséhez.
  * Itt vásárolnunk kell legalább egy egységet és pozíciót választani neki, különben nem kezdhető meg a játék.
- * Ez az ablak minden esetben ötödikként fog megjelenni.
+ * Ez az ablak minden esetben ötödikként jelenhet meg.
  */
 public class EmberController {
 

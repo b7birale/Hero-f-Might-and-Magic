@@ -8,6 +8,7 @@ import com.example.game.hos.varazslatok.Varazslat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Ez a Hos oszály, ami egy hőst valósít meg.
@@ -17,14 +18,15 @@ import java.util.List;
 
 public abstract class Hos {
 
-    public int tamadas;     //mind private! vagy mégsem
-    public int tudas;
-    public int vedekezes;
-    public int moral;
-    public int szerencse;
-    public int varazsero;
-    public int manna;
+    protected int tamadas;
+    protected int tudas;
+    protected int vedekezes;
+    protected int moral;
+    protected int szerencse;
+    protected int varazsero;
+    protected int manna;
     protected boolean akciotVegrehajtott;
+    protected String keretSzin;
 
     public List<Varazslat> varazslatok;
     public List<Egyseg> egysegek;
@@ -37,11 +39,13 @@ public abstract class Hos {
         this.varazsero = 1;
         this.tudas = 1;
         this.manna = 10;
+        this.akciotVegrehajtott = false;
+        this.keretSzin = keretSzin;
         varazslatok = new ArrayList<>();
         egysegek = new ArrayList<>();
     }
 
-    public Hos(int tamadas, int tudas, int vedekezes, int moral, int szerencse, int varazsero, int manna) {
+    public Hos(int tamadas, int tudas, int vedekezes, int moral, int szerencse, int varazsero, int manna, String keretSzin) {
         this.tamadas = tamadas;
         this.tudas = tudas;
         this.vedekezes = vedekezes;
@@ -50,6 +54,7 @@ public abstract class Hos {
         this.varazsero = varazsero;
         this.manna = manna;
         this.akciotVegrehajtott = false;
+        this.keretSzin = keretSzin;
         varazslatok = new ArrayList<>();
         egysegek = new ArrayList<>();
     }
@@ -105,6 +110,7 @@ public abstract class Hos {
                 .allMatch(Egyseg::halottE);
     }
 
+
     /**
      * Eldönti egy egységről, hogy az ellenséges egység-e vagy a sajátunk.
      * @param egyseg Az egység, amiről el kell dönteni, hogy melyik hőshöz tartozik.
@@ -112,6 +118,10 @@ public abstract class Hos {
      */
     public boolean isEllenfelEgysegE(Egyseg egyseg){
         return this != egyseg.getHos();
+    }
+
+    public boolean isSajatEgysegE(Egyseg egyseg){
+        return this == egyseg.getHos();
     }
 
     public abstract boolean isGep();
@@ -168,7 +178,10 @@ public abstract class Hos {
     }
 
     public List<Egyseg> getEgysegek() {
-        return egysegek;
+        return egysegek
+                .stream()
+                .filter(Egyseg :: eloE)
+                .collect(Collectors.toList());
     }
 
     public void setVarazslatok(List<Varazslat> varazslatok) {
@@ -203,5 +216,11 @@ public abstract class Hos {
         this.varazsero = varazsero;
     }
 
+    public String getKeretSzin() {
+        return keretSzin;
+    }
 
+    public void setKeretSzin(String keretSzin) {
+        this.keretSzin = keretSzin;
+    }
 }

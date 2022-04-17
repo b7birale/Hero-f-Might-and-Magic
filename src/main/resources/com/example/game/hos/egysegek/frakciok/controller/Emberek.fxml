@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -318,9 +319,97 @@
             <Font name="Candara" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="783.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(oszlop)">
+      <Text layoutX="783.0" layoutY="441.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(oszlop)">
          <font>
             <Font name="Candara" size="20.0" />
+         </font>
+      </Text>
+      <Line endX="100.0" layoutX="620.0" layoutY="594.0" rotate="90.0" scaleX="0.82" startX="-70.8690185546875" startY="-0.14479368925094604" />
+      <Line endX="100.0" layoutX="635.0" layoutY="593.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="100.0" layoutX="650.0" layoutY="594.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="100.0" layoutX="665.0" layoutY="594.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="100.0" layoutX="680.0" layoutY="593.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="100.0" layoutX="695.0" layoutY="593.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="100.0" layoutX="710.0" layoutY="593.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="100.0" layoutX="725.0" layoutY="593.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="100.0" layoutX="740.0" layoutY="593.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="100.0" layoutX="755.0" layoutY="594.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="100.0" layoutX="770.0" layoutY="593.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="100.0" layoutX="785.0" layoutY="593.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="100.0" layoutX="800.0" layoutY="593.0" rotate="90.0" scaleX="0.82" startX="-69.2709732055664" startY="1.3062348365783691" />
+      <Line endX="108.72479248046875" endY="0.9957275390625" layoutX="707.0" layoutY="663.0" startX="-71.2752685546875" startY="0.9957275390625" />
+      <Line endX="108.72479248046875" endY="0.9957275390625" layoutX="707.0" layoutY="649.0" startX="-71.2752685546875" startY="0.9957275390625" />
+      <Line endX="109.72479248046875" endY="0.9957275390625" layoutX="706.0" layoutY="635.0" startX="-71.2752685546875" startY="0.9957275390625" />
+      <Line endX="109.72479248046875" endY="0.9957275390625" layoutX="706.0" layoutY="621.0" startX="-71.2752685546875" startY="0.9957275390625" />
+      <Line endX="109.72479248046875" endY="0.9957275390625" layoutX="706.0" layoutY="607.0" startX="-71.2752685546875" startY="0.9957275390625" />
+      <Line endX="109.72479248046875" endY="0.9957275390625" layoutX="706.0" layoutY="593.0" startX="-71.2752685546875" startY="0.9957275390625" />
+      <Line endX="109.72479248046875" endY="0.9957275390625" layoutX="706.0" layoutY="579.0" startX="-71.2752685546875" startY="0.9957275390625" />
+      <Line endX="109.72479248046875" endY="0.9957275390625" layoutX="706.0" layoutY="565.0" startX="-71.2752685546875" startY="0.9957275390625" />
+      <Line endX="109.72479248046875" endY="0.9957275390625" layoutX="706.0" layoutY="551.0" startX="-71.2752685546875" startY="0.9957275390625" />
+      <Line endX="109.72479248046875" endY="0.9957275390625" layoutX="706.0" layoutY="537.0" startX="-71.2752685546875" startY="0.9957275390625" />
+      <Line endX="109.72479248046875" endY="0.9957275390625" layoutX="706.0" layoutY="523.0" startX="-71.2752685546875" startY="0.9957275390625" />
+      <Line endX="100.0" layoutX="620.0" layoutY="594.0" rotate="90.0" scaleX="0.82" startX="-70.8690185546875" startY="-0.14479368925094604" stroke="RED" strokeWidth="2.0" />
+      <Line endX="101.77081298828125" endY="-0.38684749603271484" layoutX="650.0" layoutY="594.0" rotate="90.0" scaleX="0.82" startX="-70.8690185546875" startY="-0.14479368925094604" stroke="RED" strokeWidth="2.0" />
+      <Line endX="-32.5999755859375" endY="-0.144775390625" layoutX="699.0" layoutY="524.0" startX="-64.7752685546875" startY="-0.5042724609375" stroke="RED" strokeWidth="2.0" />
+      <Line endX="-35.20001220703125" endY="-0.5042724609375" layoutX="700.0" layoutY="665.0" startX="-64.7752685546875" startY="-0.5042724609375" stroke="RED" strokeWidth="2.0" />
+      <Text layoutX="629.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="RIGHT" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="644.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="RIGHT" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="614.0" layoutY="534.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="614.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="615.0" layoutY="564.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="615.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="615.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="615.0" layoutY="603.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="615.0" layoutY="619.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="615.0" layoutY="632.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="615.0" layoutY="646.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="615.0" layoutY="660.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9" textAlignment="CENTER" wrappingWidth="15.0">
+         <font>
+            <Font name="Candara" size="14.0" />
          </font>
       </Text>
    </children>

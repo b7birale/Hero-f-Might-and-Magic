@@ -1,46 +1,42 @@
-
 package com.example.game.hos.varazslatok;
 
 import com.example.game.exception.EztAVarazslatotCsakASajatEgysegeidreHasznalhatodException;
-import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Egyseg;
+import com.example.game.hos.Hos;
 
 import java.util.List;
 
 /**
- * A feltámasztás varázslatot valósít meg. A Varazslat-ból öröklődik.
+ * Az erősítés varázslatot valósítja meg. A Varazslat-ból öröklődik.
  */
-public class Feltamasztas extends Varazslat {
+public class Erosites extends Varazslat {
 
-    //Egy kivalasztott sajat egyseg feltamasztasa. Maximalis gyogyitas merteke: (varazsero * 50),
-    //de az eredeti egysegszamnal több nem lehet;
+    public Erosites(Hos hos) {
 
-    public Feltamasztas(Hos hos) {
-        super("Feltamasztas", 120, 6, hos);
+        super("Erosites", 100, 4, hos);
     }
 
     @Override
     public int getMannaAr() {
-        return 6;
+        return 4;
     }
+
 
     @Override
     public void alkalmaz(List<Egyseg> egysegek) {
         if(egysegek.size() == 1){
-            Egyseg egyseg = egysegek.get(0);
-            if (hos.isEllenfelEgysegE(egyseg)) {
+            if (hos.isEllenfelEgysegE(egysegek.get(0))) {
                 throw new EztAVarazslatotCsakASajatEgysegeidreHasznalhatodException();
             }
-            egyseg.gyogyit(hos.getVarazsero()*50);
+            egysegek.get(0).setMaxSebzes(egysegek.get(0).getMaxSebzes() + 1);
         }
+
     }
 
     @Override
     public int hatoKor() {
         return 0;
     }
-
-
 
 }
 

@@ -47,7 +47,7 @@ public abstract class Varazslat {
      * @return Van-e elég mannánk a varázslat végrehajtásához.
      */
     public boolean vanElegManna(){
-        return hos.manna >= getMannaAr();
+        return hos.getManna() >= getMannaAr();
     }
 
     public abstract int getMannaAr();

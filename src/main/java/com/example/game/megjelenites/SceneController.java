@@ -12,6 +12,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Ez a kontroller osztálya annak az ablaknak, ahol kiválaszthatjuk a nehézségi szintet.
+ * Ezen ablak megjelenítése, formázása a célja.
+ * Adatokat gyűjt a játékos hőséhez, egészen pontosan azt, hogy mennyi aranya lesz az elkövetkezendőkben.
+ * Ez az ablak jelenik meg elsőként a játék futtatása során.
+ */
 public class SceneController {
 
 

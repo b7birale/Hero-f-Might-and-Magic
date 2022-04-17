@@ -5,7 +5,7 @@ import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.egysegek.Pozicio;
 
 /**
- * Az egység gyerekosztálya és az öt ember-egységnek a szülőosztálya.
+ * Az egység gyerekosztálya és az öt emberi egységnek a szülőosztálya.
  * A frakciók elkülönítésében segédkezik.
  */
 

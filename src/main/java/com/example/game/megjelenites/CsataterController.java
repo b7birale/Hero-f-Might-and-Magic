@@ -9,40 +9,71 @@ import com.example.game.hos.varazslatok.Varazslat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
+import static com.example.game.megjelenites.Palya.OSZLOPOK_SZAMA;
+import static com.example.game.megjelenites.Palya.SOROK_SZAMA;
+import static java.lang.Math.ceil;
 
+/**
+ * A Csatater kontroller osztálya. A csatatér megjelenítésében segít elsősorban.
+ */
 public class CsataterController {
 
     private final Palya palya;
-    private List<Egyseg> osszesEgyseg;
+    private final List<Egyseg> osszesEgyseg;
     private int jelenlegiEgysegIndex;
-    private Hos hos;
-    private Hos ellenfel;
+    private final Hos hos;
+    private final Hos ellenfel;
     private int kor;
     private boolean vesztettel, nyertel, dontetlen;
 
     public CsataterController(Hos hos, Hos ellenfel){
         palya = new Palya();
+
         osszesEgyseg = new ArrayList<>();
         osszesEgyseg.addAll(hos.getEgysegek());
         osszesEgyseg.addAll(ellenfel.getEgysegek());
-        jelenlegiEgysegIndex = 0;
+        Collections.sort(osszesEgyseg);
+        osszesEgyseg.forEach(this::lehelyez);
+
         this.hos = hos;
         this.ellenfel = ellenfel;
-        Collections.sort(osszesEgyseg);
-        this.kor = 1;
+        this.kor = 0;
         this.vesztettel = false;
         this.nyertel = false;
         this.dontetlen = false;
-    }
 
-    public void mozgatEgyseg(Pozicio pozicio) throws NemTudMozogniException {
-        palya.mozgatEgyseg(osszesEgyseg.get(jelenlegiEgysegIndex), pozicio);
+        //Minusz egyrol indulunk, mert az jelenlegi egyseg indexet egybol noveljuk az elejen
+        jelenlegiEgysegIndex = -1;
+
         kovetkezoLepes();
     }
 
+    public void mozgatEgyseg(Pozicio pozicio) throws NemTudMozogniException {
+        palya.mozgatEgyseg(jelenlegiEgyseg(), pozicio);
+        kovetkezoLepes();
+    }
+
+
+    public boolean vajonKritikusSebzes(int szerencse){
+        Random random = new Random();
+        int chance = 0;
+        chance += szerencse*5;
+        chance = 100/chance;
+        return random.nextInt(chance) == 0;
+    }
+
     public void tamad(Egyseg ellenfelEgyseg){
-        osszesEgyseg.get(jelenlegiEgysegIndex).tamad(ellenfelEgyseg);
+        if (!jelenlegiEgyseg().isHatokoronBelul(ellenfelEgyseg)) {
+            throw new HatokoronKivuliTamadasException();
+        }
+        if (palya.vanEllensegesSzomszed(jelenlegiEgyseg())
+                && jelenlegiEgyseg().isTavTamadas(ellenfelEgyseg)) { //Itt kell megnézni, hogy csak ha íjász
+            throw new TavolsagiTamadasEllenseggelAKozelbenTamadasException();
+        }
+        jelenlegiEgyseg().tamad(ellenfelEgyseg);
         kovetkezoLepes();
     }
 
@@ -52,12 +83,8 @@ public class CsataterController {
     }
 
     public void varazsol(String nev, Pozicio pozicio) throws NincsAdottTipusuVarazslatException, NincsElegMannaException {
-        //todo Host kell finomitani
         if(hos.isAkciotVegrehajtott()){
             throw new MarEgyAkciotVegrehajtottalAHosselEbbenAKorbenException();
-        }
-        if (!hos.isEllenfelEgysegE(palya.getMezo(pozicio).getEgyseg())) {
-            throw new NemTamadhatodMegASajatEgysegedException();
         }
         Varazslat varazslat = hos.getVarazslat(nev);
         List<Egyseg> egysegek = palya.getEgysegekNxNesTeruleten(pozicio, varazslat.hatoKor());
@@ -81,19 +108,37 @@ public class CsataterController {
     }
 
     public void tamadHos(Egyseg tamadottEgyseg) {
+        if (hos.isAkciotVegrehajtott()) {
+            throw new MarEgyAkciotVegrehajtottalAHosselEbbenAKorbenException();
+        }
         hos.tamad(tamadottEgyseg);
-        kovetkezoLepes();
     }
 
-    public int korszamlalo() {
+    public void korszamlalo() {
         if (jelenlegiEgysegIndex == 0) {
             kor++;
+            /*
+            for(int i=0; i< osszesEgyseg.size(); i++){
+                osszesEgyseg.get(i).setVisszaTamadtEMarAKorben(false);
+            }
+
+             */
         }
-        return kor;
     }
 
-    private Egyseg jelenlegiEgyseg() {
+    Egyseg jelenlegiEgyseg() {
         return osszesEgyseg.get(jelenlegiEgysegIndex);
+    }
+
+    public void leveszHalottakatPalyarol(){
+        for (int sor = 0; sor < SOROK_SZAMA; sor++) {
+            for (int oszlop = 0; oszlop < OSZLOPOK_SZAMA; oszlop++) {
+                Mezo mezo = palya.getMezo(new Pozicio(sor,oszlop));
+                if(!mezo.ures() && mezo.getEgyseg().halottE()){
+                    mezo.leveszEgyseg();
+                }
+            }
+        }
     }
 
 
@@ -113,8 +158,10 @@ public class CsataterController {
                 palya.getBarmelySzomszedosEllenfel(egyseg)
                         .ifPresentOrElse(egyseg::tamad, () -> gepMozog(egyseg));
             }
+            korszamlalo();
             novelEgysegIndex();
         }
+        korszamlalo();
     }
 
     private void gepMozog(Egyseg egyseg) {
@@ -126,7 +173,15 @@ public class CsataterController {
     }
 
     private void novelEgysegIndex() {
-        jelenlegiEgysegIndex = (jelenlegiEgysegIndex + 1) % osszesEgyseg.size();
+        //jelenlegiEgysegIndex = (jelenlegiEgysegIndex + 1) % osszesEgyseg.size();
+
+        if(jelenlegiEgysegIndex + 1 < osszesEgyseg.size()){
+            jelenlegiEgysegIndex++;
+        }
+        else{
+            jelenlegiEgysegIndex = 0;
+        }
+
         if(jelenlegiEgysegIndex == 0){
             hos.setAkciotVegrehajtott(false);
             ellenfel.setAkciotVegrehajtott(false);
@@ -176,7 +231,10 @@ public class CsataterController {
     }
 
     public List<Egyseg> getOsszesEgyseg() {
-        return osszesEgyseg;
+        return osszesEgyseg
+                .stream()
+                .filter(Egyseg :: eloE)
+                .collect(Collectors.toList());
     }
 
     public void setJelenlegiEgysegIndex(int jelenlegiEgysegIndex) {
@@ -186,5 +244,14 @@ public class CsataterController {
     public int getJelenlegiEgysegIndex() {
         return jelenlegiEgysegIndex;
     }
+
+    public int getKor() {
+        return kor;
+    }
+
+    public void setKor(int kor) {
+        this.kor = kor;
+    }
+
 
 }

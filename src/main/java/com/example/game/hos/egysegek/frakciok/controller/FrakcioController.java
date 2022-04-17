@@ -49,8 +49,10 @@ public class FrakcioController {
         macska.setHos(hos);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setHeight(689);
-        stage.setWidth(918);
+        stage.setHeight(730);
+        stage.setWidth(1000);
+        stage.setX(300);
+        stage.setY(50);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -65,8 +67,10 @@ public class FrakcioController {
         macska.setHos(hos);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setHeight(689);
-        stage.setWidth(918);
+        stage.setHeight(730);
+        stage.setWidth(1000);
+        stage.setX(300);
+        stage.setY(50);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -82,8 +86,10 @@ public class FrakcioController {
         macska.setHos(hos);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setHeight(689);
-        stage.setWidth(918);
+        stage.setHeight(730);
+        stage.setWidth(1000);
+        stage.setX(300);
+        stage.setY(50);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

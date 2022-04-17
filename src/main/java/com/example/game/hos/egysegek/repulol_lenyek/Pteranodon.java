@@ -4,6 +4,9 @@ import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.frakciok.modell.RepuloLeny;
 
+/**
+ * Egy pteranodon egységet valósít meg. A RepuloLeny gyerekosztálya. (A RepuloLeny pedig az Egyseg gyerekosztálya.)
+ */
 public class Pteranodon extends RepuloLeny {
 
     public Pteranodon(Hos hos, int hanyDb, Pozicio pozicio) {

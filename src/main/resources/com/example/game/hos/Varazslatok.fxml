@@ -111,7 +111,7 @@
             <Font name="Candara" size="24.0" />
          </font>
       </Button>
-      <Text layoutX="26.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teleport" wrappingWidth="110.14373779296875">
+      <Text layoutX="26.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erősítés" wrappingWidth="110.14373779296875">
          <font>
             <Font name="Candara" size="24.0" />
          </font>
@@ -141,7 +141,7 @@
             <Font name="Candara" size="24.0" />
          </font>
       </Text>
-      <Button layoutX="457.0" layoutY="325.0" mnemonicParsing="false" onAction="#buyTeleport" text="Buy">
+      <Button layoutX="457.0" layoutY="325.0" mnemonicParsing="false" onAction="#buyErosites" text="Buy">
          <font>
             <Font name="Candara" size="18.0" />
          </font>
@@ -151,7 +151,7 @@
             <Font name="Candara" size="18.0" />
          </font>
       </Button>
-      <Text fx:id="teleport_megvette" layoutX="520.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   " wrappingWidth="84.54376220703125">
+      <Text fx:id="erosites_megvette" layoutX="520.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="   " wrappingWidth="84.54376220703125">
          <font>
             <Font name="Candara" size="14.0" />
          </font>

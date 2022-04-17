@@ -26,6 +26,7 @@ public class Egyseg implements Comparable<Egyseg> {
     public Hos hos;
     protected String szin;
 
+    protected boolean visszaTamadtEMarAKorben = false;
 
     public Egyseg() {
         this.nev = "egyseg";
@@ -63,6 +64,10 @@ public class Egyseg implements Comparable<Egyseg> {
      */
     public boolean halottE(){
         return jelenlegiEletero <= 0;
+    }
+
+    public boolean eloE(){
+        return jelenlegiEletero > 0;
     }
 
     /**
@@ -114,7 +119,7 @@ public class Egyseg implements Comparable<Egyseg> {
      */
     public int szamolSebzes(Egyseg ellenfelEgyseg){
         double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
-        double sebzes = alapsebzes + alapsebzes*((double)hos.getTamadas()/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
+        double sebzes = alapsebzes + alapsebzes*((double)this.getHos().getTamadas()/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
         sebzes = sebzes * ((double)ellenfelEgyseg.getHos().getVedekezes()/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
         return (int) ceil(sebzes);
     }
@@ -134,19 +139,34 @@ public class Egyseg implements Comparable<Egyseg> {
         if(!isEllenfelEgysegE(ellenfelEgyseg)){
             throw new NemTamadhatodMegASajatEgysegedException();
         }
-        ellenfelEgyseg.sebez(szamolSebzes(ellenfelEgyseg));
+        if(this.getNev().equals("Vampir")){
+            ellenfelEgyseg.setEletero(0);
+        }
+        else{
+            ellenfelEgyseg.sebez(szamolSebzes(ellenfelEgyseg));
+            /*
+            if( (!ellenfelEgyseg.visszaTamadtEMarAKorben) || (!ellenfelEgyseg.halottE()) ){
+                visszaTamad(ellenfelEgyseg, this);
+            }
+
+             */
+        }
     }
 
-
-    public void visszaTamad(int tamadas, Hos ellenfel, Egyseg tamadottEgyseg){
-        //ugyanaz mint a támad, csak sebzés = sebzés/2
-        double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
-        double sebzes = alapsebzes + alapsebzes*((double)tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
-        sebzes = sebzes * ((double)ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
+    /*
+    public void visszaTamad(Egyseg tamadoEgyseg, Egyseg tamadottEgyseg){
+        if(!isEllenfelEgysegE(tamadottEgyseg)){
+            throw new NemTamadhatodMegASajatEgysegedException();
+        }
+        double alapsebzes = rand.nextInt(tamadoEgyseg.minSebzes, tamadoEgyseg.maxSebzes) * hanyDb();
+        double sebzes = alapsebzes + alapsebzes*((double)tamadoEgyseg.getHos().getTamadas()/10);
+        sebzes = sebzes * ((double)tamadottEgyseg.getHos().getVedekezes()/10);
         int vegeredmeny = (int) ceil(sebzes/2);
-        //tamadottEgyseg.csokkentEletero(vegeredmeny);  //Mi a különbség csökkentÉleterő és sebez() közt?
         tamadottEgyseg.sebez(vegeredmeny);
+        tamadoEgyseg.setVisszaTamadtEMarAKorben(true);
     }
+
+     */
 
     public boolean vajonKritikusSebzes(int szerencse){
         Random random = new Random();
@@ -157,80 +177,37 @@ public class Egyseg implements Comparable<Egyseg> {
     }
 
     /**
-     * Kiszamolja a kritikus sebzést és végre is hajtja azt az ellenséges egységen.
-     * @param tamadas A támadó egység hősének támadás tulajdonsága.
-     * @param ellenfel A megtámadott egység hőse, azaz az ellenséges hős.
+     * Kiszámolja a kritikus sebzést és végre is hajtja azt az ellenséges egységen.
      * @param tamadottEgyseg A megtámadott egység.
      */
-    public void kritikusSebzes(int tamadas, Hos ellenfel, Egyseg tamadottEgyseg){
-        //ugyanaz mint a támad, csak sebzés = sebzés*2
-        //hogyan függ a szerencse tulajdonságtól?
-        //5%
-        //+5%
-        double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
-        double sebzes = alapsebzes + alapsebzes*((double)tamadas/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
-        sebzes = sebzes * ((double)ellenfel.vedekezes/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
+    public void kritikusSebzes(Egyseg tamadottEgyseg){
+        if(!isEllenfelEgysegE(tamadottEgyseg)){
+            throw new NemTamadhatodMegASajatEgysegedException();
+        }
+        double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb();
+        double sebzes = alapsebzes + alapsebzes*((double)this.getHos().getTamadas()/10);
+        sebzes = sebzes * ((double)tamadottEgyseg.getHos().getVedekezes()/10);
         int vegeredmeny = (int) ceil(sebzes*2);
         tamadottEgyseg.sebez(vegeredmeny);
     }
 
-    /*
-    public boolean tavolsagiTamadas(){
 
-        //visszaadja, hogy van-e a közvetlen környezetében más egység
-        //ha nincs, akkor indítható távolsági támadás
-
-        Pozicio eredeti = this.pozicio;
-        Pozicio vizsgalando = new Pozicio(eredeti.getSor(), eredeti.getOszlop());
-
-        vizsgalando.setOszlop(vizsgalando.getOszlop()-1);
-        //if(vizsgalando pozicion van egyseg){return  false;}
-        vizsgalando = eredeti;
-
-        vizsgalando.setOszlop(vizsgalando.getOszlop()+1);
-        //if(vizsgalando pozicion van egyseg){return  false;}
-        vizsgalando = eredeti;
-
-        vizsgalando.setSor(vizsgalando.getSor()+1);
-        //if(vizsgalando pozicion van egyseg){return  false;}
-        vizsgalando = eredeti;
-
-        vizsgalando.setSor(vizsgalando.getSor()-1);
-        //if(vizsgalando pozicion van egyseg){return  false;}
-        vizsgalando = eredeti;
-
-        vizsgalando.setSor(vizsgalando.getSor()+1);
-        vizsgalando.setOszlop(vizsgalando.getOszlop()+1);
-        //if(vizsgalando pozicion van egyseg){return  false;}
-        vizsgalando = eredeti;
-
-        vizsgalando.setSor(vizsgalando.getSor()-1);
-        vizsgalando.setOszlop(vizsgalando.getOszlop()+1);
-        //if(vizsgalando pozicion van egyseg){return  false;}
-        vizsgalando = eredeti;
-
-        vizsgalando.setSor(vizsgalando.getSor()+1);
-        vizsgalando.setOszlop(vizsgalando.getOszlop()-1);
-        //if(vizsgalando pozicion van egyseg){return  false;}
-        vizsgalando = eredeti;
-
-        vizsgalando.setSor(vizsgalando.getSor()-1);
-        vizsgalando.setOszlop(vizsgalando.getOszlop()-1);
-        //if(vizsgalando pozicion van egyseg){return  false;}
-        vizsgalando = eredeti;
-
-        return true;
-
-        //probléma: ez minden egységet néz, de csak az ellenséges kellene, hogy számítson
-
+    public int hatokor() {
+        return 1;
     }
-     */
 
+    public boolean isTavTamadas(Egyseg egyseg) {
+        return this.pozicio.tavolsag(egyseg.getPozicio()) > 1;
+    }
 
     public boolean kozelharciTamadas(Egyseg tamadottEgyseg){
         return Math.abs(tamadottEgyseg.pozicio.getOszlop() - this.pozicio.getOszlop()) <= 1 &&
                 Math.abs(tamadottEgyseg.pozicio.getSor() - this.pozicio.getSor()) <= 1;
         // = a támadott egység a közvetlen közelében van, így indítható közelharci támadás
+    }
+
+    public boolean isHatokoronBelul(Egyseg egyseg) {
+        return this.pozicio.tavolsag(egyseg.getPozicio()) <= hatokor();
     }
 
     public boolean isGep(){
@@ -242,7 +219,9 @@ public class Egyseg implements Comparable<Egyseg> {
         return o.kezdemenyezes.compareTo(this.kezdemenyezes);
     }
 
-
+    public String getKeretSzin() {
+        return hos.getKeretSzin();
+    }
 
     public Pozicio randomKovetkezoPozicio(Pozicio pozicio){
         int randomVizszintesElmozdulas = rand.nextInt(sebesseg * -1, sebesseg + 1);
@@ -365,4 +344,13 @@ public class Egyseg implements Comparable<Egyseg> {
     public void setSzin(String szin) {
         this.szin = szin;
     }
+
+    public boolean isVisszaTamadtEMarAKorben() {
+        return visszaTamadtEMarAKorben;
+    }
+
+    public void setVisszaTamadtEMarAKorben(boolean visszaTamadtEMarAKorben) {
+        this.visszaTamadtEMarAKorben = visszaTamadtEMarAKorben;
+    }
+
 }

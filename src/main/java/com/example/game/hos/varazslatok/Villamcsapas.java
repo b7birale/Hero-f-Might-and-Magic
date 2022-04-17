@@ -1,6 +1,7 @@
 
 package com.example.game.hos.varazslatok;
 
+import com.example.game.exception.NemTamadhatodMegASajatEgysegedException;
 import com.example.game.hos.EmberiHos;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.Hos;
@@ -39,6 +40,9 @@ public class Villamcsapas extends Varazslat {
     public void alkalmaz(List<Egyseg> egysegek) {
         if(egysegek.size() == 1){
             Egyseg egyseg = egysegek.get(0);
+            if (hos.isSajatEgysegE(egyseg)) {
+                throw new NemTamadhatodMegASajatEgysegedException();
+            }
             egyseg.sebez(hos.getVarazsero()*30);
         }
     }

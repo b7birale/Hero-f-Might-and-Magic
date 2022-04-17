@@ -22,12 +22,13 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
+ * Az Eloholt osztály controller osztálya.
  * Ez a controller osztálya annak az ablaknak, ahol megvásároljuk az egységeket,
  *  amennyiben az előző ablakban a Élőholt frakciót választottuk.
  * Ezen ablak megjelenítése, formázása a célja.
  * Adatokat gyűjt be, amelyek szükségesek a játékos hősének véglegesítéséhez.
  * Itt vásárolnunk kell legalább egy egységet és pozíciót választani neki, különben nem kezdhető meg a játék.
- * Ez az ablak minden esetben ötödikként fog megjelenni.
+ * Ez az ablak minden esetben ötödikként jelenhet csak meg.
  */
 public class EloholtController {
     Hos hos = new EmberiHos();
@@ -456,7 +457,7 @@ public class EloholtController {
             stage.show();
 
             csatater.draw();
-            csatater.egysegLetesz();
+            csatater.frissitKepernyot();
             scene.setFill(Color.LIMEGREEN);
             stage.setResizable(true);
             stage.setFullScreen(true);

@@ -4,7 +4,6 @@ import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.eloholtak.*;
 import com.example.game.hos.egysegek.emberek.*;
-import com.example.game.hos.egysegek.frakciok.controller.FrakcioController;
 import com.example.game.hos.egysegek.repulol_lenyek.*;
 import com.example.game.hos.varazslatok.*;
 
@@ -14,7 +13,7 @@ import java.util.Random;
 
 /**
  * Egy a program által irányított hőst valósít meg.
- * Tulajdonságait, egységeit és varázslatait a program határozza meg.
+ * Tulajdonságait, egységeit és varázslatait a program határozza meg/generálja le.
  */
 public class GepiHos extends Hos {
 
@@ -30,7 +29,7 @@ public class GepiHos extends Hos {
 
     public GepiHos(String frakcio) {
 
-        super(1,1,1,1,1,1,10);
+        super(1,1,1,1,1,1,10, "red");
         this.arany = 0;
         this.ar = 5.0;
 
@@ -76,7 +75,7 @@ public class GepiHos extends Hos {
         valaszthatoVarazslatok.add(new Feltamasztas(this));
         valaszthatoVarazslatok.add(new Tuzlabda(this));
         valaszthatoVarazslatok.add(new MagicArrow(this));
-        valaszthatoVarazslatok.add(new Teleport(this));
+        valaszthatoVarazslatok.add(new Erosites(this));
 
 
         valasztEgysegek();

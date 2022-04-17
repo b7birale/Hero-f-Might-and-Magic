@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
 import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * A csatatérnek maga a pálya részét (12x10-es négyzetrács) valósítja meg.
+ */
 public class Palya {
 
     public static final int SOROK_SZAMA = 10;

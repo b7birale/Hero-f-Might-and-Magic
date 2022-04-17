@@ -4,6 +4,9 @@ import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.frakciok.modell.Ember;
 
+/**
+ * Egy földműves egységet valósít meg. Az Ember gyerekosztálya. (Az Ember pedig az Egyseg gyerekosztálya.)
+ */
 public class Foldmuves extends Ember {
 
     public Foldmuves(Hos hos, int hanyDb, Pozicio pozicio) {

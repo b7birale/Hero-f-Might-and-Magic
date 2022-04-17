@@ -4,6 +4,9 @@ import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.frakciok.modell.Eloholt;
 
+/**
+ * Egy szellem egységet valósít meg. Az Eloholt gyerekosztálya. (Az Eloholt pedig az Egyseg gyerekosztálya.)
+ */
 public class Szellem extends Eloholt {
 
     public Szellem(Hos hos, int hanyDb, Pozicio pozicio) {

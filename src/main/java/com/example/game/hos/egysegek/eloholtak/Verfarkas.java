@@ -4,6 +4,9 @@ import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.frakciok.modell.Eloholt;
 
+/**
+ * Egy vérfarkas egységet valósít meg. Az Eloholt gyerekosztálya. (Az Eloholt pedig az Egyseg gyerekosztálya.)
+ */
 public class Verfarkas extends Eloholt {
 
     public Verfarkas(Hos hos, int hanyDb, Pozicio pozicio) {

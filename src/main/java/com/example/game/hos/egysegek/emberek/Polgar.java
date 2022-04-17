@@ -4,6 +4,9 @@ import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.frakciok.modell.Ember;
 
+/**
+ * Egy polgár egységet valósít meg. Az Ember gyerekosztálya. (Az Ember pedig az Egyseg gyerekosztálya.)
+ */
 public class Polgar extends Ember {
 
     public Polgar(Hos hos, int hanyDb, Pozicio pozicio) {

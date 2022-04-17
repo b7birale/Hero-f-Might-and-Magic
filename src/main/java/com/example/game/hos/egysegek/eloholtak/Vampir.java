@@ -4,6 +4,9 @@ import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.frakciok.modell.Eloholt;
 
+/**
+ * Egy vámpír egységet valósít meg. Az Eloholt gyerekosztálya. (Az Eloholt pedig az Egyseg gyerekosztálya.)
+ */
 public class Vampir extends Eloholt {
 
     public Vampir(Hos hos, int hanyDb, Pozicio pozicio) {
@@ -12,4 +15,6 @@ public class Vampir extends Eloholt {
                 "verszivas", hanyDb*9, "red", pozicio);
 
     }
+
+    //verszivas: rögtön megöli a támadott egységet
 }

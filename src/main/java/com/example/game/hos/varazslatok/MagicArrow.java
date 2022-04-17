@@ -7,7 +7,9 @@ import com.example.game.hos.Hos;
 
 import java.util.List;
 
-
+/**
+ * A mágikus nyílvessző varázslatot valósítja meg. A Varazslat-ból öröklődik.
+ */
 public class MagicArrow extends Varazslat {
 
     //(10/20/30 + (varazsero x 10)) sebzést végez egy kiválasztott ellenséges egységen
@@ -26,7 +28,7 @@ public class MagicArrow extends Varazslat {
     public void alkalmaz(List<Egyseg> egysegek) {
         if(egysegek.size() == 1){
             Egyseg egyseg = egysegek.get(0);
-            egyseg.sebez(10 + hos.varazsero*10);
+            egyseg.sebez(10 + hos.getVarazsero()*10);
         }
     }
 
