@@ -291,4 +291,17 @@ public class TulajdonsagController {
     }
 
 
+
+
+
+
+    //GETTEREK ÉS SETTEREK--------------------------------------------------------
+
+    public int getVasarlasokSzama() {
+        return vasarlasokSzama;
+    }
+
+    public void setVasarlasokSzama(int vasarlasokSzama) {
+        this.vasarlasokSzama = vasarlasokSzama;
+    }
 }

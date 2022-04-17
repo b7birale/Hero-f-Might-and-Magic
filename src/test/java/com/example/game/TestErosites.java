@@ -4,7 +4,9 @@ import com.example.game.hos.EmberiHos;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.eloholtak.Demon;
+import com.example.game.hos.egysegek.eloholtak.Verfarkas;
 import com.example.game.hos.egysegek.eloholtak.Zombi;
+import com.example.game.hos.egysegek.emberek.Grof;
 import com.example.game.hos.egysegek.emberek.Ijasz;
 import com.example.game.hos.egysegek.repulol_lenyek.Griff;
 import com.example.game.hos.egysegek.repulol_lenyek.Pegazus;
@@ -23,39 +25,39 @@ public class TestErosites {
         Hos hos = new EmberiHos();
         Hos ellenfel = new EmberiHos();
         Erosites erosites = new Erosites(hos);
-        Pozicio griffPozicio = new Pozicio(3,4);
+        Pozicio verfarkasPozicio = new Pozicio(3,4);
         Pozicio demonPozicio = new Pozicio(6,6);
         Pozicio zombiPozicio = new Pozicio(7,1);
-        Griff griff = new Griff(ellenfel, 10, griffPozicio);
+        Verfarkas verfarkas = new Verfarkas(ellenfel, 10, verfarkasPozicio);
         Demon demon = new Demon(hos, 12, demonPozicio);
         Zombi zombi = new Zombi(hos, 300, zombiPozicio);
-        erosites.alkalmaz(List.of(griff, demon, zombi));
-        assertEquals(griffPozicio, griff.getPozicio(), "sajnos itt hiba van :( ");
-        assertEquals(demonPozicio, demon.getPozicio(), "sajnos itt hiba van :( ");
-        assertEquals(zombiPozicio, zombi.getPozicio(), "sajnos itt hiba van :( ");
+        erosites.alkalmaz(List.of(verfarkas, demon, zombi));
+        //nem szabadna, hogy lefusson, mert ervenytelen bemenetet adtunk meg
+        assertEquals(verfarkas.getMaxSebzes(), 11, "sajnos itt hiba van :( ");
+        assertEquals(demon.getMaxSebzes(), 3, "sajnos itt hiba van :( ");
+        assertEquals(zombi.getMaxSebzes(), 4, "sajnos itt hiba van :( ");
 
     }
 
     @Test
-    public void testAlkalmazEgyElemuListara(){
+    public void testAlkalmazUresListara(){
         Hos hos = new EmberiHos();
         Erosites erosites = new Erosites(hos);
         Pozicio sarkanyPozicio = new Pozicio(4, 4);
         Sarkany sarkany = new Sarkany(hos, 100, sarkanyPozicio);
-        erosites.alkalmaz(List.of(sarkany));
-        assertEquals(sarkanyPozicio, sarkany.getPozicio(), "sajnos itt hiba van :( ");
+        erosites.alkalmaz(List.of());
+        assertEquals(sarkany.getMaxSebzes(), 12, "sajnos itt hiba van :( ");
     }
 
     @Test
-    public void testAlkalmazHelyesBemenetre(){
+    public void testAlkalmazHelyesBemenetreEmberre(){
         Hos hos = new EmberiHos();
         Erosites erosites = new Erosites(hos);
-        Pozicio ijaszPozicio = new Pozicio(8, 10);
-        Ijasz ijasz = new Ijasz(hos, 121, ijaszPozicio);
-        Pozicio pegazusPozicio = new Pozicio(1, 2);
-        Pegazus pegazus = new Pegazus(hos, 3, pegazusPozicio);
-        erosites.alkalmaz(List.of(ijasz, pegazus));
-        assertEquals(pegazusPozicio, ijasz.getPozicio(), "sajnos itt hiba van :( ");
-        assertEquals(ijaszPozicio, pegazus.getPozicio(), "sajnos itt hiba van :( ");
+        Pozicio grofPozicio = new Pozicio(1, 2);
+        Grof grof = new Grof(hos, 3, grofPozicio);
+        erosites.alkalmaz(List.of(grof));
+        assertEquals(grof.getMaxSebzes(), 5, "sajnos itt hiba van :( ");
     }
+
+
 }

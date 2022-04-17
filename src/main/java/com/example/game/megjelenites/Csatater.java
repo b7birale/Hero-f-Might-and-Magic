@@ -583,7 +583,6 @@ public class Csatater extends Parent {
         this.hos = hos;
     }
 
-     //// TODO: 2022. 04. 03. Kitölteni képpel vagy színnel a cellákat
 
 
 

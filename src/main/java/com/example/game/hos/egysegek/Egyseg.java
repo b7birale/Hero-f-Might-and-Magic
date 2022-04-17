@@ -131,6 +131,12 @@ public class Egyseg implements Comparable<Egyseg> {
 
      */
 
+
+    /**
+     * Eldönti egy egységről, hogy az ellenséges egység-e vagy a sajátunk.
+     * @param egyseg Az egység, amiről el kell dönteni, hogy melyik hőshöz tartozik.
+     * @return true, ha az ellenfél hős egysége és false, ha a mi hősünk egysége.
+     */
     public boolean isEllenfelEgysegE(Egyseg egyseg){
         return this.hos != egyseg.getHos();
     }

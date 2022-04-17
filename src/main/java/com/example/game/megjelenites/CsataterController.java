@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 import static com.example.game.megjelenites.Palya.OSZLOPOK_SZAMA;
 import static com.example.game.megjelenites.Palya.SOROK_SZAMA;
-import static java.lang.Math.ceil;
 
 /**
  * A Csatater kontroller osztálya. A csatatér megjelenítésében segít elsősorban.

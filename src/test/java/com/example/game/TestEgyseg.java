@@ -3,12 +3,16 @@ package com.example.game;
 import com.example.game.hos.EmberiHos;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
+import com.example.game.hos.egysegek.eloholtak.Demon;
+import com.example.game.hos.egysegek.eloholtak.Szellem;
 import com.example.game.hos.egysegek.eloholtak.Vampir;
 import com.example.game.hos.egysegek.eloholtak.Zombi;
+import com.example.game.hos.egysegek.emberek.Foldmuves;
 import com.example.game.hos.egysegek.emberek.Ijasz;
 import com.example.game.hos.egysegek.repulol_lenyek.Fonix;
 import com.example.game.hos.egysegek.repulol_lenyek.Griff;
 import com.example.game.hos.egysegek.repulol_lenyek.Pegazus;
+import com.example.game.hos.egysegek.repulol_lenyek.Sarkany;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -170,6 +174,17 @@ public class TestEgyseg {
         assertEquals(300, vampir.jelenlegiEletero, "sajnos itt hiba van :( ");
     }
 
+    @Test
+    public void testSebezFoldmuvest(){
+        //foldmuves eletero: 7 * 3 = 21
+        Hos ellenfel = new EmberiHos();
+        Pozicio foldmuvesPozicio = new Pozicio(2, 2);
+        Foldmuves foldmuves = new Foldmuves(ellenfel, 7, foldmuvesPozicio);
+        foldmuves.setJelenlegiEletero(20);
+        foldmuves.sebez(34);
+        assertEquals(0, foldmuves.jelenlegiEletero, "sajnos itt hiba van :( ");
+    }
+
 
     //************** tamad() metódus tesztelése **************
     //ehhez már kéne az a mock
@@ -268,25 +283,36 @@ public class TestEgyseg {
     //************** kozelharciTamadas() metódus tesztelése **************
 
     @Test
-    public void testKozelharciTamadasIgaz(){
+    public void testKozelharciTamadasIgazEmberre(){
         Pozicio ijaszPozicio = new Pozicio(5,9);
-        Pozicio fonixPozicio = new Pozicio(5,8);
+        Pozicio foldmuvesPozicio = new Pozicio(5,8);
         Hos ijaszHos = new EmberiHos();
-        Hos fonixHos = new EmberiHos();
+        Hos foldmuvesHos = new EmberiHos();
         Ijasz ijasz = new Ijasz(ijaszHos, 83, ijaszPozicio);
-        Fonix fonix = new Fonix(fonixHos, 57, fonixPozicio);
-        assertTrue(ijasz.kozelharciTamadas(fonix), "sajnos itt hiba van :( ");
+        Foldmuves foldmuves = new Foldmuves(foldmuvesHos, 57, foldmuvesPozicio);
+        assertTrue(ijasz.kozelharciTamadas(foldmuves), "sajnos itt hiba van :( ");
     }
 
     @Test
-    public void testKozelharciTamadasHamis(){
-        Hos ijaszHos = new EmberiHos();
+    public void testKozelharciTamadasHamisRepuloEgysegre(){
+        Hos sarkanyHos = new EmberiHos();
         Hos fonixHos = new EmberiHos();
-        Pozicio ijaszPozicio = new Pozicio(5,9);
+        Pozicio sarkanyPozicio = new Pozicio(5,9);
         Pozicio fonixPozicio = new Pozicio(2,9);
-        Ijasz ijasz = new Ijasz(ijaszHos, 83, ijaszPozicio);
+        Sarkany sarkany = new Sarkany(sarkanyHos, 83, sarkanyPozicio);
         Fonix fonix = new Fonix(fonixHos,57, fonixPozicio);
-        assertFalse(ijasz.kozelharciTamadas(fonix), "sajnos itt hiba van :( ");
+        assertFalse(sarkany.kozelharciTamadas(fonix), "sajnos itt hiba van :( ");
+    }
+
+    @Test
+    public void testKozelharciTamadasIgazEloholtra(){
+        Hos demonHos = new EmberiHos();
+        Hos szellemHos = new EmberiHos();
+        Pozicio demonPozicio = new Pozicio(5,9);
+        Pozicio szellemPozicio = new Pozicio(4,9);
+        Demon demon = new Demon(demonHos, 83, demonPozicio);
+        Szellem szellem = new Szellem(szellemHos,57, szellemPozicio);
+        assertTrue(demon.kozelharciTamadas(szellem), "sajnos itt hiba van :( ");
     }
 
     //************ kezdemenyezes tesztelese ****************-

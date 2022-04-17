@@ -120,9 +120,15 @@ public abstract class Hos {
         return this != egyseg.getHos();
     }
 
+    /**
+     * Eldönti egy egységről, hogy az saját egység-e vagy az ellenfelé.
+     * @param egyseg Az egység, amiről el kell dönteni, hogy melyik hőshöz tartozik.
+     * @return true, ha a mi hősünk egysége és false, ha az ellenfél hős egysége
+     */
     public boolean isSajatEgysegE(Egyseg egyseg){
         return this == egyseg.getHos();
     }
+
 
     public abstract boolean isGep();
 
