@@ -9,7 +9,6 @@ import com.example.game.hos.varazslatok.Varazslat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import static com.example.game.megjelenites.Palya.OSZLOPOK_SZAMA;
@@ -26,7 +25,7 @@ public class CsataterController {
     private final Hos hos;
     private final Hos ellenfel;
     private int kor;
-    private boolean vesztettel, nyertel, dontetlen;
+    private boolean lose, win, draw;
 
     public CsataterController(Hos hos, Hos ellenfel){
         palya = new Palya();
@@ -35,146 +34,130 @@ public class CsataterController {
         osszesEgyseg.addAll(hos.getEgysegek());
         osszesEgyseg.addAll(ellenfel.getEgysegek());
         Collections.sort(osszesEgyseg);
-        osszesEgyseg.forEach(this::lehelyez);
+        osszesEgyseg.forEach(this::lerakEgyseg);
 
         this.hos = hos;
         this.ellenfel = ellenfel;
         this.kor = 0;
-        this.vesztettel = false;
-        this.nyertel = false;
-        this.dontetlen = false;
+        this.lose = false;
+        this.win = false;
+        this.draw = false;
 
         //Minusz egyrol indulunk, mert az jelenlegi egyseg indexet egybol noveljuk az elejen
         jelenlegiEgysegIndex = -1;
 
-        kovetkezoLepes();
+        nextStep();
     }
 
-    public void mozgatEgyseg(Pozicio pozicio) throws NemTudMozogniException {
-        palya.mozgatEgyseg(jelenlegiEgyseg(), pozicio);
-        kovetkezoLepes();
+    public void mozogEgyseg(Pozicio pozicio) throws OdaNemLephetszException {
+        palya.lepEgyseg(jelenlegiEgyseg(), pozicio);
+        nextStep();
     }
 
 
-    public boolean vajonKritikusSebzes(int szerencse){
-        Random random = new Random();
-        int chance = 0;
-        chance += szerencse*5;
-        chance = 100/chance;
-        return random.nextInt(chance) == 0;
-    }
-
-    public void tamad(Egyseg ellenfelEgyseg){
-        if (!jelenlegiEgyseg().isHatokoronBelul(ellenfelEgyseg)) {
-            throw new HatokoronKivuliTamadasException();
+    public void tamad(Egyseg tamadandoEgyseg){
+        if (!jelenlegiEgyseg().hatosugaronBelulVanE(tamadandoEgyseg)) {
+            throw new OlyanEgysegetProbalszTamadniAmiNincsAKozvetlenKozeledbenException();
         }
-        if (palya.vanEllensegesSzomszed(jelenlegiEgyseg())
-                && jelenlegiEgyseg().isTavTamadas(ellenfelEgyseg)) { //Itt kell megnézni, hogy csak ha íjász
-            throw new TavolsagiTamadasEllenseggelAKozelbenTamadasException();
+        if (palya.vanEllensegesEgysegAKozvetlenKornyezeteben(jelenlegiEgyseg())
+                && jelenlegiEgyseg().tavolsagiTamadasE(tamadandoEgyseg)) { //Itt kell megnézni, hogy csak ha íjász
+            throw new TavolsagiTamadastProbalszInditaniPedigVanEllensegesEgysegAKozeledbenException();
         }
-        jelenlegiEgyseg().tamad(ellenfelEgyseg);
-        kovetkezoLepes();
+        jelenlegiEgyseg().tamad(tamadandoEgyseg);
+        nextStep();
     }
 
 
-    public void lehelyez(Egyseg egyseg) {
-        palya.lehelyezEgyseg(egyseg);
+    public void lerakEgyseg(Egyseg egyseg) {
+        palya.lerakEgyseg(egyseg);
     }
 
-    public void varazsol(String nev, Pozicio pozicio) throws NincsAdottTipusuVarazslatException, NincsElegMannaException {
-        if(hos.isAkciotVegrehajtott()){
-            throw new MarEgyAkciotVegrehajtottalAHosselEbbenAKorbenException();
+    public void hasznalVarazslat(String nev, Pozicio pozicio) throws EzzelAVarazslattalNemRendelkezelException, NincsElegMannadAVarazslathozException {
+        if(hos.isCselekedettAKorben()){
+            throw new KoronkentCsakEgyszerCselekedhetszAHosselException();
         }
         Varazslat varazslat = hos.getVarazslat(nev);
-        List<Egyseg> egysegek = palya.getEgysegekNxNesTeruleten(pozicio, varazslat.hatoKor());
-        hos.varazsol(varazslat, egysegek);
+        List<Egyseg> egysegek = palya.getEgysegekNxNesTeruleten(pozicio, varazslat.hatosugar());
+        hos.hasznalVarazslat(varazslat, egysegek);
     }
 
-    public void varakozik(){
-        kovetkezoLepes();
+    public void passzol(){
+        nextStep();
     }
 
-    public int JelenlegiEgysegSor() {
-        if (!osszesEgyseg.get(jelenlegiEgysegIndex).isGep()) {
-            return osszesEgyseg.get(jelenlegiEgysegIndex).getPozicio().getSor();
-        } else return 0;
-    }
-
-    public int jelenlegiEgysegOSzlop() {
-        if (!osszesEgyseg.get(jelenlegiEgysegIndex).isGep()) {
-            return osszesEgyseg.get(jelenlegiEgysegIndex).getPozicio().getOszlop();
-        } else return 0;
-    }
-
-    public void tamadHos(Egyseg tamadottEgyseg) {
-        if (hos.isAkciotVegrehajtott()) {
-            throw new MarEgyAkciotVegrehajtottalAHosselEbbenAKorbenException();
+    public void tamadHossel(Egyseg tamadandoEgyseg) {
+        if (hos.isCselekedettAKorben()) {
+            throw new KoronkentCsakEgyszerCselekedhetszAHosselException();
         }
-        hos.tamad(tamadottEgyseg);
+        hos.tamad(tamadandoEgyseg);
     }
 
-    public void korszamlalo() {
+    public void hanyadikKor() {
         if (jelenlegiEgysegIndex == 0) {
             kor++;
-            /*
-            for(int i=0; i< osszesEgyseg.size(); i++){
-                osszesEgyseg.get(i).setVisszaTamadtEMarAKorben(false);
-            }
-
-             */
         }
     }
 
     Egyseg jelenlegiEgyseg() {
-        return osszesEgyseg.get(jelenlegiEgysegIndex);
+        return getOsszesEgyseg().get(jelenlegiEgysegIndex);
     }
 
-    public void leveszHalottakatPalyarol(){
+    public void leveszHalottEgysegeket(){
         for (int sor = 0; sor < SOROK_SZAMA; sor++) {
             for (int oszlop = 0; oszlop < OSZLOPOK_SZAMA; oszlop++) {
-                Mezo mezo = palya.getMezo(new Pozicio(sor,oszlop));
-                if(!mezo.ures() && mezo.getEgyseg().halottE()){
-                    mezo.leveszEgyseg();
+                Cella cella = palya.getCella(new Pozicio(sor,oszlop));
+                if(!cella.ures() && cella.getEgyseg().halott()){
+                    cella.leveszEgyseg();
                 }
             }
         }
     }
 
 
-    private void kovetkezoLepes(){
-
-        if (hos.halottE()) {
-            vesztettel = true;
-        } else if (ellenfel.halottE()) {
-            nyertel = true;
-        } else if (hos.halottE() && ellenfel.halottE()) {
-            dontetlen = true;
+    private void nextStep(){
+        if (hos.vajonHalott()) {
+            lose = true;
+            return;
+        } else if (ellenfel.vajonHalott()) {
+            win = true;
+            return;
+        } else if (hos.vajonHalott() && ellenfel.vajonHalott()) {
+            draw = true;
+            return;
         }
         novelEgysegIndex();
-        while (jelenlegiEgyseg().isGep()) {
+        while (jelenlegiEgyseg().gepIranyitja()) {
             Egyseg egyseg = jelenlegiEgyseg();
-            if (egyseg.isGep()) {
-                palya.getBarmelySzomszedosEllenfel(egyseg)
-                        .ifPresentOrElse(egyseg::tamad, () -> gepMozog(egyseg));
+            if (egyseg.gepIranyitja()) {
+                palya.getBarmelySzomszedosEllenfel(egyseg).ifPresentOrElse(egyseg::tamad, () -> gepiEllenfelEgysegMozog(egyseg));
             }
-            korszamlalo();
+            if (hos.vajonHalott()) {
+                lose = true;
+                return;
+            } else if (ellenfel.vajonHalott()) {
+                win = true;
+                return;
+            } else if (hos.vajonHalott() && ellenfel.vajonHalott()) {
+                draw = true;
+                return;
+            }
+            hanyadikKor();
             novelEgysegIndex();
         }
-        korszamlalo();
+        hanyadikKor();
     }
 
-    private void gepMozog(Egyseg egyseg) {
-        Pozicio kovPozicio = egyseg.randomKovetkezoPozicio(egyseg.getPozicio());
-        while (!palya.palyanVanE(kovPozicio) || !palya.getMezo(kovPozicio).ures()) {
-            kovPozicio = egyseg.randomKovetkezoPozicio(egyseg.getPozicio());
+    private void gepiEllenfelEgysegMozog(Egyseg egyseg) {
+        Pozicio randomPozicio = egyseg.generalRandomPoziciot(egyseg.getPozicio());
+        while (!palya.letezikIlyenPozicio(randomPozicio) || !palya.getCella(randomPozicio).ures()) {
+            randomPozicio = egyseg.generalRandomPoziciot(egyseg.getPozicio());
         }
-        palya.mozgatEgyseg(egyseg, kovPozicio);
+        palya.lepEgyseg(egyseg, randomPozicio);
     }
 
     private void novelEgysegIndex() {
-        //jelenlegiEgysegIndex = (jelenlegiEgysegIndex + 1) % osszesEgyseg.size();
 
-        if(jelenlegiEgysegIndex + 1 < osszesEgyseg.size()){
+        if(jelenlegiEgysegIndex + 1 < getOsszesEgyseg().size()){
             jelenlegiEgysegIndex++;
         }
         else{
@@ -182,57 +165,39 @@ public class CsataterController {
         }
 
         if(jelenlegiEgysegIndex == 0){
-            hos.setAkciotVegrehajtott(false);
-            ellenfel.setAkciotVegrehajtott(false);
+            hos.setCselekedettAKorben(false);
+            ellenfel.setCselekedettAKorben(false);
         }
-    }
-
-
-
-    /*
-    public void lehelyez(Pozicio pozicio){
-        palya.lehelyezEgyseg(new Foldmuves(new Hos(), 100),pozicio);
-        palya.lehelyezEgyseg(new Ijasz(new Hos(), 100),pozicio);
-        palya.lehelyezEgyseg(new Griff(new Hos(), 100),pozicio);
-        palya.lehelyezEgyseg(new Zombi(new Hos(), 100),pozicio);
-        palya.lehelyezEgyseg(new Sarkany(new Hos(), 100),pozicio);
 
     }
 
-    public void ellenfelLehelyez(Pozicio pozicio){
-        palya.lehelyezEgyseg(new Ijasz(new Hos(), 100),pozicio);
-        palya.lehelyezEgyseg(new Zombi(new Hos(), 100),pozicio);
-        palya.lehelyezEgyseg(new Sarkany(new Hos(), 100),pozicio);
-    }
-
-     */
 
     //GETTEREK ÉS SETTEREK
 
-    public boolean isVesztettel() {
-        return vesztettel;
+    public boolean isLose() {
+        return lose;
     }
 
-    public boolean isNyertel() {
-        return nyertel;
+    public boolean isWin() {
+        return win;
     }
 
-    public boolean isDontetlen() {
-        return dontetlen;
+    public boolean isDraw() {
+        return draw;
     }
 
     public Palya getPalya() {
         return palya;
     }
 
-    public Mezo getMezo(Pozicio pozicio){
-        return palya.getMezo(pozicio);
+    public Cella getMezo(Pozicio pozicio){
+        return palya.getCella(pozicio);
     }
 
     public List<Egyseg> getOsszesEgyseg() {
         return osszesEgyseg
                 .stream()
-                .filter(Egyseg :: eloE)
+                .filter(Egyseg ::elMeg)
                 .collect(Collectors.toList());
     }
 
@@ -251,6 +216,7 @@ public class CsataterController {
     public void setKor(int kor) {
         this.kor = kor;
     }
+
 
 
 }

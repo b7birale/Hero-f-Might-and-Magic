@@ -12,9 +12,7 @@ public class Vampir extends Eloholt {
     public Vampir(Hos hos, int hanyDb, Pozicio pozicio) {
 
         super(hos, "Vampir",7,2,2,9,30,20,
-                "verszivas", hanyDb*9, "red", pozicio);
+                "szupersebesseg", hanyDb*9, "red", pozicio);
 
     }
-
-    //verszivas: rögtön megöli a támadott egységet
 }

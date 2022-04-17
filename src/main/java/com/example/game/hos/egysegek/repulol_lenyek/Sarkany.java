@@ -23,7 +23,7 @@ public class Sarkany extends RepuloLeny {
     //tuzokadas, ugyanaz mint a lövés == távolsági támadás
 
     @Override
-    public int hatokor() {
+    public int hatosugar() {
         return max(OSZLOPOK_SZAMA-1, SOROK_SZAMA-1);
     }
 

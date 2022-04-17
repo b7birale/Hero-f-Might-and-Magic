@@ -1,8 +1,8 @@
 package com.example.game.hos;
 
-import com.example.game.exception.NincsAdottTipusuVarazslatException;
-import com.example.game.exception.NincsElegMannaException;
-import com.example.game.exception.VarazslatokCsakEgysegekreAlkalmazhatoakException;
+import com.example.game.exception.EzzelAVarazslattalNemRendelkezelException;
+import com.example.game.exception.NincsElegMannadAVarazslathozException;
+import com.example.game.exception.NemEgysegreProbalodVegrehajtaniAVarazslatotException;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.varazslatok.Varazslat;
 
@@ -25,25 +25,12 @@ public abstract class Hos {
     protected int szerencse;
     protected int varazsero;
     protected int manna;
-    protected boolean akciotVegrehajtott;
+    protected boolean cselekedettAKorben;
     protected String keretSzin;
 
     public List<Varazslat> varazslatok;
     public List<Egyseg> egysegek;
 
-    public Hos() {
-        this.tamadas = 1;
-        this.vedekezes = 1;
-        this.moral = 1;
-        this.szerencse = 1;
-        this.varazsero = 1;
-        this.tudas = 1;
-        this.manna = 10;
-        this.akciotVegrehajtott = false;
-        this.keretSzin = keretSzin;
-        varazslatok = new ArrayList<>();
-        egysegek = new ArrayList<>();
-    }
 
     public Hos(int tamadas, int tudas, int vedekezes, int moral, int szerencse, int varazsero, int manna, String keretSzin) {
         this.tamadas = tamadas;
@@ -53,26 +40,30 @@ public abstract class Hos {
         this.szerencse = szerencse;
         this.varazsero = varazsero;
         this.manna = manna;
-        this.akciotVegrehajtott = false;
+        this.cselekedettAKorben = false;
         this.keretSzin = keretSzin;
         varazslatok = new ArrayList<>();
         egysegek = new ArrayList<>();
     }
 
-    public void fizet(int mennyit){
-        this.manna -= mennyit;
+    /**
+     * Varázslat használata esetén levonja a varázslat mannaárát a hős meglévő mannájából.
+     * @param manna A varázslat mannaköltsége.
+     */
+    public void levonManna(int manna){
+        this.manna = this.manna - manna;
     }
 
     /**
      * Megtámadunk egy ellenséges egységet a hőssel.
      * Kiszámítjuk a sebzést. A sebzés mértéke függ a hős támadás tulajdonságától.
      * Csökkentjük a megtámadott egység életerejét annyival, amennyi a sebzés.
-     * @param tamadottEgyseg Az egység, amit megtámad a hősünk.
+     * @param tamadandoEgyseg Az egység, amit megtámad a hősünk.
      */
-    public void tamad(Egyseg tamadottEgyseg){
+    public void tamad(Egyseg tamadandoEgyseg){
         int sebzes = this.tamadas * 10;
-        tamadottEgyseg.sebez(sebzes);
-        akciotVegrehajtott = true;
+        tamadandoEgyseg.sebez(sebzes);
+        cselekedettAKorben = true;
     }
 
     /**
@@ -91,23 +82,25 @@ public abstract class Hos {
         egysegek.add(egyseg);
     }
 
-    public void varazsol(Varazslat varazslat, List<Egyseg> egysegek) throws NincsElegMannaException,
-            VarazslatokCsakEgysegekreAlkalmazhatoakException {
-        varazslat.vegrehajt(egysegek);
-        akciotVegrehajtott = true;
+    /**
+     * Detektálja, hogy ebben a körben már cselekedtünk a hőssel és meghívja a Varazlsat osztály végrahajt
+     *  metódusát, ami meghívja az adott varázslat alkalmaz metódusát, így végrahajtódik a varázslat.
+     * @param varazslat A varázslat, amit végre akarunk hajtani.
+     * @param egysegek Azon egység vagy egységek, amiken végre szeretnénk hajtani az adott varázslatot.
+     * @throws NincsElegMannadAVarazslathozException ha nincs elég mannánk az adott varázslathoz
+     * @throws NemEgysegreProbalodVegrehajtaniAVarazslatotException ha üres mezőre vagy pályán kívülre próbáljuk végrehajtani a varázslatot
+     */
+    public void hasznalVarazslat(Varazslat varazslat, List<Egyseg> egysegek) throws NincsElegMannadAVarazslathozException, NemEgysegreProbalodVegrehajtaniAVarazslatotException {
+        varazslat.varazslatVegrehajt(egysegek);
+        cselekedettAKorben = true;
     }
 
-    public Varazslat getVarazslat(String nev) throws NincsAdottTipusuVarazslatException {
-        return varazslatok.stream()
-                .filter(varazslat -> nev.equals(varazslat.getNev()))
-                .findFirst()
-                .orElseThrow(NincsAdottTipusuVarazslatException::new);
+    public Varazslat getVarazslat(String nev) throws EzzelAVarazslattalNemRendelkezelException {
+        return varazslatok.stream().filter(varazslat -> nev.equals(varazslat.getNev())).findFirst().orElseThrow(EzzelAVarazslattalNemRendelkezelException::new);
     }
 
-    public boolean halottE(){
-        return egysegek
-                .stream()
-                .allMatch(Egyseg::halottE);
+    public boolean vajonHalott(){
+        return egysegek.stream().allMatch(Egyseg::halott);
     }
 
 
@@ -116,8 +109,15 @@ public abstract class Hos {
      * @param egyseg Az egység, amiről el kell dönteni, hogy melyik hőshöz tartozik.
      * @return true, ha az ellenfél hős egysége és false, ha a mi hősünk egysége
      */
-    public boolean isEllenfelEgysegE(Egyseg egyseg){
-        return this != egyseg.getHos();
+    public boolean ezEllenfelEgyseg(Egyseg egyseg){
+        boolean kimenet = false;
+        if(this != egyseg.getHos()){
+            kimenet = true;
+        }
+        else{
+            kimenet = false;
+        }
+        return kimenet;
     }
 
     /**
@@ -125,26 +125,32 @@ public abstract class Hos {
      * @param egyseg Az egység, amiről el kell dönteni, hogy melyik hőshöz tartozik.
      * @return true, ha a mi hősünk egysége és false, ha az ellenfél hős egysége
      */
-    public boolean isSajatEgysegE(Egyseg egyseg){
-        return this == egyseg.getHos();
+    public boolean ezSajatEgyseg(Egyseg egyseg){
+        boolean kimenet;
+        if(this == egyseg.getHos()){
+            kimenet = true;
+        }
+        else{
+            kimenet = false;
+        }
+        return kimenet;
     }
 
 
-    public abstract boolean isGep();
+    public abstract boolean gepIranyitja();
 
-    public abstract void automatanVegrehajt();
 
 
 
 
     //GETTEREK ÉS SETTEREK ------------------------------------------------------------------------------
 
-    public boolean isAkciotVegrehajtott() {
-        return akciotVegrehajtott;
+    public boolean isCselekedettAKorben() {
+        return cselekedettAKorben;
     }
 
-    public void setAkciotVegrehajtott(boolean akciotVegrehajtott) {
-        this.akciotVegrehajtott = akciotVegrehajtott;
+    public void setCselekedettAKorben(boolean cselekedettAKorben) {
+        this.cselekedettAKorben = cselekedettAKorben;
     }
 
     public int getTamadas() {
@@ -184,10 +190,7 @@ public abstract class Hos {
     }
 
     public List<Egyseg> getEgysegek() {
-        return egysegek
-                .stream()
-                .filter(Egyseg :: eloE)
-                .collect(Collectors.toList());
+        return egysegek.stream().filter(Egyseg ::elMeg).collect(Collectors.toList());
     }
 
     public void setVarazslatok(List<Varazslat> varazslatok) {

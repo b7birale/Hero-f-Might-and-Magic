@@ -1,14 +1,12 @@
 package com.example.game;
 
-import com.example.game.hos.EmberiHos;
+import com.example.game.hos.FelhasznaloHos;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
-import com.example.game.hos.egysegek.eloholtak.Demon;
 import com.example.game.hos.egysegek.eloholtak.Vampir;
 import com.example.game.hos.egysegek.eloholtak.Zombi;
 import com.example.game.hos.egysegek.emberek.Foldmuves;
 import com.example.game.hos.egysegek.emberek.Grof;
-import com.example.game.hos.egysegek.emberek.Lovag;
 import com.example.game.hos.egysegek.emberek.Polgar;
 import com.example.game.hos.egysegek.repulol_lenyek.Griff;
 import com.example.game.hos.egysegek.repulol_lenyek.Sarkany;
@@ -22,25 +20,25 @@ public class TestHos {
 
     @Test
     public void testFizetMannaElso(){
-        Hos ijaszHos = new EmberiHos();
+        Hos ijaszHos = new FelhasznaloHos();
         ijaszHos.setManna(80);
-        ijaszHos.fizet(10);
+        ijaszHos.levonManna(10);
         assertEquals(ijaszHos.getManna(), 70, "sajnos itt hiba van :( ");
     }
 
     @Test
     public void testFizetMannaMasodik(){
-        Hos hos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
         hos.setManna(65);
-        hos.fizet(15);
+        hos.levonManna(15);
         assertEquals(hos.getManna(), 50, "sajnos itt hiba van :( ");
     }
 
     @Test
     public void testFizetMannaHarmadik(){
-        Hos hos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
         hos.setManna(25);
-        hos.fizet(5);
+        hos.levonManna(5);
         assertEquals(hos.getManna(), 20, "sajnos itt hiba van :( ");
     }
 
@@ -54,9 +52,9 @@ public class TestHos {
         //sebzés: 30
         //polgár életerő: 31 * 6 = 186
         //186-30 = 156
-        Hos hos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
         hos.setTamadas(3);
-        Hos ellenfel = new EmberiHos();
+        Hos ellenfel = new FelhasznaloHos();
         Pozicio polgarPozicio = new Pozicio(2, 4);
         Polgar polgar = new Polgar(ellenfel, 31, polgarPozicio);
 
@@ -71,9 +69,9 @@ public class TestHos {
         //vámpír életerő: 9 * 10 = 90
         //20
 
-        Hos hos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
         hos.setTamadas(7);
-        Hos ellenfel = new EmberiHos();
+        Hos ellenfel = new FelhasznaloHos();
         Pozicio vampirPozicio = new Pozicio(8, 9);
         Vampir vampir = new Vampir(ellenfel, 10, vampirPozicio);
 
@@ -88,9 +86,9 @@ public class TestHos {
         //sarkany életerő: 15*45 = 675
         //575
 
-        Hos hos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
         hos.setTamadas(10);
-        Hos ellenfel = new EmberiHos();
+        Hos ellenfel = new FelhasznaloHos();
         Pozicio sarkanyPozicio = new Pozicio(6, 4);
         Sarkany sarkany = new Sarkany(ellenfel, 45, sarkanyPozicio);
 
@@ -105,31 +103,31 @@ public class TestHos {
 
     @Test
     public void testIsEllenfelEgysegERepuloLenyekre(){
-        Hos hos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
         Pozicio sarkanyPozicio = new Pozicio(3, 3);
         Sarkany sarkany = new Sarkany(hos, 2, sarkanyPozicio);
 
-        assertFalse(hos.isEllenfelEgysegE(sarkany), "sajnos itt hiba van :( ");
+        assertFalse(hos.ezEllenfelEgyseg(sarkany), "sajnos itt hiba van :( ");
     }
 
     @Test
     public void testIsEllenfelEgysegEEmberekre(){
-        Hos hos = new EmberiHos();
-        Hos ellenfelHos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
+        Hos ellenfelHos = new FelhasznaloHos();
         Pozicio grofPozicio = new Pozicio(5, 6);
         Grof grof = new Grof(ellenfelHos, 9, grofPozicio);
 
-        assertTrue(hos.isEllenfelEgysegE(grof), "sajnos itt hiba van :( ");
+        assertTrue(hos.ezEllenfelEgyseg(grof), "sajnos itt hiba van :( ");
     }
 
     @Test
     public void testIsEllenfelEgysegEEloholtakra(){
-        Hos hos = new EmberiHos();
-        Hos ellenfelHos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
+        Hos ellenfelHos = new FelhasznaloHos();
         Pozicio zombiPozicio = new Pozicio(5, 6);
         Zombi zombi = new Zombi(ellenfelHos, 9, zombiPozicio);
 
-        assertTrue(hos.isEllenfelEgysegE(zombi), "sajnos itt hiba van :( ");
+        assertTrue(hos.ezEllenfelEgyseg(zombi), "sajnos itt hiba van :( ");
     }
 
 
@@ -137,32 +135,32 @@ public class TestHos {
 
     @Test
     public void testIsSajatEgysegERepuloLenyekre(){
-        Hos hos = new EmberiHos();
-        Hos ellenfelHos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
+        Hos ellenfelHos = new FelhasznaloHos();
         Pozicio griffPozicio = new Pozicio(5, 6);
         Griff griff = new Griff(ellenfelHos, 9, griffPozicio);
 
-        assertFalse(hos.isSajatEgysegE(griff), "sajnos itt hiba van :( ");
+        assertFalse(hos.ezSajatEgyseg(griff), "sajnos itt hiba van :( ");
     }
 
     @Test
     public void testIsSajatEgysegEEmberre(){
-        Hos hos = new EmberiHos();
-        Hos ellenfelHos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
+        Hos ellenfelHos = new FelhasznaloHos();
         Pozicio foldmuvesPozicio = new Pozicio(5, 6);
         Foldmuves foldmuves = new Foldmuves(hos, 9, foldmuvesPozicio);
 
-        assertTrue(hos.isSajatEgysegE(foldmuves), "sajnos itt hiba van :( ");
+        assertTrue(hos.ezSajatEgyseg(foldmuves), "sajnos itt hiba van :( ");
     }
 
     @Test
     public void testIsSajatEgysegEEloholtra(){
-        Hos hos = new EmberiHos();
-        Hos ellenfelHos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
+        Hos ellenfelHos = new FelhasznaloHos();
         Pozicio zombiPozicio = new Pozicio(5, 6);
         Zombi zombi = new Zombi(ellenfelHos, 9, zombiPozicio);
 
-        assertFalse(hos.isSajatEgysegE(zombi), "sajnos itt hiba van :( ");
+        assertFalse(hos.ezSajatEgyseg(zombi), "sajnos itt hiba van :( ");
     }
 
 

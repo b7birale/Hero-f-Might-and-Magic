@@ -1,8 +1,7 @@
 
 package com.example.game.hos.varazslatok;
 
-import com.example.game.exception.NemTamadhatodMegASajatEgysegedException;
-import com.example.game.hos.EmberiHos;
+import com.example.game.exception.SajatEgysegetProbalszTamadniException;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.Hos;
 
@@ -37,22 +36,24 @@ public class Villamcsapas extends Varazslat {
      * @param egysegek Azon egységek listája, amin alkalmazni szándékozzuk a villámcsapást.
      */
     @Override
-    public void alkalmaz(List<Egyseg> egysegek) {
+    public void hasznal(List<Egyseg> egysegek) {
         if(egysegek.size() == 1){
             Egyseg egyseg = egysegek.get(0);
-            if (hos.isSajatEgysegE(egyseg)) {
-                throw new NemTamadhatodMegASajatEgysegedException();
+            if (hos.ezSajatEgyseg(egyseg)) {
+                throw new SajatEgysegetProbalszTamadniException();
             }
             egyseg.sebez(hos.getVarazsero()*30);
         }
     }
 
     @Override
-    public int hatoKor() {
+    public int hatosugar() {
         return 0;
     }
 
-
+    public String billentyuKombinacio() {
+        return "' V ' lenyomva + bal klikk";
+    }
 
 }
 

@@ -1,6 +1,6 @@
 package com.example.game;
 
-import com.example.game.hos.EmberiHos;
+import com.example.game.hos.FelhasznaloHos;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.eloholtak.Demon;
@@ -28,7 +28,7 @@ public class TestEgyseg {
         //griff osszeletero: 3*30 = 90
         //66%30= 6
         //66/30=2
-        Hos hos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
         Pozicio griffPozicio = new Pozicio(2, 2);
         Griff griff = new Griff(hos, 3, griffPozicio);
         griff.setJelenlegiEletero(66);
@@ -41,7 +41,7 @@ public class TestEgyseg {
         //ijasz osszeletero: 10*7 = 70
         //70%7 = 0
         //70/7 = 10
-        Hos hos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
         Pozicio ijaszPozicio = new Pozicio(2, 2);
         Ijasz ijasz = new Ijasz(hos, 10, ijaszPozicio);
         assertEquals(10, ijasz.hanyDb(), "sajnos itt hiba van :( ");
@@ -53,7 +53,7 @@ public class TestEgyseg {
         //zombi osszeletero: 9*27 = 243
         //4%9 = 4
         //4/9 = 0
-        Hos hos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
         Pozicio zombiPozicio = new Pozicio(2, 2);
         Zombi zombi = new Zombi(hos, 27, zombiPozicio);
         zombi.setJelenlegiEletero(4);
@@ -66,7 +66,7 @@ public class TestEgyseg {
         //zombi osszeletero: 40*6 = 240
         //200%40 = 0
         //200/40 = 5
-        Hos hos = new EmberiHos();
+        Hos hos = new FelhasznaloHos();
         Pozicio fonixPozicio = new Pozicio(2, 2);
         Fonix fonix = new Fonix(hos,6, fonixPozicio);
         fonix.setJelenlegiEletero(200);
@@ -156,7 +156,7 @@ public class TestEgyseg {
     @Test
     public void testSebezPegazust(){
         //pegazus eletero: 30*44 = 1320
-        Hos ellenfel = new EmberiHos();
+        Hos ellenfel = new FelhasznaloHos();
         Pozicio pegazusPozicio = new Pozicio(2, 2);
         Pegazus pegazus = new Pegazus(ellenfel, 44, pegazusPozicio);
         pegazus.sebez(20);
@@ -166,7 +166,7 @@ public class TestEgyseg {
     @Test
     public void testSebezVampirt(){
         //vampir eletero: 9*50 = 450
-        Hos ellenfel = new EmberiHos();
+        Hos ellenfel = new FelhasznaloHos();
         Pozicio vampirPozicio = new Pozicio(2, 2);
         Vampir vampir = new Vampir(ellenfel, 50, vampirPozicio);
         vampir.setJelenlegiEletero(400);
@@ -177,7 +177,7 @@ public class TestEgyseg {
     @Test
     public void testSebezFoldmuvest(){
         //foldmuves eletero: 7 * 3 = 21
-        Hos ellenfel = new EmberiHos();
+        Hos ellenfel = new FelhasznaloHos();
         Pozicio foldmuvesPozicio = new Pozicio(2, 2);
         Foldmuves foldmuves = new Foldmuves(ellenfel, 7, foldmuvesPozicio);
         foldmuves.setJelenlegiEletero(20);
@@ -286,33 +286,33 @@ public class TestEgyseg {
     public void testKozelharciTamadasIgazEmberre(){
         Pozicio ijaszPozicio = new Pozicio(5,9);
         Pozicio foldmuvesPozicio = new Pozicio(5,8);
-        Hos ijaszHos = new EmberiHos();
-        Hos foldmuvesHos = new EmberiHos();
+        Hos ijaszHos = new FelhasznaloHos();
+        Hos foldmuvesHos = new FelhasznaloHos();
         Ijasz ijasz = new Ijasz(ijaszHos, 83, ijaszPozicio);
         Foldmuves foldmuves = new Foldmuves(foldmuvesHos, 57, foldmuvesPozicio);
-        assertTrue(ijasz.kozelharciTamadas(foldmuves), "sajnos itt hiba van :( ");
+        assertTrue(ijasz.kozelharciTamadasE(foldmuves), "sajnos itt hiba van :( ");
     }
 
     @Test
     public void testKozelharciTamadasHamisRepuloEgysegre(){
-        Hos sarkanyHos = new EmberiHos();
-        Hos fonixHos = new EmberiHos();
+        Hos sarkanyHos = new FelhasznaloHos();
+        Hos fonixHos = new FelhasznaloHos();
         Pozicio sarkanyPozicio = new Pozicio(5,9);
         Pozicio fonixPozicio = new Pozicio(2,9);
         Sarkany sarkany = new Sarkany(sarkanyHos, 83, sarkanyPozicio);
         Fonix fonix = new Fonix(fonixHos,57, fonixPozicio);
-        assertFalse(sarkany.kozelharciTamadas(fonix), "sajnos itt hiba van :( ");
+        assertFalse(sarkany.kozelharciTamadasE(fonix), "sajnos itt hiba van :( ");
     }
 
     @Test
     public void testKozelharciTamadasIgazEloholtra(){
-        Hos demonHos = new EmberiHos();
-        Hos szellemHos = new EmberiHos();
+        Hos demonHos = new FelhasznaloHos();
+        Hos szellemHos = new FelhasznaloHos();
         Pozicio demonPozicio = new Pozicio(5,9);
         Pozicio szellemPozicio = new Pozicio(4,9);
         Demon demon = new Demon(demonHos, 83, demonPozicio);
         Szellem szellem = new Szellem(szellemHos,57, szellemPozicio);
-        assertTrue(demon.kozelharciTamadas(szellem), "sajnos itt hiba van :( ");
+        assertTrue(demon.kozelharciTamadasE(szellem), "sajnos itt hiba van :( ");
     }
 
     //************ kezdemenyezes tesztelese ****************-

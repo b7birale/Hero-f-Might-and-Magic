@@ -1,6 +1,6 @@
 package com.example.game.hos.egysegek.frakciok.controller;
 
-import com.example.game.hos.EmberiHos;
+import com.example.game.hos.FelhasznaloHos;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
 import com.example.game.hos.egysegek.eloholtak.*;
@@ -31,7 +31,7 @@ import java.util.stream.Stream;
  * Ez az ablak minden esetben ötödikként jelenhet csak meg.
  */
 public class EloholtController {
-    Hos hos = new EmberiHos();
+    Hos hos = new FelhasznaloHos();
 
     public void setHos(Hos hos) {
         this.hos = hos;
@@ -456,8 +456,8 @@ public class EloholtController {
             stage.setScene(scene);
             stage.show();
 
-            csatater.draw();
-            csatater.frissitKepernyot();
+            csatater.rajzolas();
+            csatater.updateScreen();
             scene.setFill(Color.LIMEGREEN);
             stage.setResizable(true);
             stage.setFullScreen(true);

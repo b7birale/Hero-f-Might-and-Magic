@@ -1,7 +1,6 @@
 
 package com.example.game.hos.varazslatok;
 
-import com.example.game.hos.EmberiHos;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.Hos;
 
@@ -38,15 +37,19 @@ public class Tuzlabda extends Varazslat {
      * @param egysegek Azon egységek listája, amin alkalmazni szándékozzuk a tűzlabdát.
      */
     @Override
-    public void alkalmaz(List<Egyseg> egysegek) {
+    public void hasznal(List<Egyseg> egysegek) {
         for(Egyseg egyseg: egysegek){       //végig megy az egysegek listán
             egyseg.sebez(hos.getVarazsero()*20);
         }
     }
 
     @Override
-    public int hatoKor() {
+    public int hatosugar() {
         return 1;
+    }
+
+    public String billentyuKombinacio() {
+        return "' T ' lenyomva + bal klikk";
     }
 
 }

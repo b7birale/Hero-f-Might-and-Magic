@@ -20,7 +20,7 @@ public class Ijasz extends Ember {
     }
 
     @Override
-    public int hatokor() {
+    public int hatosugar() {
         return max(OSZLOPOK_SZAMA-1, SOROK_SZAMA-1);
     }
 

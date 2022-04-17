@@ -1,6 +1,6 @@
 package com.example.game.hos.varazslatok;
 
-import com.example.game.exception.EztAVarazslatotCsakASajatEgysegeidreHasznalhatodException;
+import com.example.game.exception.EllensegesEgysegreProbalszOlyanVarazslatotHasznalniAmitCsakSajatraTudszException;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.Hos;
 
@@ -23,10 +23,10 @@ public class Erosites extends Varazslat {
 
 
     @Override
-    public void alkalmaz(List<Egyseg> egysegek) {
+    public void hasznal(List<Egyseg> egysegek) {
         if(egysegek.size() == 1){
-            if (hos.isEllenfelEgysegE(egysegek.get(0))) {
-                throw new EztAVarazslatotCsakASajatEgysegeidreHasznalhatodException();
+            if (hos.ezEllenfelEgyseg(egysegek.get(0))) {
+                throw new EllensegesEgysegreProbalszOlyanVarazslatotHasznalniAmitCsakSajatraTudszException();
             }
             egysegek.get(0).setMaxSebzes(egysegek.get(0).getMaxSebzes() + 1);
         }
@@ -34,9 +34,14 @@ public class Erosites extends Varazslat {
     }
 
     @Override
-    public int hatoKor() {
+    public int hatosugar() {
         return 0;
     }
+
+    public String billentyuKombinacio() {
+        return "' E ' lenyomva + bal klikk";
+    }
+
 
 }
 

@@ -5,7 +5,7 @@ import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.egysegek.Pozicio;
 
 /**
- * Az egység gyerekosztálya és az öt repülő lény egységnek a szülőosztálya.
+ * Az Egyseg gyerekosztálya és az öt repülő lény egységnek a szülőosztálya.
  * A frakciók elkülönítésében segédkezik.
  */
 

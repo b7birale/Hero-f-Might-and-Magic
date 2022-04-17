@@ -1,6 +1,6 @@
 package com.example.game.hos.egysegek;
 
-import com.example.game.exception.NemTamadhatodMegASajatEgysegedException;
+import com.example.game.exception.SajatEgysegetProbalszTamadniException;
 import com.example.game.hos.Hos;
 
 import java.util.Random;
@@ -13,8 +13,8 @@ import static java.lang.Math.ceil;
 public class Egyseg implements Comparable<Egyseg> {
 
     protected String nev;
-    protected int ar;   //itt minden protected!
-    public int jelenlegiEletero;    // public-ra írta át miután packeage-eltem, hogy kellene packeage.elni, hogy újra protected lehessen?
+    protected int ar;
+    public int jelenlegiEletero;
     protected int eredetiEletero;
     protected int minSebzes;
     protected int maxSebzes;
@@ -59,14 +59,18 @@ public class Egyseg implements Comparable<Egyseg> {
 
 
     /**
-     * Visszaadja él-e még az adott egység vagy már halott.
-     * @return true, ha halott az egység, false, ha még él
+     * Megadja, hogy él-e még az adott egység vagy már halott.
+     * @return true, ha halott az egység, false, ha még él.
      */
-    public boolean halottE(){
-        return jelenlegiEletero <= 0;
+    public boolean halott(){
+        return jelenlegiEletero == 0;
     }
 
-    public boolean eloE(){
+    /**
+     * Megadja, hogy él-e még az adott egység vagy már halott.
+     * @return true, ha még él, false, ha már halott.
+     */
+    public boolean elMeg(){
         return jelenlegiEletero > 0;
     }
 
@@ -99,7 +103,7 @@ public class Egyseg implements Comparable<Egyseg> {
     private Random rand = new Random();
 
     /**
-     * Kiszámolja hány elem (ember/lény/állat) van az adott egységben.
+     * Kiszámolja hány elem (ember/lény) van az adott egységben.
      * @return Hány darab elem van az adott egységben.
      */
     public int hanyDb(){
@@ -113,23 +117,17 @@ public class Egyseg implements Comparable<Egyseg> {
 
     /**
      * Kiszámítja a sebzés mértékét.
-     * Függ a támadó egységet birtokló hős támadás tulajdonságától és a támadott egységet birtokló hős védekezés tulajdonságától.
+     * Függ a támadó egységet birtokló hős támadás tulajdonságától és a támadott egységet birtokló hős
+     *  védekezés tulajdonságától.
      * @param ellenfelEgyseg A megtámadandó egység.
      * @return A sebzés értéke. Mindig egész szám.
      */
     public int szamolSebzes(Egyseg ellenfelEgyseg){
-        double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
+        double alapsebzes = this.minSebzes == this.maxSebzes ? this.getMinSebzes() : rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb(); //this.jelenlegiEletero;
         double sebzes = alapsebzes + alapsebzes*((double)this.getHos().getTamadas()/10); //hős támadástulajdonsága (%-ot ad meg) -> pl: tamadas=7 -> ... * 1.7
         sebzes = sebzes * ((double)ellenfelEgyseg.getHos().getVedekezes()/10);    //ellenfelhos vedekezese (%) -> pl: vedekezes=5 -> sebzes * 0,5 (50%)
         return (int) ceil(sebzes);
     }
-
-    /*
-    public void tamad(Egyseg tamadottEgyseg){
-        tamadottEgyseg.sebez(szamolSebzes(tamadottEgyseg));
-    }
-
-     */
 
 
     /**
@@ -137,44 +135,22 @@ public class Egyseg implements Comparable<Egyseg> {
      * @param egyseg Az egység, amiről el kell dönteni, hogy melyik hőshöz tartozik.
      * @return true, ha az ellenfél hős egysége és false, ha a mi hősünk egysége.
      */
-    public boolean isEllenfelEgysegE(Egyseg egyseg){
+    public boolean ezEllenfelEgyseg(Egyseg egyseg){
         return this.hos != egyseg.getHos();
     }
 
     public void tamad(Egyseg ellenfelEgyseg) {
-        if(!isEllenfelEgysegE(ellenfelEgyseg)){
-            throw new NemTamadhatodMegASajatEgysegedException();
-        }
-        if(this.getNev().equals("Vampir")){
-            ellenfelEgyseg.setEletero(0);
+        if(!ezEllenfelEgyseg(ellenfelEgyseg)){
+            throw new SajatEgysegetProbalszTamadniException();
         }
         else{
             ellenfelEgyseg.sebez(szamolSebzes(ellenfelEgyseg));
-            /*
-            if( (!ellenfelEgyseg.visszaTamadtEMarAKorben) || (!ellenfelEgyseg.halottE()) ){
-                visszaTamad(ellenfelEgyseg, this);
-            }
 
-             */
         }
     }
 
-    /*
-    public void visszaTamad(Egyseg tamadoEgyseg, Egyseg tamadottEgyseg){
-        if(!isEllenfelEgysegE(tamadottEgyseg)){
-            throw new NemTamadhatodMegASajatEgysegedException();
-        }
-        double alapsebzes = rand.nextInt(tamadoEgyseg.minSebzes, tamadoEgyseg.maxSebzes) * hanyDb();
-        double sebzes = alapsebzes + alapsebzes*((double)tamadoEgyseg.getHos().getTamadas()/10);
-        sebzes = sebzes * ((double)tamadottEgyseg.getHos().getVedekezes()/10);
-        int vegeredmeny = (int) ceil(sebzes/2);
-        tamadottEgyseg.sebez(vegeredmeny);
-        tamadoEgyseg.setVisszaTamadtEMarAKorben(true);
-    }
 
-     */
-
-    public boolean vajonKritikusSebzes(int szerencse){
+    public boolean kritikusLeszEASebzes(int szerencse){
         Random random = new Random();
         int chance = 0;
         chance += szerencse*5;
@@ -184,40 +160,39 @@ public class Egyseg implements Comparable<Egyseg> {
 
     /**
      * Kiszámolja a kritikus sebzést és végre is hajtja azt az ellenséges egységen.
-     * @param tamadottEgyseg A megtámadott egység.
+     * @param megtamadandoEgyseg A megtámadott egység.
      */
-    public void kritikusSebzes(Egyseg tamadottEgyseg){
-        if(!isEllenfelEgysegE(tamadottEgyseg)){
-            throw new NemTamadhatodMegASajatEgysegedException();
+    public void kritikusSebzes(Egyseg megtamadandoEgyseg){
+        if(!ezEllenfelEgyseg(megtamadandoEgyseg)){
+            throw new SajatEgysegetProbalszTamadniException();
         }
-        double alapsebzes = rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb();
+        double alapsebzes = this.minSebzes == this.maxSebzes ? this.getMinSebzes() : rand.nextInt(this.minSebzes, this.maxSebzes) * hanyDb();
         double sebzes = alapsebzes + alapsebzes*((double)this.getHos().getTamadas()/10);
-        sebzes = sebzes * ((double)tamadottEgyseg.getHos().getVedekezes()/10);
-        int vegeredmeny = (int) ceil(sebzes*2);
-        tamadottEgyseg.sebez(vegeredmeny);
+        sebzes = sebzes * ((double)megtamadandoEgyseg.getHos().getVedekezes()/10);
+        int kimenet = (int) ceil(sebzes*2);
+        megtamadandoEgyseg.sebez(kimenet);
     }
 
 
-    public int hatokor() {
+    public int hatosugar() {
         return 1;
     }
 
-    public boolean isTavTamadas(Egyseg egyseg) {
+    public boolean tavolsagiTamadasE(Egyseg egyseg) {
         return this.pozicio.tavolsag(egyseg.getPozicio()) > 1;
     }
 
-    public boolean kozelharciTamadas(Egyseg tamadottEgyseg){
+    public boolean kozelharciTamadasE(Egyseg tamadottEgyseg){
         return Math.abs(tamadottEgyseg.pozicio.getOszlop() - this.pozicio.getOszlop()) <= 1 &&
                 Math.abs(tamadottEgyseg.pozicio.getSor() - this.pozicio.getSor()) <= 1;
-        // = a támadott egység a közvetlen közelében van, így indítható közelharci támadás
     }
 
-    public boolean isHatokoronBelul(Egyseg egyseg) {
-        return this.pozicio.tavolsag(egyseg.getPozicio()) <= hatokor();
+    public boolean hatosugaronBelulVanE(Egyseg egyseg) {
+        return this.pozicio.tavolsag(egyseg.getPozicio()) <= hatosugar();
     }
 
-    public boolean isGep(){
-        return hos.isGep();
+    public boolean gepIranyitja(){
+        return hos.gepIranyitja();
     }
 
     @Override
@@ -229,7 +204,7 @@ public class Egyseg implements Comparable<Egyseg> {
         return hos.getKeretSzin();
     }
 
-    public Pozicio randomKovetkezoPozicio(Pozicio pozicio){
+    public Pozicio generalRandomPoziciot(Pozicio pozicio){
         int randomVizszintesElmozdulas = rand.nextInt(sebesseg * -1, sebesseg + 1);
         int randomFuggolegesElmozdulas = rand.nextInt(sebesseg * -1, sebesseg + 1);
 
@@ -238,7 +213,7 @@ public class Egyseg implements Comparable<Egyseg> {
             randomFuggolegesElmozdulas = rand.nextInt(sebesseg * -1, sebesseg + 1);
         }
 
-        return pozicio.osszead(randomVizszintesElmozdulas,randomFuggolegesElmozdulas);
+        return pozicio.osszead(randomVizszintesElmozdulas, randomFuggolegesElmozdulas);
     }
 
 

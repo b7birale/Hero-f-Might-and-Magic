@@ -59,18 +59,17 @@ A varázslatok leírása:
 3. **Feltámasztás:** Egy kiválasztott saját egység feltámasztása. 
 Maximális gyógyítás mértéke: hősőd varázserő tulajdonsága * 50. (De az eredeti egységszámnál több nem lehet!)
 4. **Mágikus nyílvessző:** Egy kiválasztott egységre (varázserő * 10 + 10) sebzés okozása.
-5. **Teleport:** A soron következő egységed helyet cserél egy kiválasztott másik egységgel.
-Ez utóbbi lehet saját vagy akár ellenséges egység is.
+5. **Erősítés:** Megnöveli eggyel egy kiválasztott saját egység maximális sebzését.
 
 A varázslatok költségei:
 
-| Név          | Arany ár | Manna ár |
-|--------------|----------|-------|
-| Villámcsapás |60| 5     |
-| Tűzlabda     |120|9      |
-| Feltámasztás |120| 6     |
-|Mágikus nyílvessző|50| 15  |
-|Teleport|100|4|
+| Név                | Arany ár | Manna ár |
+|--------------------|----------|-------|
+| Villámcsapás       |60| 5     |
+| Tűzlabda           |120|9      |
+| Feltámasztás       |120| 6     |
+| Mágikus nyílvessző |50| 15  |
+| Erősítés           |100|4|
 
 **Ajánlatos itt is okosan költeni az aranyat, mert még egységeket is kell 
 majd vásárolnod!**
@@ -96,33 +95,41 @@ vásárolnod, de minimum egy egységet venned kell, hogy elkezdhesd a csatát.
 
 Éhőholt egységek listája:
 
-| Név | Ár   | Minimum sebzés | Maximum sebzés | Életerő | Sebesség | Kezdeményezés | Speciális képesség | Színkód |
-|-----|------|--------------|--------------|-------|--------|-------------|------------------|-------|
-|Démon| 6    |2|3|30|5|9|nincs|sárga|
-|Szellem| 8    |1|1|30|5|15|nincs|rózsaszín|
-|Vámpír| 7    |2|2|9|30|20|vérszívás|piros|
-|Zombi| 12   |1|4|9|1|6|nincs|zöld|
-|Vérfarkas| 15   |9|11|6|10|4|nincs|kék|
+| Név | Ár   | Minimum sebzés | Maximum sebzés | Életerő | Sebesség | Kezdeményezés | Speciális képesség |
+|-----|------|--------------|--------------|-------|--------|-------------|--------------------|
+|Démon| 6    |2|3|30|5|9| nincs              |
+|Szellem| 8    |1|1|30|5|15| nincs              |
+|Vámpír| 7    |2|2|9|30|20| szupersebesség     |
+|Zombi| 12   |1|4|9|1|6| nincs              |
+|Vérfarkas| 15   |9|11|6|10|4| nincs              |
 
 Emberi egységek listája:
 
-| Név       | Ár  | Minimum sebzés | Maximum sebzés | Életerő | Sebesség | Kezdeményezés | Speciális képesség | Színkód   |
-|-----------|-----|----------------|----------------|---------|----------|---------------|--------------------|-----------|
-| Földműves | 2   | 1              | 1              | 3       | 4        | 8             | nincs              | zöld      |
-| Gróf      | 8   | 3              | 4              | 5       | 7        | 15            | nincs              | piros     |
-| Íjász     | 6   | 2              | 4              | 7       | 4        | 9             | lövés              | sárga     |
-| Lovag     | 10  | 6              | 8              | 8       | 2        | 1             | nincs              | kék       |
-| Polgár    | 6   | 7              | 9              | 6       | 9        | 3             | nincs              | rózsaszín |
+| Név       | Ár  | Minimum sebzés | Maximum sebzés | Életerő | Sebesség | Kezdeményezés | Speciális képesség |
+|-----------|-----|----------------|----------------|---------|----------|---------------|--------------------|
+| Földműves | 2   | 1              | 1              | 3       | 4        | 8             | nincs              |
+| Gróf      | 8   | 3              | 4              | 5       | 7        | 15            | nincs              |
+| Íjász     | 6   | 2              | 4              | 7       | 4        | 9             | lövés              |
+| Lovag     | 10  | 6              | 8              | 8       | 2        | 1             | nincs              |
+| Polgár    | 6   | 7              | 9              | 6       | 9        | 3             | nincs              |
 
 Repülő lény egységek listája:
 
-| Név        | Ár  | Minimum sebzés | Maximum sebzés | Életerő | Sebesség | Kezdeményezés | Speciális képesség     | Színkód   |
-|------------|-----|----------------|----------------|---------|----------|---------------|------------------------|-----------|
-| Griff      | 15  | 5              | 10             | 30      | 7        | 15            | végtelen visszatámadás | sárga     |
-| Sarkany    | 10  | 8              | 12             | 15      | 5        | 3             | tűzokádás              | kék       |
-| Főnix      | 12  | 15             | 25             | 40      | 6        | 4             | nincs                  | piros     |
-| Pteranodon | 15  | 5              | 30             | 7       | 9        | 10            | nincs                  | zöld      |
-| Pegazus    | 7   | 2              | 2              | 30      | 7        | 8             | nincs                  | rózsaszín |
+| Név        | Ár  | Minimum sebzés | Maximum sebzés | Életerő | Sebesség | Kezdeményezés | Speciális képesség     |
+|------------|-----|----------------|----------------|---------|----------|---------------|------------------------|
+| Griff      | 15  | 5              | 10             | 30      | 7        | 15            | végtelen visszatámadás |
+| Sarkany    | 10  | 8              | 12             | 15      | 5        | 3             | tűzokádás              |
+| Főnix      | 12  | 15             | 25             | 40      | 6        | 4             | nincs                  |
+| Pteranodon | 15  | 5              | 30             | 7       | 9        | 10            | nincs                  |
+| Pegazus    | 7   | 2              | 2              | 30      | 7        | 8             | nincs                  |
+
+Speciális képességek magyarázata:
+
+Szupersebesség: A sebessége annyira magas, hogy bármekkorát léphetsz vele a csatatéren.
+
+Lövés: Olyan egységet is meg tud támadni, ami nincs a közvetlen közelében.
+
+Tűzokádás: Olyan egységet is meg tud támadni, ami nincs a közvetlen közelében.
 
 Mielőtt tovább lépnél válaszd ki, hova szeretnéd lehelyezni a megvásárolt 
 egységeid. Csak az első két oszlopban helyezheted el őket. Mindegyik egység 
@@ -138,6 +145,8 @@ a pálya mellett bal oldalon találod felsorolva.
 A program legenerálja az ellenfél tulajdonságait és varázslatait. 
 Ezeket a csatatér mellett jobb oldalon tekintheted meg. Ilyenkor választ magának 
 egységeket is, melyeket rögtön le is helyez a pálya utolsó két oszlopának celláiba.
+A játék piros kerettel jelöli az ellenséges, sárga kerettel a saját, és zöld kerettel
+az éppen soron következő egységet.
 
 A csata körökre van osztva. Minden körben egy egység egy alkalommal lép. Először lépnek a 
 magasabb kezdeményezésű egységek, majd pedig az alacsonyabb kezdeményezésű egységek.
@@ -160,13 +169,13 @@ egységre klikkelsz. Csak akkor fog működni a varázslat, ha van hozzá elég 
 
 ' V ' + bal klikk = villámcsapás
 
-' Z ' + bal klikk = tűzlabda
+' T ' + bal klikk = tűzlabda
 
 ' F ' + bal klikk = feltámasztás
 
 ' N ' + bal klikk = mágikus nyílvessző
 
-' T ' + bal klikk = erosites
+' E ' + bal klikk = erősítés
 
 
 Egy adott egység, amikor rá kerül a sor, akkor három dolgot tud csinálni: 

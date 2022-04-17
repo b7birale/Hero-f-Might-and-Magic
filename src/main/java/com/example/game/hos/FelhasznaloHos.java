@@ -4,19 +4,17 @@ package com.example.game.hos;
  * A felhasználó hősét valósítja meg.
  * A felhasználó maga választja ki a tulajdonságait, varázslatait és egységeit.
  */
-public class EmberiHos extends Hos {
+public class FelhasznaloHos extends Hos {
 
-    public EmberiHos() {
+    public FelhasznaloHos() {
         super(1,1,1,1,1,1,10, "yellow");
     }
 
     @Override
-    public boolean isGep() {
+    public boolean gepIranyitja() {
         return false;
     }
 
-    @Override
-    public void automatanVegrehajt() {
-    }
+
 
 }

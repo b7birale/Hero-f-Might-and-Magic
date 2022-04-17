@@ -1,7 +1,6 @@
 
 package com.example.game.hos.varazslatok;
 
-import com.example.game.hos.EmberiHos;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.Hos;
 
@@ -11,8 +10,6 @@ import java.util.List;
  * A mágikus nyílvessző varázslatot valósítja meg. A Varazslat-ból öröklődik.
  */
 public class MagicArrow extends Varazslat {
-
-    //(10/20/30 + (varazsero x 10)) sebzést végez egy kiválasztott ellenséges egységen
 
     public MagicArrow(Hos hos) {
 
@@ -25,7 +22,7 @@ public class MagicArrow extends Varazslat {
     }
 
     @Override
-    public void alkalmaz(List<Egyseg> egysegek) {
+    public void hasznal(List<Egyseg> egysegek) {
         if(egysegek.size() == 1){
             Egyseg egyseg = egysegek.get(0);
             egyseg.sebez(10 + hos.getVarazsero()*10);
@@ -33,8 +30,12 @@ public class MagicArrow extends Varazslat {
     }
 
     @Override
-    public int hatoKor() {
+    public int hatosugar() {
         return 100;
+    }
+
+    public String billentyuKombinacio() {
+        return "' N ' lenyomva + bal klikk";
     }
 }
 

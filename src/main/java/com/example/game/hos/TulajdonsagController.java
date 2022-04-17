@@ -25,7 +25,7 @@ import static java.lang.Math.ceil;
 
 public class TulajdonsagController {
 
-    Hos hos = new EmberiHos();
+    Hos hos = new FelhasznaloHos();
 
     /**
      * Kiírja, mennyi arannyal rendelkezünk jelenleg.

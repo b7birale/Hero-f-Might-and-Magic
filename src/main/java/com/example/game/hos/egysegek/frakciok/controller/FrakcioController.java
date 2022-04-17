@@ -1,6 +1,6 @@
 package com.example.game.hos.egysegek.frakciok.controller;
 
-import com.example.game.hos.EmberiHos;
+import com.example.game.hos.FelhasznaloHos;
 import com.example.game.hos.Hos;
 import com.example.game.megjelenites.SceneController;
 import javafx.event.ActionEvent;
@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 public class FrakcioController {
 
-    Hos hos = new EmberiHos();
+    Hos hos = new FelhasznaloHos();
 
     public void setHos(Hos hos) {
         this.hos = hos;

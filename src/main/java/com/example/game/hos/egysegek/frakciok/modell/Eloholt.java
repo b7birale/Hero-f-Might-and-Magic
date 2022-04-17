@@ -5,7 +5,7 @@ import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.egysegek.Pozicio;
 
 /**
- * Az egység gyerekosztálya és az öt élőholt egység szülőosztálya.
+ * Az Egyseg gyerekosztálya és az öt élőholt egység szülőosztálya.
  * A frakciók elkülönítésében segédkezik.
  */
 public class Eloholt extends Egyseg {

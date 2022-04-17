@@ -1,7 +1,7 @@
 package com.example.game.megjelenites;
 
 import com.example.game.exception.*;
-import com.example.game.hos.GepiHos;
+import com.example.game.hos.automataHos;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.egysegek.Pozicio;
@@ -35,70 +35,65 @@ import static javafx.scene.paint.Color.WHITE;
 public class Csatater extends Parent {
 
 
-    private GepiHos ellenfel;
+    private automataHos ellenfel;
     private CsataterController csataterController;
     private Hos hos;
 
-    private Canvas jatekterCanvas;
-    private Affine affine;
+    private Canvas negyzetracs;
+    private Affine racs;
 
     int oszlop;
     int sor;
 
-    private final Label sajatTulajdonsagKiir;
-    private final Label ellenfelEgysegTulajdonsagKiir;
-    private final Label hibaLabel;
+    private final Label sajatEgysegInfoLabel;
+    private final Label ellenfelEgysegInfoLabel;
+    private final Label hibauzenetLabel;
     private final Label varazslatSebezLabel;
-    private final Label sajatVarazslatCimKiir;
-    private final Label kiirManna;
-    private final Label korok;
-    private final Label userLabel;
-    private final Label cpuLabel;
-    private final Label ellenfelVarazslatLabel;
-    private final Label ellenfelEgysegLabel;
-    private final Label ellenfelTulajdonsagLabel;
-    private final Label kritikus;
+    private final Label nemValtozoVarazslatKiirLabel;
+    private final Label mannaKiirLabel;
+    private final Label hanyadikKorLabel;
+    private final Label kritikusSebzesLabel;
 
     private final GraphicsContext g;
 
-    private String lenyomottGomb = null;
-    private Map<String, String> gombbolVarazslatTipusba;
+    private String lenyomottBillenytu = null;
+    private final Map<String, String> billentyuConvertToVarazslat;
 
 
     public Csatater(Hos hos, String frakcio) {
 
         this.hos = hos;
-        this.ellenfel = new GepiHos(frakcio);
+        this.ellenfel = new automataHos(frakcio);
         this.csataterController = new CsataterController(hos, ellenfel);
 
-        jatekterCanvas = new Canvas(600, 400);
-        affine = new Affine();
-        affine.appendScale(600 / 12f, 400 / 10f);
-        g = this.jatekterCanvas.getGraphicsContext2D();
-        jatekterCanvas.setLayoutX(325);
-        jatekterCanvas.setLayoutY(200);
+        negyzetracs = new Canvas(600, 400);
+        racs = new Affine();
+        racs.appendScale(600 / 12f, 400 / 10f);
+        g = this.negyzetracs.getGraphicsContext2D();
+        negyzetracs.setLayoutX(325);
+        negyzetracs.setLayoutY(200);
 
-        jatekterCanvas.setOnMouseClicked(this::egerLenyomas);
-        this.setOnKeyPressed(this::gombLenyomas);
-        this.setOnKeyReleased(this::gombElenged);
+        negyzetracs.setOnMouseClicked(this::mouseClick);
+        this.setOnKeyPressed(this::keyPress);
+        this.setOnKeyReleased(this::keyRelease);
 
         varazslatSebezLabel = new Label();
-        sajatVarazslatCimKiir = new Label();
-        sajatTulajdonsagKiir = new Label();
-        ellenfelEgysegTulajdonsagKiir = new Label();
-        hibaLabel = new Label();
-        kiirManna = new Label();
-        korok = new Label();
-        userLabel = new Label();
-        cpuLabel = new Label();
-        ellenfelEgysegLabel = new Label();
-        ellenfelVarazslatLabel = new Label();
-        ellenfelTulajdonsagLabel = new Label();
-        kritikus = new Label();
+        nemValtozoVarazslatKiirLabel = new Label();
+        sajatEgysegInfoLabel = new Label();
+        ellenfelEgysegInfoLabel = new Label();
+        hibauzenetLabel = new Label();
+        mannaKiirLabel = new Label();
+        hanyadikKorLabel = new Label();
+        Label felhasznaloLabel1 = new Label();
+        Label automataEllenfelLabel = new Label();
+        Label ellenfelEgysegLabel1 = new Label();
+        Label ellenfelVarazslatLabel1 = new Label();
+        Label ellenfelTulajdonsagLabel1 = new Label();
+        kritikusSebzesLabel = new Label();
 
-        gombbolVarazslatTipusba = Map.of(
+        billentyuConvertToVarazslat = Map.of(
                 "V", "Villamcsapas",
-                "Z", "Tuzlabda",
+                "T", "Tuzlabda",
                 "F", "Feltamasztas",
                 "N", "MagikusNyilvesszo",
                 "E", "Erosites"
@@ -106,38 +101,37 @@ public class Csatater extends Parent {
 
 
 //BUTTONOK
-        varazslatTipusLabelek();
-        ellenfelVarazslatkiir();
-        ellenfelEgysegKiir();
-        //ellenfelTulajdonsagKiir();
+        sajatMeglevoVarazslatokLabel();
+        kiirEllenfelVarazslataiLabel();
+        ellensegesEgysegInfoKiirLabel();
 
 //ALAPADATOK A JÁTÉKOSRÓL ÉS AZ ELLENFÉLRŐL + A GOMBJAIK
 
-        Label jatekosLabel = jatekosLabel();
+        Label felhasznaloLabel = felhasznaloLabel();
 
-        Label cpuLabel = cpuLabel();
+        Label automataELlenfelLabel = automataEllenfelLabel();
 
-        Button sajatVarakozasButton = new Button();
-        sajatVarakozasButton.setText("Várakozás");
-        sajatVarakozasButton.setTextFill(Color.RED);
-        sajatVarakozasButton.setFont(new Font("Candara", 16));
-        sajatVarakozasButton.setLayoutX(10);
-        sajatVarakozasButton.setLayoutY(40);
-        sajatVarakozasButton.setOnAction(event -> {
-            csataterController.varakozik();
-            frissitKepernyot();
+        Button varakozasGomb = new Button();
+        varakozasGomb.setText("Várakozás");
+        varakozasGomb.setTextFill(Color.BLACK);
+        varakozasGomb.setFont(new Font("Candara", 16));
+        varakozasGomb.setLayoutX(10);
+        varakozasGomb.setLayoutY(40);
+        varakozasGomb.setOnAction(event -> {
+            csataterController.passzol();
+            updateScreen();
         });
-        sajatVarazslatCimKiir();
-        kiirKor();
+        nemValtozoSajatVarazslatokKiir();
+        korszamKiiratas();
 
-        Label ellenfelVarazslatLabel = ellenfelVarazslatLabel();
-        Label ellenfelEgysegLabel = ellenfelEgysegLabel();
-        Label ellenfelTulajdonsagLabel = ellenfelTulajdonsagLabel();
+        Label ellenfelVarazslatSzovegKiirLabel = ellenfelVarazslatSzovegKiirLabel();
+        Label ellenfelEgysegSzovegKiirLabel = ellenfelEgysegSzovegKiirLabel();
+        Label ellenfelTulajdonsagSzovegKiirLabel = ellenfelTulajdonsagSzovegKiirLabel();
 
-        getChildren().addAll(this.jatekterCanvas, jatekosLabel, cpuLabel, ellenfelVarazslatLabel,
-                ellenfelEgysegLabel, ellenfelTulajdonsagLabel, sajatVarakozasButton);
+        getChildren().addAll(this.negyzetracs, felhasznaloLabel, automataELlenfelLabel, ellenfelVarazslatSzovegKiirLabel,
+                ellenfelEgysegSzovegKiirLabel, ellenfelTulajdonsagSzovegKiirLabel, varakozasGomb);
 
-        frissitKepernyot();
+        updateScreen();
 
     }
 
@@ -145,12 +139,8 @@ public class Csatater extends Parent {
 //TOVÁBBI ADATOK
 
     //JÁTÉKOS KIIRATÁS ------------------------------------------------
-    private void varazslatTipusLabelek() {
-        List<Label> varazslatLabel =
-                hos.getVarazslatok()
-                        .stream()
-                        .map(varazslat -> new Label("    " + varazslat.getNev()))
-                        .toList();
+    private void sajatMeglevoVarazslatokLabel() {
+        List<Label> varazslatLabel = hos.getVarazslatok().stream().map(varazslat -> new Label("    " + varazslat.getNev() + "    " + varazslat.billentyuKombinacio() + " \n")).toList();
 
         int meret = 130;
         for (Label label : varazslatLabel) {
@@ -163,7 +153,7 @@ public class Csatater extends Parent {
         getChildren().addAll(varazslatLabel);
     }
 
-    private Label jatekosLabel() {
+    private Label felhasznaloLabel() {
         Label jatekosLabel = new Label();
         jatekosLabel.setText("JÁTÉKOS");
         jatekosLabel.setTextFill(WHITE);
@@ -184,13 +174,13 @@ public class Csatater extends Parent {
         return sajatVarakozasButton;
     }
 
-    private void sajatVarazslatCimKiir() {
-        sajatVarazslatCimKiir.setText("Varázslatok");
-        sajatVarazslatCimKiir.setTextFill(WHITE);
-        sajatVarazslatCimKiir.setFont(new Font("Candara", 20));
-        sajatVarazslatCimKiir.setLayoutX(10);
-        sajatVarazslatCimKiir.setLayoutY(90);
-        getChildren().add(sajatVarazslatCimKiir);
+    private void nemValtozoSajatVarazslatokKiir() {
+        nemValtozoVarazslatKiirLabel.setText("Varázslatok");
+        nemValtozoVarazslatKiirLabel.setTextFill(WHITE);
+        nemValtozoVarazslatKiirLabel.setFont(new Font("Candara", 20));
+        nemValtozoVarazslatKiirLabel.setLayoutX(10);
+        nemValtozoVarazslatKiirLabel.setLayoutY(90);
+        getChildren().add(nemValtozoVarazslatKiirLabel);
     }
 
     private Button sajatTamadasButton() {
@@ -203,24 +193,20 @@ public class Csatater extends Parent {
         return sajatTamadasButton;
     }
 
-    private void kiirManna(){
-        kiirManna.setTextFill(WHITE);
-        kiirManna.setText("| Manna: " + hos.getManna());
-        kiirManna.setFont(new Font("Candara", 20));
-        kiirManna.setLayoutX(120);
-        kiirManna.setLayoutY(90);
-        getChildren().add(kiirManna);
+    private void kiirManna() {
+        mannaKiirLabel.setTextFill(WHITE);
+        mannaKiirLabel.setText("| Manna: " + hos.getManna());
+        mannaKiirLabel.setFont(new Font("Candara", 20));
+        mannaKiirLabel.setLayoutX(120);
+        mannaKiirLabel.setLayoutY(90);
+        getChildren().add(mannaKiirLabel);
     }
 
 
     //ELLENFÉL KIIRATÁS ---------------------------
 
-    private void ellenfelEgysegKiir() {
-        List<Label> egysegLabel =
-                ellenfel.getEgysegek()
-                        .stream()
-                        .map(egyseg -> new Label("    " + egyseg.getNev() + "    " + egyseg.hanyDb() + " db"))
-                        .toList();
+    private void ellensegesEgysegInfoKiirLabel() {
+        List<Label> egysegLabel = ellenfel.getEgysegek().stream().map(egyseg -> new Label("    " + egyseg.getNev() + "    " + egyseg.hanyDb() + " db")).toList();
 
         int meret = 260;
         for (Label label1 : egysegLabel) {
@@ -233,12 +219,8 @@ public class Csatater extends Parent {
         getChildren().addAll(egysegLabel);
     }
 
-    private void ellenfelVarazslatkiir() {
-        List<Label> varazslatLabel =
-                ellenfel.getVarazslatok()
-                        .stream()
-                        .map(varazslat -> new Label("    " + varazslat.getNev()))
-                        .toList();
+    private void kiirEllenfelVarazslataiLabel() {
+        List<Label> varazslatLabel = ellenfel.getVarazslatok().stream().map(varazslat -> new Label("    " + varazslat.getNev())).toList();
 
         int meret = 70;
         for (Label label : varazslatLabel) {
@@ -251,7 +233,7 @@ public class Csatater extends Parent {
         getChildren().addAll(varazslatLabel);
     }
 
-    private Label ellenfelVarazslatLabel() {
+    private Label ellenfelVarazslatSzovegKiirLabel() {
         Label ellenfelVarazslatLabel = new Label();
         ellenfelVarazslatLabel.setText("Varázslatok");
         ellenfelVarazslatLabel.setTextFill(WHITE);
@@ -261,7 +243,7 @@ public class Csatater extends Parent {
         return ellenfelVarazslatLabel;
     }
 
-    private Label ellenfelEgysegLabel() {
+    private Label ellenfelEgysegSzovegKiirLabel() {
         Label ellenfelEgysegLabel = new Label();
         ellenfelEgysegLabel.setText("Egysegek");
         ellenfelEgysegLabel.setTextFill(WHITE);
@@ -271,7 +253,7 @@ public class Csatater extends Parent {
         return ellenfelEgysegLabel;
     }
 
-    private Label ellenfelTulajdonsagLabel() {
+    private Label ellenfelTulajdonsagSzovegKiirLabel() {
         Label ellenfelTulajdonsagLabel = new Label();
         ellenfelTulajdonsagLabel.setText("Tulajdonsagok\n" +
                 "    tamadas = " + ellenfel.getTamadas() + "\n    vedekezes = " + ellenfel.getVedekezes() +
@@ -284,96 +266,103 @@ public class Csatater extends Parent {
         return ellenfelTulajdonsagLabel;
     }
 
-    private Label cpuLabel() {
-        Label cpuLabel = new Label("CPU");
-        cpuLabel.setText("CPU");
-        cpuLabel.setTextFill(WHITE);
-        cpuLabel.setFont(new Font("Candara", 20));
-        cpuLabel.setLayoutX(1200);
-        cpuLabel.setLayoutY(10);
-        return cpuLabel;
+
+    private Label automataEllenfelLabel() {
+        Label automataEllenfelLabel = new Label("AUTOMATA ELLENFEL");
+        automataEllenfelLabel.setText("AUTOMATA ELLENFEL");
+        automataEllenfelLabel.setTextFill(WHITE);
+        automataEllenfelLabel.setFont(new Font("Candara", 20));
+        automataEllenfelLabel.setLayoutX(1200);
+        automataEllenfelLabel.setLayoutY(10);
+        return automataEllenfelLabel;
     }
 
 
 //AKTUÁLIS ADATOK KIIRATÁSA ---------------
 
-    private void kiiratSajatEgysegInfo() {
-        sajatTulajdonsagKiir.setTextFill(WHITE);
-        sajatTulajdonsagKiir.setFont(new Font("Candara", 20));
-        sajatTulajdonsagKiir.setText("Az egység neve: " + csataterController.getOsszesEgyseg().get(csataterController.getJelenlegiEgysegIndex()).getNev()
+    private void kiirSajatEgysegAllapot() {
+        sajatEgysegInfoLabel.setTextFill(WHITE);
+        sajatEgysegInfoLabel.setFont(new Font("Candara", 20));
+        sajatEgysegInfoLabel.setText("Az egység neve: " + csataterController.getOsszesEgyseg().get(csataterController.getJelenlegiEgysegIndex()).getNev()
                 + "\nAz összes Életerő: " + csataterController.getOsszesEgyseg().get(csataterController.getJelenlegiEgysegIndex()).getJelenlegiEletero()
-                + "\nLépések száma: " + csataterController.getOsszesEgyseg().get(csataterController.getJelenlegiEgysegIndex()).getSebesseg());
-        sajatTulajdonsagKiir.setLayoutX(325);
-        sajatTulajdonsagKiir.setLayoutY(10);
-        getChildren().add(sajatTulajdonsagKiir);
+                + "\nLépések száma: " + csataterController.getOsszesEgyseg().get(csataterController.getJelenlegiEgysegIndex()).getSebesseg()
+                + "\nMaximális sebzése: " + csataterController.getOsszesEgyseg().get(csataterController.getJelenlegiEgysegIndex()).getMaxSebzes());
+        sajatEgysegInfoLabel.setLayoutX(325);
+        sajatEgysegInfoLabel.setLayoutY(10);
+        getChildren().add(sajatEgysegInfoLabel);
     }
 
-    private void kiiratEllenfelEgysegInfo(Egyseg egyseg) {
-        ellenfelEgysegTulajdonsagKiir.setTextFill(WHITE);
-        ellenfelEgysegTulajdonsagKiir.setFont(new Font("Candara", 20));
-        ellenfelEgysegTulajdonsagKiir.setText("Az ellenfélegyseg neve: " + egyseg.getNev() +
+    private void kiirEllensegesEgysegAllapot(Egyseg egyseg) {
+        ellenfelEgysegInfoLabel.setTextFill(WHITE);
+        ellenfelEgysegInfoLabel.setFont(new Font("Candara", 20));
+        ellenfelEgysegInfoLabel.setText("Az ellenfélegyseg neve: " + egyseg.getNev() +
                 "\nösszes életerejük: " + egyseg.getJelenlegiEletero() +
                 "\ndb: " + egyseg.hanyDb());
-        ellenfelEgysegTulajdonsagKiir.setLayoutX(725);
-        ellenfelEgysegTulajdonsagKiir.setLayoutY(10);
-        getChildren().add(ellenfelEgysegTulajdonsagKiir);
+        ellenfelEgysegInfoLabel.setLayoutX(725);
+        ellenfelEgysegInfoLabel.setLayoutY(10);
+        getChildren().add(ellenfelEgysegInfoLabel);
     }
 
-    private void VillamcsapasSebezLabel(Mezo kattintottMezo) {
+    private void VillamcsapasSebezLabel(Cella kattintottCella) {
         varazslatSebezLabel.setFont(new Font("Candara", 20));
         varazslatSebezLabel.setLayoutX(450);
         varazslatSebezLabel.setLayoutY(150);
         varazslatSebezLabel.setTextFill(WHITE);
-        varazslatSebezLabel.setText("Megsebzett ellenfél: " + kattintottMezo.getEgyseg().getNev() +
-                "\nMegsebzett ellenfél maradék életereje: " + kattintottMezo.getEgyseg().getJelenlegiEletero());
+        varazslatSebezLabel.setText("Megsebzett ellenfél: " + kattintottCella.getEgyseg().getNev() +
+                "\nMegsebzett ellenfél maradék életereje: " + kattintottCella.getEgyseg().getJelenlegiEletero());
         getChildren().add(varazslatSebezLabel);
     }
 
     //HIBAÜZENET KIIRATÁSA
-    private void kiiratHiba(String uzenet) {
-        hibaLabel.setTextFill(Color.RED);
-        hibaLabel.setFont(new Font("Candara", 30));
-        hibaLabel.setText(uzenet);
-        hibaLabel.setLayoutX(500);
-        hibaLabel.setLayoutY(625);
-        getChildren().add(hibaLabel);
+    private void kiirHibauzenet(String uzenet) {
+        hibauzenetLabel.setTextFill(Color.RED);
+        hibauzenetLabel.setFont(new Font("Candara", 30));
+        hibauzenetLabel.setText(uzenet);
+        hibauzenetLabel.setLayoutX(500);
+        hibauzenetLabel.setLayoutY(625);
+        getChildren().add(hibauzenetLabel);
     }
 
     //JELENLEGI KÖR KIIRATÁSA
-    private void kiirKor() {
-        korok.setFont(new Font("Candara", 20));
-        korok.setTextFill(WHITE);
-        korok.setText(csataterController.getKor() + ".kör");
-        korok.setLayoutX(600);
-        korok.setLayoutY(10);
-        getChildren().add(korok);
+    private void korszamKiiratas() {
+        hanyadikKorLabel.setFont(new Font("Candara", 20));
+        hanyadikKorLabel.setTextFill(WHITE);
+        hanyadikKorLabel.setText(csataterController.getKor() + ".kör");
+        hanyadikKorLabel.setLayoutX(600);
+        hanyadikKorLabel.setLayoutY(10);
+        getChildren().add(hanyadikKorLabel);
     }
 
     private void kiiratKritikusSebzes() {
-        kritikus.setTextFill(WHITE);
-        kritikus.setFont(new Font("Candara", 30));
-        kritikus.setText("Kritikus sebzést történt!");
-        kritikus.setLayoutX(450);
-        kritikus.setLayoutY(670);
-        getChildren().add(kritikus);
+        kritikusSebzesLabel.setTextFill(WHITE);
+        kritikusSebzesLabel.setFont(new Font("Candara", 30));
+        kritikusSebzesLabel.setText("Kritikus sebzést történt!");
+        kritikusSebzesLabel.setLayoutX(450);
+        kritikusSebzesLabel.setLayoutY(670);
+        getChildren().add(kritikusSebzesLabel);
     }
 
     //Jáéték vége
 
-    private void vesztettNyertDontetlen() {
-        if (csataterController.isNyertel()) {
-            getChildren().add(getNyeresLabel("Győztél!", Color.ORANGE));
-            jatekterCanvas.setVisible(false);
-        } else if (csataterController.isVesztettel()) {
-            getChildren().add(getNyeresLabel("Vesztettél!", Color.ORANGE));
-            jatekterCanvas.setVisible(false);
-        } else if (csataterController.isDontetlen()) {
-            getChildren().add(getNyeresLabel("Döntetlen", Color.ORANGE));
-            jatekterCanvas.setVisible(false);
+    private boolean jatekVegkimenetele() {
+        if (csataterController.isWin()) {
+            getChildren().add(winLabel("Győztél!", Color.ORANGE));
+            negyzetracs.setVisible(false);
+            return true;
+        } else if (csataterController.isLose()) {
+            getChildren().add(winLabel("Vesztettél!", Color.ORANGE));
+            negyzetracs.setVisible(false);
+            return true;
+        } else if (csataterController.isDraw()) {
+            getChildren().add(winLabel("Döntetlen", Color.ORANGE));
+            negyzetracs.setVisible(false);
+            return true;
         }
+        return false;
     }
 
-    private Label getNyeresLabel(String text, Color color) {
+
+    private Label winLabel(String text, Color color) {
         Label nyertel = new Label();
         nyertel.setFont(new Font("Arial", 80));
         nyertel.setTextFill(color);
@@ -385,84 +374,88 @@ public class Csatater extends Parent {
 
     //BILLENYTŰK ÉS EGÉR-KLIKKELÉS--------------------------------
 
-    private void gombElenged(KeyEvent keyEvent) {
-        lenyomottGomb = null;
+    private void keyRelease(KeyEvent keyEvent) {
+        lenyomottBillenytu = null;
     }
 
-    private void gombLenyomas(KeyEvent keyEvent) {
-        if (gombbolVarazslatTipusba.containsKey(keyEvent.getCode().getChar())) {
-            lenyomottGomb = keyEvent.getCode().getChar();
+    private void keyPress(KeyEvent keyEvent) {
+        if (billentyuConvertToVarazslat.containsKey(keyEvent.getCode().getChar())) {
+            lenyomottBillenytu = keyEvent.getCode().getChar();
         }
     }
 
-    private void egerLenyomas(MouseEvent event) {
+    private void mouseClick(MouseEvent event) {
         double egerX = event.getX();
         double egerY = event.getY();
 
         try {
-            Point2D koordinata = this.affine.inverseTransform(egerX, egerY);
+            Point2D koordinata = this.racs.inverseTransform(egerX, egerY);
             Pozicio kattintottPozicio = new Pozicio((int) koordinata.getY(), (int) koordinata.getX());
-            Mezo kattintottMezo = csataterController.getMezo(kattintottPozicio);
+            Cella kattintottCella = csataterController.getMezo(kattintottPozicio);
             MouseButton button = event.getButton();
-            getChildren().remove(hibaLabel);
-            getChildren().remove(ellenfelEgysegTulajdonsagKiir);
+            getChildren().remove(hibauzenetLabel);
+            getChildren().remove(ellenfelEgysegInfoLabel);
             getChildren().remove(varazslatSebezLabel);
-            getChildren().remove(kritikus);
+            getChildren().remove(kritikusSebzesLabel);
 
-            if(lenyomottGomb != null && button == MouseButton.PRIMARY){
-                if(!gombbolVarazslatTipusba.containsKey(lenyomottGomb)){
-                    throw new EztAGombotNemHasznalhatodException();
+            if (lenyomottBillenytu != null && button == MouseButton.PRIMARY) {
+                if (!billentyuConvertToVarazslat.containsKey(lenyomottBillenytu)) {
+                    throw new ErvenytelenBillenytuBemenetException();
                 }
-                if(kattintottMezo.ures()){
-                    throw new AkciokCsakEgysegekreAlkalmazhatoakException();
+                if (kattintottCella.ures()) {
+                    throw new NemEgysegreProbalszAkciotVegrehajtaniException();
                 }
-                String varazslatTipus = gombbolVarazslatTipusba.get(lenyomottGomb);
-                csataterController.varazsol(varazslatTipus, kattintottPozicio);
-                vesztettNyertDontetlen();
-                kiiratEllenfelEgysegInfo(kattintottMezo.getEgyseg());
-            }
-            else if(button == MouseButton.SECONDARY){
-                if(kattintottMezo.ures()){
-                    throw new AkciokCsakEgysegekreAlkalmazhatoakException();
+                String varazslatTipus = billentyuConvertToVarazslat.get(lenyomottBillenytu);
+                csataterController.hasznalVarazslat(varazslatTipus, kattintottPozicio);
+                kiirEllensegesEgysegAllapot(kattintottCella.getEgyseg());
+            } else if (button == MouseButton.SECONDARY) {
+                if (kattintottCella.ures()) {
+                    throw new NemEgysegreProbalszAkciotVegrehajtaniException();
                 }
-                Egyseg kattintottEgyseg = kattintottMezo.getEgyseg();
-                csataterController.tamadHos(kattintottMezo.getEgyseg());
-                kiiratEllenfelEgysegInfo(kattintottEgyseg);
-                vesztettNyertDontetlen();
-            }
-            else if (kattintottMezo.ures() && button == MouseButton.PRIMARY) {
-                csataterController.mozgatEgyseg(kattintottPozicio);
-            } else if(button == MouseButton.PRIMARY){
-                Egyseg kattintottEgyseg = kattintottMezo.getEgyseg();
-                if(csataterController.jelenlegiEgyseg().vajonKritikusSebzes(kattintottEgyseg.getHos().getSzerencse())){
+                Egyseg kattintottEgyseg = kattintottCella.getEgyseg();
+                csataterController.tamadHossel(kattintottCella.getEgyseg());
+                kiirEllensegesEgysegAllapot(kattintottEgyseg);
+            } else if (kattintottCella.ures() && button == MouseButton.PRIMARY) {
+                csataterController.mozogEgyseg(kattintottPozicio);
+            } else if (button == MouseButton.PRIMARY) {
+                Egyseg kattintottEgyseg = kattintottCella.getEgyseg();
+                if (csataterController.jelenlegiEgyseg().kritikusLeszEASebzes(csataterController.jelenlegiEgyseg().getHos().getSzerencse())) {
                     csataterController.jelenlegiEgyseg().kritikusSebzes(kattintottEgyseg);
                     kiiratKritikusSebzes();
+                } else {
+                    csataterController.tamad(kattintottCella.getEgyseg());
                 }
-                else{
-                    csataterController.tamad(kattintottMezo.getEgyseg());
-                }
-                kiiratEllenfelEgysegInfo(kattintottEgyseg);
-                vesztettNyertDontetlen();
+                kiirEllensegesEgysegAllapot(kattintottEgyseg);
             }
-            frissitKepernyot();
-            kiiratSajatEgysegInfo();
-        }
-        catch (NonInvertibleTransformException e) {
+            if (!jatekVegkimenetele()) {
+                updateScreen();
+                kiirSajatEgysegAllapot();
+            }
+
+        } catch (NonInvertibleTransformException e) {
             System.out.println("Nem lehet invertálni");
-        }
-        catch (NemTudMozogniException | NincsAdottTipusuVarazslatException |
-                NincsElegMannaException | EztAGombotNemHasznalhatodException |
-                VarazslatokCsakEgysegekreAlkalmazhatoakException e) {
-            e.printStackTrace();        //???
-            kiiratHiba(e.getMessage());
+        } catch (OdaNemLephetszException
+                | EzzelAVarazslattalNemRendelkezelException
+                | NincsElegMannadAVarazslathozException
+                | ErvenytelenBillenytuBemenetException
+                | NemEgysegreProbalodVegrehajtaniAVarazslatotException
+                | EllensegesEgysegreProbalszOlyanVarazslatotHasznalniAmitCsakSajatraTudszException
+                | KoronkentCsakEgyszerCselekedhetszAHosselException
+                | NemEgysegreProbalszAkciotVegrehajtaniException
+                | OlyanEgysegetProbalszTamadniAmiNincsAKozvetlenKozeledbenException
+                | SajatEgysegetProbalszTamadniException
+                | TavolsagiTamadastProbalszInditaniPedigVanEllensegesEgysegAKozeledbenException e) {
+            kiirHibauzenet(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
 
 
     //RAJZOLÁS ------------------------
-    public void draw() {
-        g.setTransform(this.affine);
+    public void rajzolas() {
+        g.setTransform(this.racs);
         g.setFill(WHITE);
         g.fillRect(0, 0, 400, 200);
         g.setStroke(Color.BLACK);
@@ -475,9 +468,9 @@ public class Csatater extends Parent {
         }
     }
 
-    private void festRacsozat () {
-        GraphicsContext g = this.jatekterCanvas.getGraphicsContext2D();
-        g.setTransform(this.affine);
+    private void rajzolRacsozat() {
+        GraphicsContext g = this.negyzetracs.getGraphicsContext2D();
+        g.setTransform(this.racs);
         g.setStroke(Color.BLACK);
         g.setLineWidth(0.022);
         for (int i = 0; i <= 12; i++) {
@@ -492,48 +485,46 @@ public class Csatater extends Parent {
 //EGYÉB FONTOS METÓDUSOK -------------------------
 
     public void egysegLetesz() {
-        hos.getEgysegek()
-                .forEach(csataterController::lehelyez);
-        ellenfel.getEgysegek()
-                .forEach(csataterController::lehelyez);
-
-        frissitKepernyot();
+        hos.getEgysegek().forEach(csataterController::lerakEgyseg);
+        ellenfel.getEgysegek().forEach(csataterController::lerakEgyseg);
+        updateScreen();
     }
 
-    private Mezo jelenlegi () {
-        return getPalya().getMezo(new Pozicio(sor, oszlop));
+    private Cella jelenlegi() {
+        return getPalya().getCella(new Pozicio(sor, oszlop));
     }
 
     //KÉPERNYŐFRISSÍTÉS
-    public void frissitKepernyot() {
-        GraphicsContext e = this.jatekterCanvas.getGraphicsContext2D();
-        e.setTransform(this.affine);
+    public void updateScreen() {
+        GraphicsContext e = this.negyzetracs.getGraphicsContext2D();
+        e.setTransform(this.racs);
         tisztitTabla(e);
         csataterController
-                .leveszHalottakatPalyarol();
+                .leveszHalottEgysegeket();
         csataterController
                 .getOsszesEgyseg()
-                //.stream()
-                //.filter(Egyseg::eloE)
                 .forEach(egyseg -> rajzolEgyseg(e, egyseg));
         Egyseg jelenlegiEgyseg = csataterController.jelenlegiEgyseg();
         kiemelAktualisEgyseg(e);
         frissitLabels();
-        festRacsozat();
+        rajzolRacsozat();
     }
+
     private void kiemelAktualisEgyseg(GraphicsContext e) {
         Egyseg jelenlegiEgyseg = csataterController.jelenlegiEgyseg();
         e.setLineWidth(0.15);
         e.setStroke(Color.LIGHTGREEN);
         e.strokeRect(jelenlegiEgyseg.getPozicio().getOszlop(), jelenlegiEgyseg.getPozicio().getSor(), 1, 1);
     }
+
     private void frissitLabels() {
-        getChildren().remove(kiirManna);
-        getChildren().remove(sajatTulajdonsagKiir);
-        getChildren().remove(korok);
+        getChildren().remove(mannaKiirLabel);
+        getChildren().remove(sajatEgysegInfoLabel);
+        getChildren().remove(hanyadikKorLabel);
         kiirManna();
-        kiirKor();
+        korszamKiiratas();
     }
+
     private void tisztitTabla(final GraphicsContext e) {
         for (int sor = 0; sor < SOROK_SZAMA; sor++) {
             for (int oszlop = 0; oszlop < OSZLOPOK_SZAMA; oszlop++) {
@@ -555,31 +546,31 @@ public class Csatater extends Parent {
                 requireNonNull(
                         this.getClass()
                                 .getClassLoader()
-                                .getResourceAsStream( "com/example/game/megjelenites/" + egyseg.getNev() + ".png")
+                                .getResourceAsStream("com/example/game/megjelenites/" + egyseg.getNev() + ".png")
                 )
         );
     }
 
 
-
     //GETTEREK ÉS SETTEREK
 
-    private Palya getPalya () {
+    private Palya getPalya() {
         return csataterController.getPalya();
     }
-    public CsataterController getCsataterController () {
+
+    public CsataterController getCsataterController() {
         return csataterController;
     }
 
-    public void setCsataterController (CsataterController csataterController){
+    public void setCsataterController(CsataterController csataterController) {
         this.csataterController = csataterController;
     }
 
-    public Hos getHos () {
+    public Hos getHos() {
         return hos;
     }
 
-    public void setHos (Hos hos){
+    public void setHos(Hos hos) {
         this.hos = hos;
     }
 

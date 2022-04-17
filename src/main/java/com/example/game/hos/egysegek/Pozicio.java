@@ -17,10 +17,6 @@ public class Pozicio {
         this.oszlop = oszlop;
     }
 
-    public  Pozicio osszead(Pozicio pozicio){
-        return new Pozicio(sor + pozicio.sor, oszlop + pozicio.oszlop);
-    }
-
     public  Pozicio osszead(int sor, int oszlop){
         return new Pozicio(this.sor + sor, this.oszlop + oszlop);
     }
@@ -41,20 +37,13 @@ public class Pozicio {
 
 
     public int tavolsag(Pozicio pozicio) {
-        return max(
-                abs(this.sor - pozicio.getSor()),
-                abs(this.oszlop - pozicio.getOszlop())
-        );
+        return max( abs(this.sor - pozicio.getSor()), abs(this.oszlop - pozicio.getOszlop()));
     }
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         final Pozicio pozicio = (Pozicio) o;
         return sor == pozicio.sor && oszlop == pozicio.oszlop;
     }

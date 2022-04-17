@@ -1,15 +1,13 @@
 package com.example.game.hos.egysegek.frakciok.controller;
 
-import com.example.game.hos.EmberiHos;
+import com.example.game.hos.FelhasznaloHos;
 import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Pozicio;
-import com.example.game.hos.egysegek.eloholtak.*;
 import com.example.game.hos.egysegek.repulol_lenyek.*;
 import com.example.game.megjelenites.Csatater;
 import com.example.game.megjelenites.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -34,7 +32,7 @@ import java.util.stream.Stream;
  */
 public class RepuloLenyController {
 
-    Hos hos = new EmberiHos();
+    Hos hos = new FelhasznaloHos();
     public void setHos(Hos hos) {
         this.hos = hos;
     }
@@ -460,7 +458,7 @@ public class RepuloLenyController {
             stage.setScene(scene);
             stage.show();
 
-            csatater.draw();
+            csatater.rajzolas();
             csatater.egysegLetesz();
             scene.setFill(Color.LIMEGREEN);
             stage.setResizable(true);

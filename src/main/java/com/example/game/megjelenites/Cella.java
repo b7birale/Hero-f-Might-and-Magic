@@ -1,22 +1,18 @@
 package com.example.game.megjelenites;
 
 
-import com.example.game.hos.Hos;
 import com.example.game.hos.egysegek.Egyseg;
 import com.example.game.hos.egysegek.Pozicio;
-import com.example.game.hos.egysegek.emberek.Foldmuves;
-
-import java.util.Objects;
 
 /**
- * A csatatér egy mezőjét valósítja meg.
+ * A csatatér egy celláját valósítja meg.
  */
-public class Mezo {
+public class Cella {
 
     private Egyseg egyseg;
     private Pozicio pozicio;
 
-    public Mezo(final Pozicio pozicio) {
+    public Cella(final Pozicio pozicio) {
         this.pozicio = pozicio;
     }
 
@@ -24,12 +20,11 @@ public class Mezo {
         return egyseg == null;
     }
 
-
     public Egyseg getEgyseg() {
         return egyseg;
     }
 
-    public void lehelyezEgyseg(final Egyseg egyseg) {
+    public void lerakEgyseg(final Egyseg egyseg) {
         egyseg.setPozicio(pozicio);
         this.egyseg = egyseg;
     }
